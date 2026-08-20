@@ -19,15 +19,22 @@ Quieres instalar RHEL en tu laptop. Dos problemas aparecen:
 ## ¿Qué es "repartir el disco 50/50"?
 
 Es **encoger (shrink)** la partición de Windows para dejar la mitad del disco
-libre. Con un disco de 476 GB:
+libre. Con un disco de 476 GB, el objetivo ideal es:
 
-| Antes | Después |
+| Antes | Después (ideal 50/50) |
 |-------|---------|
 | Windows: 468 GB | Windows: ~238 GB |
 | RHEL: 0 GB | RHEL: ~238 GB (espacio libre, no asignado) |
 
 El espacio libre **no asignado** que queda al final del disco es lo que el
 instalador de RHEL usará. Windows no se borra: solo se achica.
+
+> **Resultado real obtenido en el equipo de referencia (Lenovo, i3-N305, 512 GB NVMe):**
+> Windows se encogió hasta **271.5 GB** (límite impuesto por Windows por archivos
+> inamovibles del NTFS) y RHEL recibió **196.5 GB**, un tamaño más que suficiente.
+> El "50/50 exacto" no siempre es alcanzable: **Windows nunca deja encoger más allá
+> de lo que permiten sus archivos de sistema no movibles**, y ese límite depende del
+> estado del volumen.
 
 ---
 
@@ -135,8 +142,9 @@ Riesgos controlados:
 
 ## ¿Qué hace `fix.ps1` paso a paso?
 
-1. Verifica que el pagefile ya fue liberado (tamaño mínimo < 240 GB).
-2. Encoge C al objetivo (238 GB) o al mínimo posible si no alcanza.
+1. Verifica el tamaño actual y el mínimo soportado por Windows.
+2. Intenta el objetivo 50/50 (238 GB); si Windows lo rechaza, encoge al mínimo
+   soportado (en el equipo de referencia: 271.5 GB → RHEL con 196.5 GB).
 3. Reactiva el pagefile automático.
 4. Muestra el mapa de particiones final y recuerda no tocar Windows durante la instalación.
 
