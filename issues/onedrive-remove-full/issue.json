@@ -1,0 +1,27 @@
+{
+  "id": "onedrive-remove-full",
+  "title": "Desinstalación completa de OneDrive",
+  "category": "performance",
+  "severity": "medium",
+  "symptom": "OneDrive se auto-inicia con Windows, sincroniza la carpeta Documentos/Escritorio y agrega procesos (OneDrive.exe, FileCoAuth) que consumen RAM y CPU en un equipo de 8 GB, especialmente si no se usa el servicio de nube de Microsoft.",
+  "affected": {
+    "os": ["Windows 10", "Windows 11"],
+    "builds": [],
+    "condition": "Usuarios que NO usan OneDrive (no sincronizan con la nube de Microsoft)"
+  },
+  "root_cause": "OneDrive se instala por defecto y se agrega al Registro (HKCU Run) para iniciar con la sesión. Su proceso lee, indexa y monitoriza carpetas del usuario, y en equipos de poca RAM se suma al resto de procesos en segundo plano.",
+  "diagnosis": [
+    "Get-Process -Name OneDrive -ErrorAction SilentlyContinue | Select-Object Name, Id, WS",
+    "Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -Name OneDrive -ErrorAction SilentlyContinue",
+    "Get-AppxPackage -AllUsers *OneDrive* | Select-Object Name, PackageFullName"
+  ],
+  "detection": "(Get-AppxPackage -AllUsers *OneDrive* -ErrorAction SilentlyContinue) -ne $null",
+  "fix_script": "fix.ps1",
+  "plain_language": "OneDrive es el servicio de sincronización de archivos de Microsoft. Si no lo usas, es un proceso que arranca solo con Windows y consume RAM inútilmente. Este arreglo detiene el proceso, quita su auto-inicio, lo desinstala y limpia sus restos, guardando antes un respaldo del registro por si quieres revertirlo. No toca tus archivos ni tus demás programas.",
+  "reversible": true,
+  "undo": "Reinstalar OneDrive (winget install Microsoft.OneDrive o desde la Microsoft Store) y volver a agregar la clave HKCU Run si se desea el auto-inicio.",
+  "tags": ["onedrive", "bloatware", "ram", "performance", "startup"],
+  "references": ["https://support.microsoft.com/office/uninstall-onedrive-7250df19-3a61-4f3a-93f0-689f11b3ccff"],
+  "author": "@opencode-session",
+  "date": "2026-08-29"
+}

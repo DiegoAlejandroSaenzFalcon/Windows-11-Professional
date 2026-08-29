@@ -43,6 +43,10 @@ pulsa "Escanear" y luego "Aplicar". No necesitas escribir nada. Consulta el
 | `windows-network-optimization` | Optimizar pila de red (DNS/QoS/TCP) | performance | [issues/windows-network-optimization](issues/windows-network-optimization) |
 | `windows-visual-effects-performance` | Efectos visuales en "Mejor rendimiento" | performance | [issues/windows-visual-effects-performance](issues/windows-visual-effects-performance) |
 | `rhel-dual-boot-partition` | Repartir disco 50/50 y preparar dual-boot Windows + RHEL (UEFI) | performance | [issues/rhel-dual-boot-partition](issues/rhel-dual-boot-partition) |
+| `onedrive-remove-full` | Desinstalar OneDrive por completo (si no usas la nube MS) | performance | [issues/onedrive-remove-full](issues/onedrive-remove-full) |
+| `searchhost-web-disable` | Búsqueda solo-local (sin web/Bing/Cortana) | performance | [issues/searchhost-web-disable](issues/searchhost-web-disable) |
+| `oem-bloat-services` | Desactivar servicios OEM (Lenovo/Intel) que gastan RAM | performance | [issues/oem-bloat-services](issues/oem-bloat-services) |
+| `edge-uninstall-full` | Desinstalar Microsoft Edge (cuando se usa otro navegador) | performance | [issues/edge-uninstall-full](issues/edge-uninstall-full) |
 
 ## Evidencia real
 Lee [docs/examples/evidencia-sesion-2026-08-19.md](docs/examples/evidencia-sesion-2026-08-19.md):

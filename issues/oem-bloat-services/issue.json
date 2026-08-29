@@ -1,0 +1,25 @@
+{
+  "id": "oem-bloat-services",
+  "title": "Desactivar servicios de fabricante (Lenovo/Intel) y telemetría OEM que consumen RAM",
+  "category": "performance",
+  "severity": "medium",
+  "symptom": "En portátiles de marca hay servicios 'extra' del fabricante (servicios de audio/telemetría de Lenovo/Realtek, telemetría de Intel, utilidades de mantenimiento) que arrancan solos con Windows y consumen RAM en equipos con poca memoria.",
+  "affected": {
+    "os": ["Windows 10", "Windows 11"],
+    "builds": [],
+    "condition": "Equipos OEM (Lenovo, HP, Dell, etc.) con servicios propietarios que corren innecesarios; verificar lista antes de aplicar"
+  },
+  "root_cause": "Los fabricantes agregan sus propios servicios al instalarse Windows para dar soporte de marca (audio 3D, telemetría de la marca, utilidades de diagnóstico). Muchos arrancan como 'Automatic' aunque no los necesites, quitando RAM y CPU al usuario.",
+  "diagnosis": [
+    "Get-CimInstance Win32_Service | Where-Object { $_.Name -match 'Elevoc|LITSSVC|dptf|igcc|jhi|cplspcon|Lenovo|ImController|SysMain' } | Select-Object Name, DisplayName, State, StartMode"
+  ],
+  "detection": "(Get-Service -Name 'ElevocService','LITSSVC','dptftcs','igccservice','jhi_service','cplspcon' -ErrorAction SilentlyContinue) -ne $null",
+  "fix_script": "fix.ps1",
+  "plain_language": "Tu equipo llegó con servicios extra de la marca (Lenovo, Intel, Realtek) que arrancan solos y gastan RAM sin que los uses. Este arreglo los desactiva y guarda un respaldo (CSV) con su configuración previa para revertirla si algún día los necesitas. Deja intactos los servicios importantes: red, audio, Bluetooth, antivirus y la batería.",
+  "reversible": true,
+  "undo": "Restaurar cada servicio desde el respaldo services_oem_respaldo.csv (Set-Service StartType + Start-Service) o usar el Punto de restauración creado antes.",
+  "tags": ["services", "oem", "lenovo", "intel", "ram", "performance", "telemetry"],
+  "references": [],
+  "author": "@opencode-session",
+  "date": "2026-08-29"
+}

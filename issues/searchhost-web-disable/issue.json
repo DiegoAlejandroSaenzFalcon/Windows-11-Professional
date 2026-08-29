@@ -1,0 +1,26 @@
+{
+  "id": "searchhost-web-disable",
+  "title": "Desactivar búsqueda web/Cortana en el menú Inicio y búsqueda",
+  "category": "performance",
+  "severity": "medium",
+  "symptom": "La barra de búsqueda del menú Inicio y el proceso SearchHost muestran sugerencias y resultados web (Bing) que tardan en cargar, usan red y RAM, y envían consultas a los servicios de Microsoft.",
+  "affected": {
+    "os": ["Windows 10", "Windows 11"],
+    "builds": [],
+    "condition": "Usuarios que solo buscan archivos y programas locales, no usan Cortana ni resultados de Bing"
+  },
+  "root_cause": "Windows agrega por defecto una búsqueda 'conectada' que consulta el buscador web (Bing) y Cortana, además de sugerencias de búsqueda. Eso genera tráfico de red, procesos adicionales y una experiencia más lenta en la búsqueda local.",
+  "diagnosis": [
+    "Get-Process -Name SearchHost -ErrorAction SilentlyContinue | Select-Object Name, Id, WS",
+    "Get-ItemProperty 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search' -ErrorAction SilentlyContinue"
+  ],
+  "detection": "$true  # perfil: aplica si el usuario prefiere búsqueda solo local",
+  "fix_script": "fix.ps1",
+  "plain_language": "La búsqueda de Windows está 'conectada': además de buscar en tu equipo, consulta Bing y Cortana en internet. Si solo quieres encontrar tus archivos y programas de forma rápida, apagar esa parte web acelera la búsqueda local y reduce la RAM que gasta SearchHost. Es reversible y no afecta a otros programas ni al antivirus.",
+  "reversible": true,
+  "undo": "Poner a 1 las políticas (AllowSearchToUseLocation, ConnectedSearchUseWeb, DisableWebSearch, AllowCortana) y volver a habilitar la casilla 'Resultados web' en la configuración de búsqueda.",
+  "tags": ["search", "bing", "cortana", "privacy", "performance", "telemetry"],
+  "references": ["https://learn.microsoft.com/windows/configuration/disable-search"],
+  "author": "@opencode-session",
+  "date": "2026-08-29"
+}
