@@ -1,0 +1,31 @@
+{
+  "id": "lenovo-ctrl-cortana2-link",
+  "title": "Ctrl izquierdo abre el aviso 'no se puede abrir vínculo ms-cortana2' (Lenovo Fn)",
+  "category": "bug",
+  "severity": "medium",
+  "symptom": "En portátiles Lenovo (IdeaPad/V), mantener presionado el Ctrl izquierdo (o pulsar Ctrl+Fn, o Fn+PgUp/PgDn) dispara una y otra vez el cartel 'Necesitas una app para abrir este vínculo ms-cortana2'. Es determinista: solo con el Ctrl izquierdo, no con el derecho.",
+  "affected": {
+    "os": ["Windows 11"],
+    "builds": [],
+    "condition": "Portátiles Lenovo con el driver 'Lenovo Fn and function keys' instalado (servicio LenovoFnAndFunctionKeys / procesos LenovoUtilityService y FnHotkeyUtility)"
+  },
+  "root_cause": "El driver 'Lenovo Fn and function keys' (FnHotkeyUtility.exe) registra el Ctrl izquierdo (la combinación propia de Lenovo Ctrl+Fn) para abrir el URI 'ms-cortana2://'. Como Cortana fue eliminada de Windows 11 (24H2 en adelante) no existe manejador del protocolo, y Windows muestra el error 'no se puede abrir el vínculo'.",
+  "diagnosis": [
+    "Get-Service LenovoFnAndFunctionKeys | Select-Object Name, Status, StartType",
+    "Get-Process FnHotkeyUtility,LenovoUtilityService -ErrorAction SilentlyContinue",
+    "Get-CimInstance Win32_Process | Where-Object { $_.Name -match 'FnHotkey|LenovoUtility' } | Select-Object Name, ParentProcessId",
+    "Test-Path 'Registry::HKEY_CLASSES_ROOT\\ms-cortana2'   # debe dar False"
+  ],
+  "detection": "(Get-Service -Name 'LenovoFnAndFunctionKeys' -ErrorAction SilentlyContinue) -ne $null",
+  "fix_script": "fix.ps1",
+  "plain_language": "Al mantener el Ctrl izquierdo, el software de Lenovo intenta abrir un enlace interno 'ms-cortana2://' que antes abría Cortana. Como Cortana ya no existe, Windows avisa que no hay app para abrirlo. El arreglo desactiva ese servicio de Lenovo; se pierde solo el aviso en pantalla (OSD) de las teclas Fn y los atajos propietarios, pero el brillo y el volumen con Fn siguen funcionando porque los maneja Windows. Guarda el estado previo para poder revertir.",
+  "reversible": true,
+  "undo": "Set-Service LenovoFnAndFunctionKeys -StartupType Automatic; Start-Service LenovoFnAndFunctionKeys",
+  "tags": ["lenovo", "cortana", "ms-cortana2", "fn", "hotkey", "popup", "keyboard", "oem"],
+  "references": [
+    "https://learn.microsoft.com/en-us/answers/questions/3880845/how-do-i-get-rid-of-the-get-an-app-for-this-ms-cor",
+    "https://www.minitool.com/news/get-an-app-to-open-this-ms-cortana2-link.html"
+  ],
+  "author": "@opencode-session",
+  "date": "2026-09-03"
+}
