@@ -1,10 +1,10 @@
-﻿site_name: Windows-Errata-Optimizations
-site_url: https://diegoalejandrosaenzfalcon.github.io/Windows-11-Professional/
-site_author: Diego Alejandro Saenz Falcon
-copyright: Copyright &copy; 2024 Diego Alejandro Saenz Falcon
+﻿site_name: "Windows-Errata-Optimizations"
+site_url: "https://diegoalejandrosaenzfalcon.github.io/Windows-11-Professional/"
+site_author: "Diego Alejandro Saenz Falcon"
+copyright: "Copyright &copy; 2024 Diego Alejandro Saenz Falcon"
 
-repo_url: https://github.com/DiegoAlejandroSaenzFalcon/Windows-11-Professional
-repo_name: DiegoAlejandroSaenzFalcon/Windows-11-Professional
+repo_url: "https://github.com/DiegoAlejandroSaenzFalcon/Windows-11-Professional"
+repo_name: "DiegoAlejandroSaenzFalcon/Windows-11-Professional"
 
 theme:
   name: material
@@ -15,6 +15,8 @@ theme:
     - scheme: slate
       primary: blue
       accent: amber
+
+docs_dir: .
 
 nav:
   - Inicio: index.md
@@ -37,5 +39,3 @@ nav:
 
 plugins:
   - search
-  - minify:
-      minify_html: true
