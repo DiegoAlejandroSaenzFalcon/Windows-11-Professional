@@ -16,8 +16,6 @@ theme:
       primary: blue
       accent: amber
 
-docs_dir: .
-
 nav:
   - Inicio: index.md
   - START-HERE.md: START-HERE.md
