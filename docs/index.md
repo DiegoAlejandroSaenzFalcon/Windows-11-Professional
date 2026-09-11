@@ -1,94 +1,123 @@
-# Windows-Errata-Optimizations
+# Windows 11 Professional — Manual Técnico Forense Dev 8GB
 
-> Base de conocimiento **didáctica y profesional** de **errores comunes y optimizaciones** de Windows.
-> Cada entrada es **reproducible por versión/build**, trae un **script reversible** y se puede aplicar
-> **sin escribir comandos** gracias a un launcher gráfico.
+> **Hardware:** Lenovo IdeaPad Slim 3 15IAN8 (82XB) — Intel Core i3-N305, 8GB LPDDR5-4800, SSD NVMe
+> **OS:** Windows 11 Pro 25H2 (Build 26200.9445)
+> **Repositorio:** https://github.com/DiegoAlejandroSaenzFalcon/Windows-11-Professional
+> **Sitio:** https://diegoalejandrosaenzfalcon.github.io/Windows-11-Professional/
 
-![License](https://img.shields.io/github/license/DiegoAlejandroSaenzFalcon/Windows-Errores-Optimizaciones?style=flat)
-![Issues](https://img.shields.io/github/issues/DiegoAlejandroSaenzFalcon/Windows-Errores-Optimizaciones)
-![Last commit](https://img.shields.io/github/last-commit/DiegoAlejandroSaenzFalcon/Windows-Errores-Optimizaciones)
+---
 
-## ¿Por qué este repositorio?
-La mayoría de las guías existentes son listas planas de códigos de error o "tweak packs" sin explicación.
-Este proyecto es distinto:
+## 🎯 Propósito
 
-- **Errores + Optimizaciones:** documenta tanto fallos frecuentes como ajustes para ganar rendimiento.
-- **Anclado a versión/build:** cada entrada dice exactamente en qué Windows se reproduce.
-- **Didáctico:** explicación sencilla (qué es, por qué pasa, paso a paso) en cada `README.md`.
-- **Sin línea de comandos:** un **launcher gráfico** (botones) aplica los arreglos por ti.
-- **Reversible y seguro:** cada fix guarda respaldo / punto de restauración y se puede deshacer.
-- **Basado en evidencia:** incluye datos reales antes/después (`docs/examples/`).
+Manual técnico forense completo para **instalar, configurar, optimizar y monitorear Windows 11** en hardware limitado (8GB RAM soldada) bajo **carga real de desarrollo**: VS Code + WSL2 (Ubuntu) + Docker + Node.js + Brave (15 tabs) + Windows Terminal + Git.
 
-## ¿Eres principiante? (sin experiencia técnica)
-Lee **[START-HERE.md](START-HERE.md)**. En resumen: haz doble clic en `Run-WinErrata.bat`,
-pulsa "Escanear" y luego "Aplicar". No necesitas escribir nada. Consulta el
-**[glosario](docs/glossary.md)** si un término te suena raro.
+**No es:** Lista de "tweaks" sin explicación, "debloat scripts" ciegos, ni guías genéricas.
+**Sí es:** Arquitectura de memoria documentada, boot forensics con WPR/PerfView, límites duros medibles, alertas proactivas, rollback garantizado.
 
-## ¿Eres desarrollador / sysadmin?
+---
+
+## 📊 Tu Baseline Actual (2026-09-10)
+
+| Métrica | Valor | Estado |
+|---------|-------|--------|
+| **RAM Física Libre** | **766 MB** (10%) | 🔴 CRÍTICO |
+| **opencode (3 instancias)** | ~2.5 GB WS | Mayor consumidor |
+| **Brave (5 procesos)** | ~1.5 GB WS | Esperado |
+| **Servicios Bloat Identificados** | ~150 MB recuperables | SysMain, DiagTrack, NDU, Lenovo/Intel OEM |
+| **Pagefile** | 2 GB libre | Configurado |
+| **Commit Limit** | 9.7 GB (RAM + 2GB pf) | Margen estrecho |
+
+> **Ver evidencias:** [EVIDENCE/baseline-2026-09-10/](evidence/baseline-2026-09-10.md)
+
+---
+
+## 🚀 Inicio Rápido
+
 ```powershell
-.\scanner\Invoke-WinDiag.ps1          # escanea, no cambia nada
-.\scanner\Invoke-WinDiag.ps1 -Apply   # aplica los fixes (como Admin)
+# 1. Clonar repo
+gh repo clone DiegoAlejandroSaenzFalcon/Windows-11-Professional
+cd Windows-11-Professional
+
+# 2. Ejecutar COMO ADMINISTRADOR
+PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Apply-DevBaseline.ps1
+
+# 3. Seguir prompts → REINICIAR → Verificar: RAM libre > 2.5 GB idle
 ```
 
-## Catálogo de entradas
+---
 
-| ID | Título | Categoría | Carpeta |
-|----|--------|-----------|---------|
-| `ms-cortana2-link-error` | "No se puede abrir vínculo ms-cortana2" | bug | [issues/ms-cortana2-link-error](issues/ms-cortana2-link-error) |
-| `ms-cortana2-no-malware` | ms-cortana2 NO es malware: diagnóstico de seguridad | security | [issues/ms-cortana2-no-malware](issues/ms-cortana2-no-malware) |
-| `lenovo-ctrl-cortana2-link` | Ctrl izquierdo abre "ms-cortana2" (driver Fn de Lenovo) | bug | [issues/lenovo-ctrl-cortana2-link](issues/lenovo-ctrl-cortana2-link) |
-| `ltsc-dev-services` | Servicios innecesarios en laptop 8GB (dev) | performance | [issues/ltsc-dev-services](issues/ltsc-dev-services) |
-| `wifi-throughput-ltsc` | Máxima velocidad WiFi (Intel AX203) | performance | [issues/wifi-throughput-ltsc](issues/wifi-throughput-ltsc) |
-| `windows-power-plan-ultimate` | Plan Máximo Rendimiento | performance | [issues/windows-power-plan-ultimate](issues/windows-power-plan-ultimate) |
-| `windows-telemetry-disable` | Reducir telemetría de Windows | performance | [issues/windows-telemetry-disable](issues/windows-telemetry-disable) |
-| `windows-network-optimization` | Optimizar pila de red (DNS/QoS/TCP) | performance | [issues/windows-network-optimization](issues/windows-network-optimization) |
-| `windows-visual-effects-performance` | Efectos visuales en "Mejor rendimiento" | performance | [issues/windows-visual-effects-performance](issues/windows-visual-effects-performance) |
-| `rhel-dual-boot-partition` | Repartir disco 50/50 y preparar dual-boot Windows + RHEL (UEFI) | performance | [issues/rhel-dual-boot-partition](issues/rhel-dual-boot-partition) |
-| `onedrive-remove-full` | Desinstalar OneDrive por completo (si no usas la nube MS) | performance | [issues/onedrive-remove-full](issues/onedrive-remove-full) |
-| `searchhost-web-disable` | Búsqueda solo-local (sin web/Bing/Cortana) | performance | [issues/searchhost-web-disable](issues/searchhost-web-disable) |
-| `oem-bloat-services` | Desactivar servicios OEM (Lenovo/Intel) que gastan RAM | performance | [issues/oem-bloat-services](issues/oem-bloat-services) |
-| `edge-uninstall-full` | Desinstalar Microsoft Edge (cuando se usa otro navegador) | performance | [issues/edge-uninstall-full](issues/edge-uninstall-full) |
+## 📚 Navegación del Manual
 
-## Evidencia real
-Lee [docs/examples/evidencia-sesion-2026-08-19.md](docs/examples/evidencia-sesion-2026-08-19.md):
-datos antes/después reales de un equipo LTSC 2024, 8 GB RAM, optimizado con estas mismas entradas.
+| Sección | Descripción | Entrada Clave |
+|---------|-------------|---------------|
+| **ARQUITECTURA** | Memory Manager, Boot, Compression, Modelo Carga | [Memoria Kernel](architecture/01-windows-kernel-memory.md) |
+| **INSTALACIÓN** | ISO, autounattend.xml, OOBE, Drivers | [ISO + autounattend](install/01-media-creation.md) |
+| **CONFIGURACIÓN** | Servicios, Tasks, Registro, Pagefile, Privacidad | [Servicios Baseline](config/01-services-baseline.md) |
+| **RENDIMIENTO** | RAMMap Forensics, WS Trim, Boot Latency, Perfil Dev | [RAMMap Forensics](performance/01-rammap-forensics.md) |
+| **EVIDENCIA** | Metodología, Baselines, Tests Regresión | [Metodología](evidence/methodology.md) |
+| **SCRIPTS** | Orquestador, Rollback, Emergency, Monitoreo | [Apply-DevBaseline](scripts/Apply-DevBaseline.md) |
 
-## Estructura
+---
+
+## ⚡ Scripts Clave — Uso Diario
+
+| Script | Cuándo | Qué Hace |
+|--------|--------|----------|
+| `Start-DevDay.ps1` | Inicio día | Warm WSL2, Docker esenciales, VS Code, verifica RAM |
+| `Switch-Context.ps1` | Cambio tarea | `frontend`/`backend`/`compile`/`meeting` — libera RAM contextual |
+| `Monitor-DevMemory.ps1` | Terminal dedicado | Dashboard RAM libre, commit %, top processes, alertas sonora |
+| `Emergency-Trim.ps1` | **Solo** Available < 500 MB | Secuencia nuclear: Standby → WS trim → Modified → Servicios → Docker → WSL → All |
+| `End-DevDay.ps1` | Fin día | Shutdown WSL2, Docker, VS Code, Brave, verifica RAM libre |
+| `Undo-DevBaseline.ps1` | Si algo falla | Rollback via System Restore o backups CSV |
+
+---
+
+## 📈 Métricas Objetivo — Validación Post-Optimización
+
+| Métrica | Baseline (2026-09-10) | Objetivo Optimizado |
+|---------|----------------------|---------------------|
+| **RAM Libre Idle** | 766 MB | **> 2,500 MB** |
+| **Boot Frío Total** | ~28-30s | **< 20s** |
+| **Servicios Auto Running** | ~95 | **< 75** |
+| **Pagefile Usado** | ~500 MB | **< 1 GB** |
+| **Non-Paged Pool** | ~400 MB | **< 300 MB** |
+| **Carga Dev Completa** | N/A | **RAM libre > 1 GB** |
+
+---
+
+## 🔬 Metodología Forense
+
+1. **Captura Baseline** → `Capture-Baseline.ps1`
+2. **RAMMap Forensics** → Empty Standby List → recapturar
+3. **Aplicar Optimizaciones** → `Apply-DevBaseline.ps1`
+4. **Reboot + Estabilizar 5 min** → ReadyBoot reconstrucción
+5. **Captura Optimizado** → Comparar CSV/JSON
+6. **Test Carga Dev** → `Test-DevWorkload.ps1`
+7. **Monitoreo Continuo** → `Monitor-DevMemory.ps1` + `Log-MemorySnapshot.ps1`
+8. **Alertas** → Prometheus/Grafana local o Event Log triggers
+
+---
+
+## 🛡️ Rollback Garantizado
+
+```powershell
+# Opción 1: System Restore (recomendado)
+.\SCRIPTS\Undo-DevBaseline.ps1  # → Elige [1] → rstrui.exe
+
+# Opción 2: Backups CSV
+.\SCRIPTS\Undo-DevBaseline.ps1  # → Elige [2] → Restaura desde CSV
 ```
-Windows-Errata-Optimizations/
-├── START-HERE.md             # guia para usuarios sin experiencia
-├── Run-WinErrata.bat         # doble clic -> GUI como Admin
-├── launcher/WinErrata-GUI.ps1# ventana gráfica (botones, sin comandos)
-├── scanner/Invoke-WinDiag.ps1# escáner CLI (avanzado)
-├── db/schema.json            # esquema de cada issue.json
-├── issues/<id>/              # UNA CARPETA POR PROBLEMA/OPTIMIZACION
-│   ├── issue.json            # datos + detección + plain_language
-│   ├── README.md             # lección didáctica
-│   └── fix.ps1               # script reversible
-├── docs/
-│   ├── examples/             # EVIDENCIA real antes/después
-│   ├── glossary.md           # conceptos para aprender
-│   └── how-to-add-an-issue.md
-└── .github/                  # plantillas de issue/PR
-```
 
-## Preguntas frecuentes (FAQ)
-**¿Es seguro aplicar los fixes?** Sí. Cada uno es reversible, muchos crean un Punto de
-restauración y ninguno toca tus archivos personales ni tu navegador.
+---
 
-**¿Necesito saber de computadoras?** No. Usa `Run-WinErrata.bat` y los botones.
+## 📄 Licencia & Autor
 
-**¿Qué pasa si algo falla?** Reinicia y usa un Punto de restauración del sistema
-(escribe "restaurar" en el menú Inicio).
+**GPL-3.0** — [LICENSE](../LICENSE.md)
+**Autor:** Diego Alejandro Saenz Falcon
+- GitHub: [@DiegoAlejandroSaenzFalcon](https://github.com/DiegoAlejandroSaenzFalcon)
+- Portfolio: https://diegoalejandrosaenzfalcon.github.io/
+- Email: diegoalejandrosaenzfalcon@gmail.com
 
-**¿Puedo proponer un error u optimización?** Sí. Usa la plantilla en
-[.github/ISSUE_TEMPLATE.md](.github/ISSUE_TEMPLATE.md) o abre un Pull Request.
+---
 
-## Contribuir
-Ver [CONTRIBUTING.md](CONTRIBUTING.md) y [docs/how-to-add-an-issue.md](docs/how-to-add-an-issue.md).
-Cada entrada es **una carpeta** con sus 3 archivos; el GUI y el escáner las cargan solos.
-
-## Licencia
-**GPL-3.0** — ver [LICENSE](LICENSE). Esto garantiza que el código (y sus derivados) permanezca libre y abierto; nadie puede cerrarlo ni venderlo como software propietario.
-
-Al contribuir aceptas el **CLA** ([CLA.md](CLA.md)): cedes a Diego Alejandro Saenz Falcon el derecho de relicenciar tus aportaciones (incl. versiones privadas o comerciales). El proyecto es y sigue siendo propiedad del autor original.
+> **Principio Rector:** *"En 8GB, cada MB cuenta. No optimices el kernel — optimiza lo que TÚ decides ejecutar. Un límite duro en WSL2 vale más que 100 EmptyStandbyList."*

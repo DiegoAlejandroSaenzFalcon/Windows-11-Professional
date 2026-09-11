@@ -1,0 +1,207 @@
+"TaskName","TaskPath","State","Actions","Triggers"
+".NET Framework NGEN v4.0.30319","\Microsoft\Windows\.NET Framework\","Ready"," ",
+".NET Framework NGEN v4.0.30319 64","\Microsoft\Windows\.NET Framework\","Ready"," ",
+"RecoverabilityToastTask","\Microsoft\Windows\AccountHealth\","Ready"," ","CimInstance"
+"AD RMS Rights Policy Template Management (Manual)","\Microsoft\Windows\Active Directory Rights Management Services Client\","Ready"," ","CimInstance"
+"EDP Policy Manager","\Microsoft\Windows\AppID\","Ready"," ","CimInstance, CimInstance"
+"PolicyConverter","\Microsoft\Windows\AppID\","Ready","%windir%\system32\appidpolicyconverter.exe ",
+"VerifiedPublisherCertStoreCheck","\Microsoft\Windows\AppID\","Ready","%windir%\system32\appidcertstorecheck.exe ","CimInstance"
+"MareBackup","\Microsoft\Windows\Application Experience\","Ready","%windir%\system32\compattelrunner.exe -m:aeinv.dll -f:UpdateSoftwareInventoryW invsvc | %windir%\system32\compattelrunner.exe -m:appraiser.dll -f:DoScheduledTelemetryRun | %windir%\system32\compattelrunner.exe -m:aemarebackup.dll -f:BackupMareData",
+"Microsoft Compatibility Appraiser Exp","\Microsoft\Windows\Application Experience\","Ready","%windir%\system32\compattelrunner.exe -m:appraiser.dll -f:DoScheduledTelemetryRun express","CimInstance"
+"PcaPatchDbTask","\Microsoft\Windows\Application Experience\","Ready","%windir%\system32\rundll32.exe %windir%\system32\PcaSvc.dll,PcaPatchSdbTask","CimInstance"
+"SdbinstMergeDbTask","\Microsoft\Windows\Application Experience\","Ready","%windir%\system32\sdbinst.exe -mm","CimInstance, CimInstance"
+"StartupAppTask","\Microsoft\Windows\Application Experience\","Ready","%windir%\system32\rundll32.exe Startupscan.dll,SusRunTask",
+"appuriverifierdaily","\Microsoft\Windows\ApplicationData\","Ready","%windir%\system32\AppHostRegistrationVerifier.exe ",
+"appuriverifierinstall","\Microsoft\Windows\ApplicationData\","Ready","%windir%\system32\AppHostRegistrationVerifier.exe ","CimInstance"
+"CleanupTemporaryState","\Microsoft\Windows\ApplicationData\","Ready","%windir%\system32\rundll32.exe Windows.Storage.ApplicationData.dll,CleanupTemporaryState",
+"DsSvcCleanup","\Microsoft\Windows\ApplicationData\","Ready","%windir%\system32\dstokenclean.exe ",
+"Backup","\Microsoft\Windows\AppListBackup\","Ready"," ",
+"BackupNonMaintenance","\Microsoft\Windows\AppListBackup\","Ready"," ","CimInstance"
+"Pre-staged app cleanup","\Microsoft\Windows\AppxDeploymentClient\","Ready","%windir%\system32\rundll32.exe %windir%\system32\AppxDeploymentClient.dll,AppxPreStageCleanupRunTask","CimInstance"
+"UCPD velocity","\Microsoft\Windows\AppxDeploymentClient\","Ready","%windir%\system32\UCPDMgr.exe ","CimInstance"
+"Proxy","\Microsoft\Windows\Autochk\","Ready","%windir%\system32\rundll32.exe /d acproxy.dll,PerformAutochkOperations","CimInstance"
+"BitLocker Encrypt All Drives","\Microsoft\Windows\BitLocker\","Ready"," ","CimInstance"
+"BitLocker MDM policy Refresh","\Microsoft\Windows\BitLocker\","Ready"," ","CimInstance"
+"UninstallDeviceTask","\Microsoft\Windows\Bluetooth\","Ready","BthUdTask.exe $(Arg0)",
+"BgTaskRegistrationMaintenanceTask","\Microsoft\Windows\BrokerInfrastructure\","Ready"," ",
+"maintenancetasks","\Microsoft\Windows\capabilityaccessmanager\","Ready","%windir%\system32\rundll32.exe %windir%\system32\CapabilityAccessManager.dll,CapabilityAccessManagerDoStoreMaintenance",
+"AikCertEnrollTask","\Microsoft\Windows\CertificateServicesClient\","Ready"," ","CimInstance"
+"CryptoPolicyTask","\Microsoft\Windows\CertificateServicesClient\","Ready"," ","CimInstance"
+"KeyPreGenTask","\Microsoft\Windows\CertificateServicesClient\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance, CimInstance"
+"SystemTask","\Microsoft\Windows\CertificateServicesClient\","Ready"," ","CimInstance, CimInstance, CimInstance"
+"UserTask","\Microsoft\Windows\CertificateServicesClient\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance"
+"UserTask-Roam","\Microsoft\Windows\CertificateServicesClient\","Ready"," ","CimInstance, CimInstance"
+"ProactiveScan","\Microsoft\Windows\Chkdsk\","Ready"," ",
+"SyspartRepair","\Microsoft\Windows\Chkdsk\","Ready","%windir%\system32\bcdboot.exe %windir% /sysrepair","CimInstance"
+"CreateObjectTask","\Microsoft\Windows\CloudExperienceHost\","Ready"," ",
+"Backup","\Microsoft\Windows\CloudRestore\","Ready"," ","CimInstance, CimInstance"
+"Restore","\Microsoft\Windows\CloudRestore\","Ready"," ","CimInstance"
+"UnifiedConsentSyncTask","\Microsoft\Windows\ConsentUX\UnifiedConsent\","Ready"," ","CimInstance, CimInstance"
+"CmCleanup","\Microsoft\Windows\Containers\","Ready"," ",
+"Consolidator","\Microsoft\Windows\Customer Experience Improvement Program\","Ready","%SystemRoot%\System32\wsqmcons.exe ","CimInstance"
+"UsbCeip","\Microsoft\Windows\Customer Experience Improvement Program\","Ready"," ",
+"Data Integrity Check And Scan","\Microsoft\Windows\Data Integrity Scan\","Ready"," ","CimInstance, CimInstance"
+"Data Integrity Scan","\Microsoft\Windows\Data Integrity Scan\","Ready"," ",
+"Data Integrity Scan for Crash Recovery","\Microsoft\Windows\Data Integrity Scan\","Ready"," ","CimInstance"
+"ScheduledDefrag","\Microsoft\Windows\Defrag\","Ready","%windir%\system32\defrag.exe -c -h -o -$",
+"Device","\Microsoft\Windows\Device Information\","Ready","%windir%\system32\devicecensus.exe SystemCxt","CimInstance, CimInstance"
+"Device User","\Microsoft\Windows\Device Information\","Ready","%windir%\system32\devicecensus.exe UserCxt","CimInstance"
+"Metadata Refresh","\Microsoft\Windows\Device Setup\","Ready"," ",
+"HandleCommand","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance"
+"HandleWnsCommand","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance"
+"LocateCommandUserSession","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance"
+"RegisterDeviceAccountChange","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance, CimInstance"
+"RegisterDeviceLocationRightsChange","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance"
+"RegisterDevicePeriodic24","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance"
+"RegisterDevicePolicyChange","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance, CimInstance"
+"RegisterDeviceProtectionStateChanged","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance"
+"RegisterDeviceSettingChange","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance, CimInstance"
+"RegisterDeviceWnsFallback","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance"
+"RegisterUserDevice","\Microsoft\Windows\DeviceDirectoryClient\","Ready"," ","CimInstance, CimInstance, CimInstance"
+"RecommendedTroubleshootingScanner","\Microsoft\Windows\Diagnosis\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance"
+"Scheduled","\Microsoft\Windows\Diagnosis\","Ready"," ",
+"UnexpectedCodepath","\Microsoft\Windows\Diagnosis\","Ready","%windir%\system32\UCConfigTask.exe ","CimInstance"
+"DirectXDatabaseUpdater","\Microsoft\Windows\DirectX\","Ready","%windir%\system32\directxdatabaseupdater.exe ","CimInstance, CimInstance"
+"DXGIAdapterCache","\Microsoft\Windows\DirectX\","Ready","%windir%\system32\dxgiadaptercache.exe ","CimInstance, CimInstance, CimInstance"
+"SilentCleanup","\Microsoft\Windows\DiskCleanup\","Ready","%windir%\system32\cleanmgr.exe /autocleanstoragesense /d %systemdrive%",
+"Microsoft-Windows-DiskDiagnosticDataCollector","\Microsoft\Windows\DiskDiagnostic\","Ready","%windir%\system32\rundll32.exe dfdts.dll,DfdGetDefaultPolicyAndSMART",
+"Diagnostics","\Microsoft\Windows\DiskFootprint\","Ready","%windir%\system32\disksnapshot.exe -z",
+"StorageSense","\Microsoft\Windows\DiskFootprint\","Ready"," ",
+"dusmtask","\Microsoft\Windows\DUSM\","Ready","%SystemRoot%\System32\dusmtask.exe ","CimInstance"
+"EDP App Launch Task","\Microsoft\Windows\EDP\","Ready"," ","CimInstance"
+"EDP Auth Task","\Microsoft\Windows\EDP\","Ready"," ","CimInstance"
+"EDP Inaccessible Credentials Task","\Microsoft\Windows\EDP\","Ready"," ","CimInstance"
+"StorageCardEncryption Task","\Microsoft\Windows\EDP\","Ready"," ","CimInstance"
+"ExploitGuard MDM policy Refresh","\Microsoft\Windows\ExploitGuard\","Ready"," ","CimInstance, CimInstance, CimInstance"
+"DmClient","\Microsoft\Windows\Feedback\Siuf\","Ready","%windir%\system32\dmclient.exe ",
+"DmClientOnScenarioDownload","\Microsoft\Windows\Feedback\Siuf\","Ready","%windir%\system32\dmclient.exe utcwnf","CimInstance"
+"File History (maintenance mode)","\Microsoft\Windows\FileHistory\","Ready"," ",
+"BootstrapUsageDataReporting","\Microsoft\Windows\Flighting\FeatureConfig\","Ready"," ","CimInstance"
+"GovernedFeatureUsageProcessing","\Microsoft\Windows\Flighting\FeatureConfig\","Ready"," ","CimInstance, CimInstance"
+"ReconcileConfigs","\Microsoft\Windows\Flighting\FeatureConfig\","Ready"," ","CimInstance"
+"ReconcileFeatures","\Microsoft\Windows\Flighting\FeatureConfig\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance, CimInstance"
+"SafeguardsReconciliation","\Microsoft\Windows\Flighting\FeatureConfig\","Ready"," ","CimInstance"
+"UsageDataFlushing","\Microsoft\Windows\Flighting\FeatureConfig\","Ready"," ","CimInstance, CimInstance, CimInstance"
+"UsageDataReceiver","\Microsoft\Windows\Flighting\FeatureConfig\","Ready"," ","CimInstance"
+"UsageDataReporting","\Microsoft\Windows\Flighting\FeatureConfig\","Ready"," ","CimInstance"
+"RefreshCache","\Microsoft\Windows\Flighting\OneSettings\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance"
+"Monitoring","\Microsoft\Windows\Hotpatch\","Ready","%systemroot%\system32\cmd.exe /d /c %systemroot%\system32\hpatchmonTask.cmd","CimInstance, CimInstance, CimInstance"
+"InputSettingsRestoreDataAvailable","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"LocalUserSyncDataAvailable","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"MouseSyncDataAvailable","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"PenSyncDataAvailable","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"RemoteMouseSyncDataAvailable","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"RemotePenSyncDataAvailable","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"RemoteTouchpadSyncDataAvailable","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"syncpensettings","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"TouchpadSyncDataAvailable","\Microsoft\Windows\input\","Ready"," ","CimInstance"
+"RestoreDevice","\Microsoft\Windows\InstallService\","Ready"," ","CimInstance"
+"ScanForUpdates","\Microsoft\Windows\InstallService\","Ready"," ","CimInstance, CimInstance, CimInstance"
+"ScanForUpdatesAsUser","\Microsoft\Windows\InstallService\","Ready"," ",
+"SmartRetry","\Microsoft\Windows\InstallService\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance, CimInstance, CimInstance"
+"Synchronize Language Settings","\Microsoft\Windows\International\","Ready"," ","CimInstance, CimInstance"
+"La57Cleanup","\Microsoft\Windows\Kernel\","Ready","%windir%\system32\la57setup.exe ",
+"Installation","\Microsoft\Windows\LanguageComponentsInstaller\","Ready"," ","CimInstance"
+"ReconcileLanguageResources","\Microsoft\Windows\LanguageComponentsInstaller\","Ready"," ","CimInstance"
+"Uninstallation","\Microsoft\Windows\LanguageComponentsInstaller\","Ready"," ",
+"TempSignedLicenseExchange","\Microsoft\Windows\License Manager\","Ready"," ",
+"WindowsActionDialog","\Microsoft\Windows\Location\","Ready","%windir%\System32\WindowsActionDialog.exe ","CimInstance"
+"WinSAT","\Microsoft\Windows\Maintenance\","Ready"," ",
+"Cellular","\Microsoft\Windows\Management\Provisioning\","Ready","%windir%\system32\ProvTool.exe /turn 7 /source CellStateChangeTask","CimInstance"
+"Logon","\Microsoft\Windows\Management\Provisioning\","Ready","%windir%\system32\ProvTool.exe /turn 5 /source LogonIdleTask","CimInstance"
+"MapsToastTask","\Microsoft\Windows\Maps\","Ready"," ",
+"AutomaticOfflineMemoryDiagnostic","\Microsoft\Windows\MemoryDiagnostic\","Ready"," ","CimInstance"
+"ProcessMemoryDiagnosticEvents","\Microsoft\Windows\MemoryDiagnostic\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance"
+"LPRemove","\Microsoft\Windows\MUI\","Ready","%windir%\system32\lpremove.exe ",
+"SystemSoundsService","\Microsoft\Windows\Multimedia\","Running"," ","CimInstance"
+"NcsiIdentifyUserProxies","\Microsoft\Windows\Network Connectivity Status Indicator\","Ready"," ","CimInstance, CimInstance, CimInstance"
+"WiFiTask","\Microsoft\Windows\NlaSvc\","Ready","%SystemRoot%\System32\WiFiTask.exe nla","CimInstance"
+"PCR Prediction Framework Firmware Update Task","\Microsoft\Windows\PCRPF\","Ready","%windir%\system32\rundll32.exe %windir%\system32\pcrpf.dll,NotifyFirmwareUpdateStaged","CimInstance"
+"ShowFeedbackToast","\Microsoft\Windows\PerformanceTrace\","Ready"," ","CimInstance"
+"WhesvcToast","\Microsoft\Windows\PerformanceTrace\","Ready"," ","CimInstance"
+"Secure-Boot-Update","\Microsoft\Windows\PI\","Ready"," ","CimInstance"
+"Sqm-Tasks","\Microsoft\Windows\PI\","Ready"," ",
+"Device Install Group Policy","\Microsoft\Windows\Plug and Play\","Ready"," ","CimInstance"
+"Device Install Reboot Required","\Microsoft\Windows\Plug and Play\","Ready"," ","CimInstance, CimInstance"
+"Sysprep Generalize Drivers","\Microsoft\Windows\Plug and Play\","Ready","%SystemRoot%\System32\drvinst.exe 6",
+"Pluton-Ksp-Provisioning","\Microsoft\Windows\Pluton\","Ready"," ","CimInstance"
+"AnalyzeSystem","\Microsoft\Windows\Power Efficiency Diagnostics\","Ready"," ",
+"EduPrintProv","\Microsoft\Windows\Printing\","Ready","%windir%\system32\eduprintprov.exe ","CimInstance"
+"PrinterCleanupTask","\Microsoft\Windows\Printing\","Ready"," ","CimInstance"
+"PrintJobCleanupTask","\Microsoft\Windows\Printing\","Ready"," ","CimInstance"
+"LoginCheck","\Microsoft\Windows\PushToInstall\","Ready","%windir%\system32\sc.exe start pushtoinstall login","CimInstance"
+"Registration","\Microsoft\Windows\PushToInstall\","Ready","%windir%\system32\sc.exe start pushtoinstall registration","CimInstance, CimInstance"
+"MobilityManager","\Microsoft\Windows\Ras\","Ready"," ","CimInstance"
+"VerifyWinRE","\Microsoft\Windows\RecoveryEnvironment\","Ready"," ",
+"Initialization","\Microsoft\Windows\ReFsDedupSvc\","Ready"," ","CimInstance"
+"RegIdleBackup","\Microsoft\Windows\Registry\","Ready"," ",
+"RemoteAssistanceTask","\Microsoft\Windows\RemoteAssistance\","Ready","%windir%\system32\RAServer.exe /offerraupdate","CimInstance, CimInstance"
+"CleanupOfflineContent","\Microsoft\Windows\RetailDemo\","Ready"," ","CimInstance"
+"StartComponentCleanup","\Microsoft\Windows\Servicing\","Ready"," ",
+"PITRTask","\Microsoft\Windows\Setup\","Ready"," ","CimInstance, CimInstance"
+"SetupCleanupTask","\Microsoft\Windows\Setup\","Ready"," ","CimInstance"
+"SetupRecoveryDataTask","\Microsoft\Windows\Setup\","Ready"," ","CimInstance"
+"CreateObjectTask","\Microsoft\Windows\Shell\","Ready"," ",
+"FamilySafetyMonitor","\Microsoft\Windows\Shell\","Ready","%windir%\System32\wpcmon.exe ",
+"FamilySafetyRefreshTask","\Microsoft\Windows\Shell\","Ready"," ","CimInstance"
+"IndexerAutomaticMaintenance","\Microsoft\Windows\Shell\","Ready"," ",
+"ThemesSyncedImageDownload","\Microsoft\Windows\Shell\","Ready"," ",
+"UpdateUserPictureTask","\Microsoft\Windows\Shell\","Ready"," ","CimInstance"
+"UpdateUserPictureTaskContained","\Microsoft\Windows\Shell\","Ready"," ","CimInstance"
+"SvcRestartTask","\Microsoft\Windows\SoftwareProtectionPlatform\","Ready"," ","CimInstance"
+"SpaceAgentTask","\Microsoft\Windows\SpacePort\","Ready","%windir%\system32\SpaceAgent.exe ","CimInstance, CimInstance"
+"SpaceManagerTask","\Microsoft\Windows\SpacePort\","Ready","%windir%\system32\spaceman.exe /Work","CimInstance, CimInstance"
+"SpeechModelDownloadTask","\Microsoft\Windows\Speech\","Ready","%windir%\system32\speech_onecore\common\SpeechModelDownload.exe ","CimInstance"
+"MaintenanceTasks","\Microsoft\Windows\StateRepository\","Ready","%windir%\system32\rundll32.exe %windir%\system32\Windows.StateRepositoryClient.dll,StateRepositoryDoMaintenanceTasks",
+"Storage Tiers Management Initialization","\Microsoft\Windows\Storage Tiers Management\","Ready"," ","CimInstance"
+"EnableLicenseAcquisition","\Microsoft\Windows\Subscription\","Ready","%SystemRoot%\system32\ClipRenew.exe -e","CimInstance, CimInstance, CimInstance"
+"PowerGridForecastTask","\Microsoft\Windows\Sustainability\","Ready"," ","CimInstance, CimInstance"
+"SustainabilityTelemetry","\Microsoft\Windows\Sustainability\","Ready"," ",
+"ResPriStaticDbSync","\Microsoft\Windows\Sysmain\","Ready"," ",
+"WsSwapAssessmentTask","\Microsoft\Windows\Sysmain\","Ready","%windir%\system32\rundll32.exe sysmain.dll,PfSvWsSwapAssessmentTask",
+"SR","\Microsoft\Windows\SystemRestore\","Ready","%windir%\system32\srtasks.exe ExecuteScheduledSPPCreation",
+"Interactive","\Microsoft\Windows\Task Manager\","Ready"," ",
+"MsCtfMonitor","\Microsoft\Windows\TextServicesFramework\","Ready"," ","CimInstance"
+"ForceSynchronizeTime","\Microsoft\Windows\Time Synchronization\","Ready"," ","CimInstance, CimInstance"
+"SynchronizeTime","\Microsoft\Windows\Time Synchronization\","Ready","%windir%\system32\sc.exe start w32time task_started","CimInstance"
+"SynchronizeTimeZone","\Microsoft\Windows\Time Zone\","Ready","%windir%\system32\tzsync.exe ",
+"Tpm-HASCertRetr","\Microsoft\Windows\TPM\","Ready"," ","CimInstance"
+"Tpm-Maintenance","\Microsoft\Windows\TPM\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance"
+"Tpm-PreAttestationHealthCheck","\Microsoft\Windows\TPM\","Ready"," ","CimInstance"
+"Report policies","\Microsoft\Windows\UpdateOrchestrator\","Ready","%systemroot%\system32\usoclient.exe ReportPolicies","CimInstance, CimInstance, CimInstance"
+"Schedule Scan","\Microsoft\Windows\UpdateOrchestrator\","Ready","%systemroot%\system32\usoclient.exe StartScan","CimInstance"
+"Schedule Scan Static Task","\Microsoft\Windows\UpdateOrchestrator\","Ready","%systemroot%\system32\usoclient.exe StartScan","CimInstance, CimInstance, CimInstance, CimInstance, CimInstance"
+"Start Oobe Expedite Work","\Microsoft\Windows\UpdateOrchestrator\","Ready","%systemroot%\system32\usoclient.exe StartWork","CimInstance"
+"StartOobeAppsScanAfterUpdate","\Microsoft\Windows\UpdateOrchestrator\","Ready","%systemroot%\system32\usoclient.exe StartOobeAppsScanAfterUpdate","CimInstance"
+"StartOobeAppsScan_LicenseAccepted","\Microsoft\Windows\UpdateOrchestrator\","Ready","%systemroot%\system32\usoclient.exe StartOobeAppsScan","CimInstance"
+"UIEOrchestrator","\Microsoft\Windows\UpdateOrchestrator\","Ready","%systemroot%\system32\UIEOrchestratorStub.exe /SendHeartbeat","CimInstance"
+"USO_UxBroker","\Microsoft\Windows\UpdateOrchestrator\","Ready","%systemroot%\system32\MusNotification.exe ","CimInstance, CimInstance"
+"UUS Failover Task","\Microsoft\Windows\UpdateOrchestrator\","Ready","%windir%\System32\MLEngineStub.exe HandleUusFailoverEvaluationSignalFromWnf","CimInstance"
+"UPnPHostConfig","\Microsoft\Windows\UPnP\","Ready","sc.exe config upnphost start= auto",
+"UsageAndQualityInsights-MaintenanceTask","\Microsoft\Windows\UsageAndQualityInsights\","Ready","%SystemRoot%\System32\Microsoft.Data.UsageAndQualityInsights.MaintenanceTask.exe ","CimInstance"
+"Usb-Notifications","\Microsoft\Windows\USB\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance"
+"WiFiTask","\Microsoft\Windows\WCM\","Ready","%SystemRoot%\System32\WiFiTask.exe ","CimInstance"
+"ResolutionHost","\Microsoft\Windows\WDI\","Running"," ",
+"Windows Defender Cache Maintenance","\Microsoft\Windows\Windows Defender\","Ready","C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26080.3-0\MpCmdRun.exe -IdleTask -TaskName WdCacheMaintenance",
+"Windows Defender Cleanup","\Microsoft\Windows\Windows Defender\","Ready","C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26080.3-0\MpCmdRun.exe -IdleTask -TaskName WdCleanup",
+"Windows Defender Scheduled Scan","\Microsoft\Windows\Windows Defender\","Ready","C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26080.3-0\MpCmdRun.exe Scan -ScheduleJob -ScanTrigger 55 -IdleScheduledJob",
+"Windows Defender Verification","\Microsoft\Windows\Windows Defender\","Ready","C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26080.3-0\MpCmdRun.exe -IdleTask -TaskName WdVerification",
+"QueueReporting","\Microsoft\Windows\Windows Error Reporting\","Ready","%windir%\system32\wermgr.exe -upload","CimInstance, CimInstance, CimInstance, CimInstance, CimInstance"
+"BfeOnServiceStartTypeChange","\Microsoft\Windows\Windows Filtering Platform\","Ready","%windir%\system32\rundll32.exe bfe.dll,BfeOnServiceStartTypeChange","CimInstance"
+"UpdateLibrary","\Microsoft\Windows\Windows Media Sharing\","Ready","""%ProgramFiles%\Windows Media Player\wmpnscfg.exe"" ","CimInstance"
+"ModelCachingLimit","\Microsoft\Windows\WindowsAI\ClickToDo\","Ready"," ","CimInstance"
+"ModelCachingUpdate","\Microsoft\Windows\WindowsAI\ClickToDo\","Ready"," ","CimInstance"
+"PolicyConfiguration","\Microsoft\Windows\WindowsAI\Recall\","Ready"," ","CimInstance, CimInstance, CimInstance, CimInstance, CimInstance"
+"InitialConfiguration","\Microsoft\Windows\WindowsAI\Settings\","Ready"," ","CimInstance, CimInstance"
+"Calibration Loader","\Microsoft\Windows\WindowsColorSystem\","Ready"," ","CimInstance, CimInstance"
+"Refresh Group Policy Cache","\Microsoft\Windows\WindowsUpdate\","Ready"," ","CimInstance"
+"Scheduled Start","\Microsoft\Windows\WindowsUpdate\","Ready","%systemroot%\System32\sc.exe start wuauserv","CimInstance, CimInstance, CimInstance, CimInstance"
+"CacheTask","\Microsoft\Windows\Wininet\","Running"," ","CimInstance"
+"CDSSync","\Microsoft\Windows\WlanSvc\","Ready"," ","CimInstance"
+"MoProfileManagement","\Microsoft\Windows\WlanSvc\","Ready"," ","CimInstance, CimInstance"
+"WIM-Hash-Management","\Microsoft\Windows\WOF\","Ready"," ","CimInstance, CimInstance"
+"WIM-Hash-Validation","\Microsoft\Windows\WOF\","Ready"," ",
+"Work Folders Logon Synchronization","\Microsoft\Windows\Work Folders\","Ready"," ","CimInstance"
+"Work Folders Maintenance Work","\Microsoft\Windows\Work Folders\","Ready"," ","CimInstance"
+"NotificationTask","\Microsoft\Windows\WwanSvc\","Ready","%SystemRoot%\System32\WiFiTask.exe wwan","CimInstance"
+"OobeDiscovery","\Microsoft\Windows\WwanSvc\","Ready"," ","CimInstance, CimInstance, CimInstance"

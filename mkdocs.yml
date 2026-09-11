@@ -1,10 +1,11 @@
-﻿site_name: "Windows-Errata-Optimizations"
+﻿site_name: "Windows 11 Professional — Manual Técnico Forense Dev 8GB"
 site_url: "https://diegoalejandrosaenzfalcon.github.io/Windows-11-Professional/"
 site_author: "Diego Alejandro Saenz Falcon"
-copyright: "Copyright &copy; 2024 Diego Alejandro Saenz Falcon"
+copyright: "Copyright &copy; 2024-2026 Diego Alejandro Saenz Falcon"
 
 repo_url: "https://github.com/DiegoAlejandroSaenzFalcon/Windows-11-Professional"
 repo_name: "DiegoAlejandroSaenzFalcon/Windows-11-Professional"
+edit_uri: "edit/main/docs/"
 
 theme:
   name: material
@@ -12,28 +13,119 @@ theme:
     - scheme: default
       primary: blue
       accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
     - scheme: slate
       primary: blue
       accent: amber
-
-nav:
-  - Inicio: index.md
-  - START-HERE.md: START-HERE.md
-  - issues/:
-    - ms-cortana2-link-error: issues/ms-cortana2-link-error/README.md
-    - ms-cortana2-no-malware: issues/ms-cortana2-no-malware/README.md
-    - lenovo-ctrl-cortana2-link: issues/lenovo-ctrl-cortana2-link/README.md
-    - ltsc-dev-services: issues/ltsc-dev-services/README.md
-    - wifi-throughput-ltsc: issues/wifi-throughput-ltsc/README.md
-    - windows-power-plan-ultimate: issues/windows-power-plan-ultimate/README.md
-    - windows-telemetry-disable: issues/windows-telemetry-disable/README.md
-    - windows-network-optimization: issues/windows-network-optimization/README.md
-    - windows-visual-effects-performance: issues/windows-visual-effects-performance/README.md
-    - rhel-dual-boot-partition: issues/rhel-dual-boot-partition/README.md
-    - onedrive-remove-full: issues/onedrive-remove-full/README.md
-    - searchhost-web-disable: issues/searchhost-web-disable/README.md
-    - oem-bloat-services: issues/oem-bloat-services/README.md
-    - edge-uninstall-full: issues/edge-uninstall-full/README.md
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: "DM Sans"
+    code: "Space Mono"
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
 
 plugins:
   - search
+  - mermaid2
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+nav:
+  - Inicio: index.md
+  - ARQUITECTURA:
+      - "Memoria Kernel (Working Set, Standby, Compression)": architecture/01-windows-kernel-memory.md
+      - "Arquitectura Boot (Fases, SMSS, WinInit, Services)": architecture/02-startup-architecture.md
+      - "Memory Compression vs Pagefile vs RAMMap": architecture/03-memory-compression.md
+      - "Modelo Carga Dev 8GB (WSL2, Docker, VS Code, Brave)": architecture/04-developer-workload-model.md
+  - INSTALACIÓN:
+      - "ISO Oficial, Rufus, autounattend.xml": install/01-media-creation.md
+      - "OOBE Debloat (Cuenta Local, Telemetría Mínima)": install/02-oobe-debloat.md
+      - "Drivers Lenovo 82XB Baseline (Versiones, BIOS, Vantage)": install/03-driver-baseline.md
+  - CONFIGURACIÓN BASE:
+      - "Tabla Maestra Servicios (Keep/Manual/Disabled)": config/01-services-baseline.md
+      - "Task Scheduler Auditoría (180 tareas → Telemetría Off)": config/02-scheduled-tasks.md
+      - "Registro (Memory, Prefetch, NDU, Priority, Power, Edge)": config/03-registry-tuning.md
+      - "Pagefile 2/4GB + Compression Internals": config/04-pagefile-compression.md
+      - "Privacidad/Telemetría (Cortana, Edge, OneDrive, Firewall, Hosts)": config/05-privacy-telemetry.md
+  - RENDIMIENTO 8GB:
+      - "RAMMap Forensics (Tu Hallazgo Standby vs WS)": performance/01-rammap-forensics.md
+      - "Working Set Trim (APIs, Herramientas, Estrategias)": performance/02-working-set-trim.md
+      - "Startup Latency (WPR, WPA, ReadyBoot, Métricas)": performance/03-startup-latency.md
+      - "Perfil Dev 8GB (Límites Duros, Workflow, Test Carga)": performance/04-developer-profile.md
+      - "Monitoring/Alerting (ETW, PerfView, Counters, Grafana)": performance/05-monitoring-alerting.md
+  - EVIDENCIA CIENTÍFICA:
+      - "Metodología Medición (WPR, RAMMap, PerfView, Baselines)": evidence/methodology.md
+      - "Baseline 2026-09-10 (Tu Estado Actual)": evidence/baseline-2026-09-10.md
+      - "Baseline Optimizado (Post-Aplicación)": evidence/baseline-optimized.md
+      - "Tests Regresión (Validación No-Regresión)": evidence/regression-tests.md
+  - SCRIPTS AUTOMATIZADOS:
+      - "Apply-DevBaseline.ps1 (Orquestador Maestro)": scripts/Apply-DevBaseline.md
+      - "Apply-ServicesBaseline.ps1": scripts/Apply-ServicesBaseline.md
+      - "Apply-TaskSchedulerBaseline.ps1": scripts/Apply-TaskSchedulerBaseline.md
+      - "Apply-RegistryTuning.ps1": scripts/Apply-RegistryTuning.md
+      - "Apply-PrivacyTelemetry.ps1": scripts/Apply-PrivacyTelemetry.md
+      - "Verify-DriverBaseline.ps1": scripts/Verify-DriverBaseline.md
+      - "Undo-DevBaseline.ps1 (Rollback)": scripts/Undo-DevBaseline.md
+      - "Emergency-Trim.ps1 (Emergencia < 500 MB)": scripts/Emergency-Trim.md
+      - "Capture-Baseline.ps1 (Forense Completa)": scripts/Capture-Baseline.md
+      - "Monitor-DevMemory.ps1 (Dashboard Tiempo Real)": scripts/Monitor-DevMemory.md
+      - "Test-DevWorkload.ps1 (Test Carga Sintética)": scripts/Test-DevWorkload.md
+      - "Switch-Context.ps1 (Cambio Contexto)": scripts/Switch-Context.md
+  - GOBERNANZA:
+      - "Licencia GPL-3.0": LICENSE.md
+      - "Contributor License Agreement": CLA.md
+      - "Política Seguridad": SECURITY.md
+      - "Instrucciones Agentes IA": AGENTS.md
+      - "Tripwire IA No Autorizada": HONEYTOKEN.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/DiegoAlejandroSaenzFalcon
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/diegosaenzfalcon
+    - icon: fontawesome/solid/envelope
+      link: mailto:diegoalejandrosaenzfalcon@gmail.com
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+  consent:
+    title: Cookie consent
+    description: >-
+      Usamos cookies para analizar tráfico y mejorar la experiencia.
+    actions:
+      - accept
+      - reject
