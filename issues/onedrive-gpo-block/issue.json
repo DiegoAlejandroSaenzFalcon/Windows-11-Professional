@@ -1,0 +1,30 @@
+{
+  "id": "onedrive-gpo-block",
+  "title": "OneDrive bloqueado por GPO `DisableFileSyncNGSC`",
+  "category": "bug",
+  "severity": "high",
+  "symptom": "OneDrive no inicia, no muestra ventana de configuración, el proceso `OneDrive.Sync.Service` no arranca, `OD4Used=0` en registro. El usuario ve el icono pero no puede configurar su cuenta.",
+  "affected": {
+    "os": ["Windows 10", "Windows 11"],
+    "builds": [],
+    "condition": "Política de grupo `DisableFileSyncNGSC=1` activa en HKLM o HKCU"
+  },
+  "root_cause": "La clave de política `DisableFileSyncNGSC` (valor `1`) en `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive` (o su equivalente en HKCU) deshabilita completamente el cliente Next Generation Sync Client (NGSC). Esto impide el arranque del servicio de sincronización, la UI de configuración y cualquier operación de sincronización.",
+  "diagnosis": [
+    "Get-ItemProperty 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name DisableFileSyncNGSC -ErrorAction SilentlyContinue",
+    "Get-ItemProperty 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name DisableFileSyncNGSC -ErrorAction SilentlyContinue",
+    "Get-ItemProperty 'HKCU:\\Software\\Microsoft\\OneDrive' -Name OD4Used -ErrorAction SilentlyContinue",
+    "Get-Process -Name OneDrive* -ErrorAction SilentlyContinue"
+  ],
+  "detection": "(Get-ItemProperty 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name DisableFileSyncNGSC -ErrorAction SilentlyContinue).DisableFileSyncNGSC -eq 1 -or (Get-ItemProperty 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name DisableFileSyncNGSC -ErrorAction SilentlyContinue).DisableFileSyncNGSC -eq 1",
+  "fix_script": "fix.ps1",
+  "reversible": true,
+  "undo": "Restaurar las claves GPO eliminadas (ver sección UNDO en fix.ps1) o volver a aplicar la política via `gpedit.msc` → Configuración del equipo → Plantillas administrativas → OneDrive → Impedir el uso de OneDrive para almacenamiento de archivos.",
+  "tags": ["onedrive", "gpo", "policy", "sync", "configuration", "ngsc", "disablefilesyncngsc"],
+  "references": [
+    "https://learn.microsoft.com/en-us/onedrive/group-policy#disablefileSyncNGSC",
+    "https://learn.microsoft.com/en-us/onedrive/deploy-and-configure-on-windows"
+  ],
+  "author": "@opencode-session",
+  "date": "2026-09-12"
+}
