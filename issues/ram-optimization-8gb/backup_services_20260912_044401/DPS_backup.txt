@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Diagnostic Policy Service                                                               
+Name                           DPS                                                                                     
+OldStartType                   Automatic                                                                               
+OldStatus                      Running                                                                                 
+
+

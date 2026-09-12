@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Push notifications (apps Store)                                                         
+Name                           WpnUserService                                                                          
+OldStartType                   Automatic                                                                               
+OldStatus                      Stopped                                                                                 
+
+

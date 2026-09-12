@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Program Compatibility Assistant (bajo demanda)                                          
+Name                           PcaSvc                                                                                  
+OldStartType                   Automatic                                                                               
+OldStatus                      Running                                                                                 
+
+

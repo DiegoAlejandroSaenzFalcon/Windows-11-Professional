@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Licencias apps Store                                                                    
+Name                           ClipSVC                                                                                 
+OldStartType                   Manual                                                                                  
+OldStatus                      Stopped                                                                                 
+
+

@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Windows Update medic (bajo demanda)                                                     
+Name                           WaaSMedicSvc                                                                            
+OldStartType                   Manual                                                                                  
+OldStatus                      Stopped                                                                                 
+
+

@@ -1,0 +1,7 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy]
+"TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000002
+"PrivacyConsentPresentationVersion"=dword:00000001
+"PrivacyConsentSettingsVersion"=dword:00000000
+

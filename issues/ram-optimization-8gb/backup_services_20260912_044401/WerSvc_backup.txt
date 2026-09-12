@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Windows Error Reporting (bajo demanda)                                                  
+Name                           WerSvc                                                                                  
+OldStartType                   Manual                                                                                  
+OldStatus                      Stopped                                                                                 
+
+

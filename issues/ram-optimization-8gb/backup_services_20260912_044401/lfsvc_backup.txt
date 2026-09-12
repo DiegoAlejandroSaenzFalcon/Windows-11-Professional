@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Geolocalizacion                                                                         
+Name                           lfsvc                                                                                   
+OldStartType                   Manual                                                                                  
+OldStatus                      Running                                                                                 
+
+

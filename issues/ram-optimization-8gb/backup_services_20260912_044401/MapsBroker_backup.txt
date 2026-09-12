@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Mapas offline (poco uso)                                                                
+Name                           MapsBroker                                                                              
+OldStartType                   Automatic                                                                               
+OldStatus                      Stopped                                                                                 
+
+

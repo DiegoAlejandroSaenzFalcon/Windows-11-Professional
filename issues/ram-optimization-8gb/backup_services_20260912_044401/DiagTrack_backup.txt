@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Telemetria Connected User Experience                                                    
+Name                           DiagTrack                                                                               
+OldStartType                   Automatic                                                                               
+OldStatus                      Running                                                                                 
+
+

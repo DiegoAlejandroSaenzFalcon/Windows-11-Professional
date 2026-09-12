@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Modo tienda (nunca en usuario)                                                          
+Name                           RetailDemo                                                                              
+OldStartType                   Manual                                                                                  
+OldStatus                      Stopped                                                                                 
+
+

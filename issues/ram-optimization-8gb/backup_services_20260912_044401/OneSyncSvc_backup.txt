@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Sync cuentas Mail/Calendar (si no se usa)                                               
+Name                           OneSyncSvc                                                                              
+OldStartType                   Manual                                                                                  
+OldStatus                      Stopped                                                                                 
+
+

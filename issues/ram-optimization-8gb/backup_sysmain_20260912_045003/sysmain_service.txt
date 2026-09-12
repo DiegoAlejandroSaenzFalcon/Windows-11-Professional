@@ -1,0 +1,8 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Name                           SysMain                                                                                 
+OldStartType                   Automatic                                                                               
+OldStatus                      Running                                                                                 
+
+

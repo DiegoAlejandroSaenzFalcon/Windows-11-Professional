@@ -1,0 +1,32 @@
+{
+  "id": "ram-optimization-8gb",
+  "title": "Optimizacion agresiva de RAM para equipos con 8 GB (LPDDR5 soldada)",
+  "category": "performance",
+  "severity": "high",
+  "symptom": "RAM fisica 7.7 GB, commit charge 87.6%, solo ~0.8 GB libre. Presion de memoria constante con opencode x3 + Brave + Windows + Defender. Paging activo (34 pages input/s).",
+  "affected": {
+    "os": ["Windows 10", "Windows 11"],
+    "builds": [],
+    "condition": "Equipos con 8 GB RAM soldada (LPDDR5) sin posibilidad de upgrade hardware. Carga de trabajo multi-proceso (IDE, navegador, terminales)."
+  },
+  "root_cause": "Windows 11 base consume ~3-4 GB RAM. Servicios innecesarios (SysMain, DiagTrack, MapsBroker, etc.), telemetria, indizador, efectos visuales, telemetria Edge/OneDrive, y falta de tuning agresivo dejan poca RAM para apps de usuario. Memoria LPDDR5 soldada impide upgrade fisico.",
+  "diagnosis": [
+    "Get-CimInstance Win32_OperatingSystem | Select FreePhysicalMemory, TotalVisibleMemorySize",
+    "Get-Counter '\\Memory\\% Committed Bytes In Use', '\\Memory\\Pages Input/sec', '\\Memory\\Available MBytes'",
+    "Get-Process | Sort-Object WorkingSet64 -Descending | Select -First 10 Name, Id, WS",
+    "Get-Service | Where StartType -eq 'Auto' | Where Status -eq 'Running' | Select Name, DisplayName",
+    "Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management' | Select ClearPageFileAtShutdown, DisablePagingExecutive, LargeSystemCache"
+  ],
+  "detection": "(Get-CimInstance Win32_OperatingSystem).TotalVisibleMemorySize -lt 9000000 -and (Get-Counter '\\Memory\\% Committed Bytes In Use').CounterSamples[0].CookedValue -gt 80",
+  "fix_script": "fix.ps1",
+  "reversible": true,
+  "undo": "Cada sub-script tiene su UNDO individual. Ver fix.ps1 para lista completa. Restauracion global: ejecutar .\\undo-all.ps1 o restaurar puntos de restauracion del sistema creados por cada script.",
+  "tags": ["ram", "memory", "optimization", "8gb", "lpddr5", "services", "startup", "visual-effects", "telemetry", "compactos", "pagefile", "sysmain", "search-indexer"],
+  "references": [
+    "https://learn.microsoft.com/en-us/windows/performance/memory/",
+    "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oobe-optimize-memory",
+    "https://github.com/microsoft/Windows-Tooling/tree/master/WindowsPerformance"
+  ],
+  "author": "@opencode-session",
+  "date": "2026-09-12"
+}

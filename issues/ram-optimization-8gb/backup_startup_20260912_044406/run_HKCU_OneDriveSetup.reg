@@ -1,0 +1,4 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKCU:\Software\Microsoft\Windows\CurrentVersion\Run]
+"OneDriveSetup"="C:\Windows\System32\OneDriveSetup.exe /thfirstsetup"

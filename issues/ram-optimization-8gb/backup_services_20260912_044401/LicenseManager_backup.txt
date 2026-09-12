@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Gestion licencias                                                                       
+Name                           LicenseManager                                                                          
+OldStartType                   Manual                                                                                  
+OldStatus                      Running                                                                                 
+
+

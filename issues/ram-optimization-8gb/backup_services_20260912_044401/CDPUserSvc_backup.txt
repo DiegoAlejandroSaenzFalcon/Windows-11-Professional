@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Connected Devices Platform                                                              
+Name                           CDPUserSvc                                                                              
+OldStartType                   Automatic                                                                               
+OldStatus                      Stopped                                                                                 
+
+

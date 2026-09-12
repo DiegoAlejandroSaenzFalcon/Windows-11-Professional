@@ -1,0 +1,49 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"BlockSendInputResets"="0"
+"CaretTimeout"=dword:00001388
+"CaretWidth"=dword:00000001
+"ClickLockTime"=dword:000004B0
+"CoolSwitchColumns"="7"
+"CoolSwitchRows"="3"
+"CursorBlinkRate"="530"
+"DockMoving"="1"
+"DragFromMaximize"="1"
+"DragFullWindows"="1"
+"DragHeight"="4"
+"DragWidth"="4"
+"FocusBorderHeight"=dword:00000001
+"FocusBorderWidth"=dword:00000001
+"FontSmoothing"="2"
+"FontSmoothingGamma"=dword:00000000
+"FontSmoothingOrientation"=dword:00000001
+"FontSmoothingType"=dword:00000002
+"ForegroundFlashCount"=dword:00000007
+"ForegroundLockTimeout"=dword:00030D40
+"LeftOverlapChars"="3"
+"MenuShowDelay"="400"
+"MouseWheelRouting"=dword:00000002
+"PaintDesktopVersion"=dword:00000000
+"Pattern"=dword:00000000
+"RightOverlapChars"="3"
+"ScreenSaveActive"="1"
+"SnapSizing"="1"
+"TileWallpaper"="0"
+"WallPaper"="C:\Users\Diego Saenz\Downloads\amor de mi vida.jpg"
+"WallpaperOriginX"=dword:00000000
+"WallpaperOriginY"=dword:00000000
+"WallpaperStyle"="10"
+"WheelScrollChars"="3"
+"WheelScrollLines"="3"
+"WindowArrangementActive"="1"
+"DelayLockInterval"=dword:00000384
+"Win8DpiScaling"=dword:00000000
+"DpiScalingVer"=dword:00001000
+"UserPreferencesMask"="144 18 7 128 16 0 0 0"
+"MaxVirtualDesktopDimension"=dword:00000780
+"MaxMonitorDimension"=dword:00000780
+"TranscodedImageCount"=dword:00000001
+"LastUpdated"="4294967295"
+"TranscodedImageCache"="122 195 1 0 122 177 3 0 128 7 0 0 56 4 0 0 209 98 247 53 80 66 221 1 67 0 58 0 92 0 85 0 115 0 101 0 114 0 115 0 92 0 68 0 105 0 101 0 103 0 111 0 32 0 83 0 97 0 101 0 110 0 122 0 92 0 68 0 111 0 119 0 110 0 108 0 111 0 97 0 100 0 115 0 92 0 97 0 109 0 111 0 114 0 32 0 100 0 101 0 32 0 109 0 105 0 32 0 118 0 105 0 100 0 97 0 46 0 106 0 112 0 103 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+

@@ -1,0 +1,20 @@
+﻿DiagTrack | CHANGED | Old: Automatic | New: Disabled | Telemetria Connected User Experience
+MapsBroker | CHANGED | Old: Automatic | New: Disabled | Mapas offline (poco uso)
+lfsvc | CHANGED | Old: Manual | New: Disabled | Geolocalizacion
+RetailDemo | CHANGED | Old: Manual | New: Disabled | Modo tienda (nunca en usuario)
+XboxGipSvc | CHANGED | Old: Manual | New: Disabled | Xbox Game Bar (si no se usa)
+XboxNetApiSvc | CHANGED | Old: Manual | New: Disabled | Xbox Networking (si no se usa)
+PcaSvc | CHANGED | Old: Automatic | New: Manual | Program Compatibility Assistant (bajo demanda)
+WpnUserService | CHANGED | Old: Automatic | New: Disabled | Push notifications (apps Store)
+CDPUserSvc | CHANGED | Old: Automatic | New: Disabled | Connected Devices Platform
+OneSyncSvc | CHANGED | Old: Manual | New: Disabled | Sync cuentas Mail/Calendar (si no se usa)
+UnistoreSvc | CHANGED | Old: Manual | New: Disabled | Microsoft Store updates
+ClipSVC | ERROR | Old: Manual | New: Disabled | 
+LicenseManager | CHANGED | Old: Manual | New: Disabled | Gestion licencias
+WaaSMedicSvc | ALREADY_SET | Old: Manual | New: Manual | 
+DPS | CHANGED | Old: Automatic | New: Manual | Diagnostic Policy Service
+WmiApSrv | ALREADY_SET | Old: Manual | New: Manual | 
+TrkWks | CHANGED | Old: Automatic | New: Manual | Distributed Link Tracking (dominio)
+Fax | NOT_FOUND | Old: N/A | New: Disabled | 
+RemoteRegistry | ALREADY_SET | Old: Disabled | New: Disabled | 
+WerSvc | ALREADY_SET | Old: Manual | New: Manual | 

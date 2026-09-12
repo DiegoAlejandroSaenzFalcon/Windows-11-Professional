@@ -1,0 +1,8 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Name                           DoSvc                                                                                   
+OldStartType                   Manual                                                                                  
+OldStatus                      Stopped                                                                                 
+
+

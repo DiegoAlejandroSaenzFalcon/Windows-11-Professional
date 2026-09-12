@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         WMI Performance Adapter                                                                 
+Name                           WmiApSrv                                                                                
+OldStartType                   Manual                                                                                  
+OldStatus                      Stopped                                                                                 
+
+

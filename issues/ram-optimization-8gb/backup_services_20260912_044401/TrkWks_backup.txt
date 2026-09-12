@@ -1,0 +1,9 @@
+﻿
+Name                           Value                                                                                   
+----                           -----                                                                                   
+Reason                         Distributed Link Tracking (dominio)                                                     
+Name                           TrkWks                                                                                  
+OldStartType                   Automatic                                                                               
+OldStatus                      Running                                                                                 
+
+
