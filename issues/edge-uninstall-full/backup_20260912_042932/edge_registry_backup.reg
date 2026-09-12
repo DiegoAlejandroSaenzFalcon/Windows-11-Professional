@@ -1,0 +1,11 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
+"OneDriveSetup"="C:\Windows\System32\OneDriveSetup.exe /thfirstsetup"
+"BraveSoftware Update"=""C:\Users\Diego Saenz\AppData\Local\BraveSoftware\Update\1.3.361.151\BraveUpdateCore.exe""
+"Microsoft.Lists"="C:\Program Files\Microsoft OneDrive\26.158.0816.0003\OneDrive.Sync.Service.exe"
+"OneDrive"=""C:\Program Files\Microsoft OneDrive\OneDrive.exe" /background"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages]
+"PackageStatusImported"=dword:00000001
+

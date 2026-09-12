@@ -1,6 +1,6 @@
 {
   "id": "edge-uninstall-full",
-  "title": "Desinstalación completa de Microsoft Edge (cuando no se usa)",
+  "title": "Desinstalacion completa de Microsoft Edge (cuando no se usa)",
   "category": "performance",
   "severity": "high",
   "symptom": "Microsoft Edge arranca procesos en segundo plano, se actualiza solo (EdgeUpdate/EdgeUpdateMachine), agrega procesos y consume RAM aunque uses otro navegador (p. ej. Brave).",
@@ -9,7 +9,7 @@
     "builds": [],
     "condition": "Usuarios que usan otro navegador (Brave, Firefox, Chrome) y no necesitan Edge"
   },
-  "root_cause": "Edge viene integrado en Windows y añade servicios/actualizadores (edgeupdate, edgeupdatem) y entradas de registro que inician procesos de forma permanente. Al no desinstalarlo, esos procesos siguen consumiendo RAM y CPU.",
+  "root_cause": "Edge viene integrado en Windows y anade servicios/actualizadores (edgeupdate, edgeupdatem) y entradas de registro que inician procesos de forma permanente. Al no desinstalarlo, esos procesos siguen consumiendo RAM y CPU.",
   "diagnosis": [
     "Get-Process -Name msedge -ErrorAction SilentlyContinue | Select-Object Name, Id",
     "Get-Service -Name 'edgeupdate','edgeupdatem' -ErrorAction SilentlyContinue | Select-Object Name, StartType",
@@ -17,11 +17,11 @@
   ],
   "detection": "(Get-AppxPackage -AllUsers *MicrosoftEdge.Stable* -ErrorAction SilentlyContinue) -ne $null",
   "fix_script": "fix.ps1",
-  "plain_language": "Edge es el navegador integrado de Windows. Si usas otro navegador, sus procesos y actualizador igual corren en segundo plano gastando RAM. Este arreglo detiene esos procesos, desactiva los servicios de actualización y elimina las entradas de registro que lo relanzan, guardando respaldo para revertirlo. Quitar Edge no rompe Windows: es una aplicación, no parte del kernel.",
+  "plain_language": "Edge es el navegador integrado de Windows. Si usas otro navegador, sus procesos y actualizador igual corren en segundo plano gastando RAM. Este arreglo detiene esos procesos, desactiva los servicios de actualizacion y elimina las entradas de registro que lo relanzan, guardando respaldo para revertirlo. Quitar Edge no rompe Windows: es una aplicacion, no parte del kernel.",
   "reversible": true,
   "undo": "Reinstalar Edge desde https://www.microsoft.com/edge (o con winget install --id Microsoft.Edge) y reactivar los servicios edgeupdate/edgeupdatem si se desean las actualizaciones.",
-  "tags": ["edge", "browser", "ram", "performance", "bloatware", "startup"],
+  "tags": ["edge", "browser", "ram", "performance", "bloatware", "startup", "webview2"],
   "references": ["https://www.microsoft.com/edge"],
   "author": "@opencode-session",
-  "date": "2026-08-29"
+  "date": "2026-09-12"
 }

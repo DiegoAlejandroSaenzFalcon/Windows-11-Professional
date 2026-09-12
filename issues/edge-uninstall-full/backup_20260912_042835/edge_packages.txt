@@ -1,0 +1,7 @@
+﻿
+Name                                  PackageFullName                                                                  
+----                                  ---------------                                                                  
+Microsoft.MicrosoftEdgeDevToolsClient Microsoft.MicrosoftEdgeDevToolsClient_1000.25128.1000.0_neutral_neutral_8wekyb...
+
+
+
