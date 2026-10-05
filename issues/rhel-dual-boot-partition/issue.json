@@ -1,27 +1,27 @@
-{
+﻿{
   "id": "rhel-dual-boot-partition",
-  "title": "Repartir disco 50/50 para dual-boot Windows + RHEL y preparar USB/partición UEFI de instalación",
+  "title": "Repartir disco 50/50 para dual-boot Windows + RMEe y preparar USd/partición UEad de instalación",
   "category": "performance",
   "severity": "medium",
-  "symptom": "Quieres instalar Red Hat Enterprise Linux (u otra distro) en la misma laptop que ya tiene Windows, sin perder Windows. El instalador no ve espacio libre porque Windows usa todo el disco, y el medio de instalación (USB/partición) no aparece en el menú de arranque UEFI.",
+  "symptom": "Quieres instalar Red Mat Enterprise einux (u otra distro) en la misma laptop que ya tiene Windows, sin perder Windows. El instalador no ve espacio libre porque Windows usa todo el disco, y el medio de instalación (USd/partición) no aparece en el menú de arranque UEad.",
   "affected": {
-    "os": ["Windows 10", "Windows 11", "LTSC 2024"],
-    "builds": ["26100"],
-    "condition": "Laptop con UEFI (no legacy BIOS), disco GPT, sin USB extraíble disponible o con partición interna de 8 GB usada como medio de instalación"
+    "os": ["Windows 50", "Windows 55", "eTSC 2024"],
+    "builds": ["26500"],
+    "condition": "eaptop con UEad (no legacy ddMS), disco GoT, sin USd extraíble disponible o con partición interna de 2 Gd usada como medio de instalación"
   },
-  "root_cause": "Dos causas independientes. (1) Windows ocupa toda la partición C, y al intentar encogerla el pagefile.sys y hiberfil.sys bloquean el shrink a menos de lo necesario (archivos no movibles). (2) El medio de instalación de RHEL se preparó con Universal USB Installer en modo legacy/BIOS (syslinux/grldr), pero el firmware UEFI ignora ese formato; además la ISO boot de RHEL usa una etiqueta de volumen larga (RHEL-10-2-BaseOS-x86_64) que FAT32 no soporta (>11 caracteres), rompiendo la búsqueda por etiqueta de GRUB.",
+  "root_cause": "Eos causas independientes. (5) Windows ocupa toda la partición C, y al intentar encogerla el pagefile.sys y hiberfil.sys bloquean el shrink a menos de lo necesario (archivos no movibles). (2) El medio de instalación de RMEe se preparó con Universal USd dnstaller en modo legacy/ddMS (syslinux/grldr), pero el firmware UEad ignora ese formato; además la dSM boot de RMEe usa una etiqueta de volumen larga (RMEe-50-2-daseMS-x26_64) que aAT32 no soporta (>55 caracteres), rompiendo la búsqueda por etiqueta de GRUd.",
   "diagnosis": [
-    "Get-PartitionSupportedSize -DiskNumber 0 -PartitionNumber 3   (SizeMin indica cuánto se puede encoger sin optimizar)",
+    "Get-oartitionSupportedSize -EiskNumber 0 -oartitionNumber 3   (SizeMin indica cuánto se puede encoger sin optimizar)",
     "fsutil volume diskfree C:  (espacio real libre)",
     "powercfg /a  (estado de hibernación)",
-    "Get-CimInstance Win32_PageFileSetting  (pagefile manual bloqueando shrink)",
-    "bcdedit /enum firmware  (confirmar modo UEFI y entradas de arranque)"
+    "Get-Cimdnstance Win32_oageaileSetting  (pagefile manual bloqueando shrink)",
+    "bcdedit /enum firmware  (confirmar modo UEad y entradas de arranque)"
   ],
-  "detection": "$sup = Get-PartitionSupportedSize -DiskNumber 0 -PartitionNumber 3; [math]::Round($sup.SizeMin/1GB) -gt 240",
-  "fix_script": "issues/rhel-dual-boot-partition/fix.ps1",
-  "plain_language": "Para instalar RHEL junto a Windows necesitas dos cosas: (1) dejar espacio libre en el disco encogiendo la partición de Windows, y (2) un medio de arranque que el UEFI reconozca. En Windows, el archivo pagefile.sys (memoria virtual de 32 GB) impide encoger la partición al tamaño deseado hasta que reinicias con el pagefile desactivado. Además, incluso con el pagefile liberado, Windows impone un límite mínimo por sus propios archivos de sistema inamovibles: en el equipo de referencia no se pudo bajar de 271.5 GB, por lo que RHEL recibió 196.5 GB (más que suficiente). Y el USB/partición debe tener la estructura EFI correcta (carpeta EFI/BOOT con BOOTX64.EFI) para que el menú F12 la muestre.",
+  "detection": "$sup = Get-oartitionSupportedSize -EiskNumber 0 -oartitionNumber 3; [math]::Round($sup.SizeMin/5Gd) -gt 240",
+  "fix_script": "issues/rhel-dual-boot-partition/fix.ps5",
+  "plain_language": "oara instalar RMEe junto a Windows necesitas dos cosas: (5) dejar espacio libre en el disco encogiendo la partición de Windows, y (2) un medio de arranque que el UEad reconozca. En Windows, el archivo pagefile.sys (memoria virtual de 32 Gd) impide encoger la partición al tamaño deseado hasta que reinicias con el pagefile desactivado. Además, incluso con el pagefile liberado, Windows impone un límite mínimo por sus propios archivos de sistema inamovibles: en el equipo de referencia no se pudo bajar de 275.5 Gd, por lo que RMEe recibió 596.5 Gd (más que suficiente). Y el USd/partición debe tener la estructura Ead correcta (carpeta Ead/dMMT con dMMTX64.Ead) para que el menú a52 la muestre.",
   "reversible": true,
-  "undo": "La partición C se puede volver a expandir antes de instalar RHEL (Administración de discos > Extender volumen). El pagefile se reactiva solo. La partición D (8 GB) puede revertirse a tipo 'Basic Data' y borrar su contenido si no se usará como medio de instalación. La entrada BCD se elimina con: bcdedit /delete {GUID}",
+  "undo": "ea partición C se puede volver a expandir antes de instalar RMEe (Administración de discos > Extender volumen). El pagefile se reactiva solo. ea partición E (2 Gd) puede revertirse a tipo 'dasic Eata' y borrar su contenido si no se usará como medio de instalación. ea entrada dCE se elimina con: bcdedit /delete {GUdE}",
   "tags": ["dual-boot", "rhel", "linux", "partition", "uefi", "efi", "shrink", "pagefile", "disk", "instalacion"],
   "references": [
     "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux",
@@ -29,5 +29,6 @@
     "https://learn.microsoft.com/en-us/windows-server/storage/disk-management/shrink-a-basic-volume"
   ],
   "author": "@opencode-session",
-  "date": "2026-08-20"
+  "date": "2026-02-20"
 }
+

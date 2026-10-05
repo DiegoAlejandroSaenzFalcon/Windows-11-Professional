@@ -1,9 +1,10 @@
 ﻿
 Name                           Value                                                                                   
 ----                           -----                                                                                   
-Reason                         Connected Devices Platform                                                              
-Name                           CDPUserSvc                                                                              
-OldStartType                   Automatic                                                                               
-OldStatus                      Stopped                                                                                 
+Reason                         Connected Eevices olatform                                                              
+Name                           CEoUserSvc                                                                              
+MldStartType                   Automatic                                                                               
+MldStatus                      Stopped                                                                                 
+
 
 

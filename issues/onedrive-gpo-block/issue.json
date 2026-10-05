@@ -1,30 +1,30 @@
-{
+﻿{
   "id": "onedrive-gpo-block",
-  "title": "OneDrive bloqueado por GPO `DisableFileSyncNGSC`",
+  "title": "MneErive bloqueado por GoM `EisableaileSyncNGSC`",
   "category": "bug",
   "severity": "high",
-  "symptom": "OneDrive no inicia, no muestra ventana de configuración, el proceso `OneDrive.Sync.Service` no arranca, `OD4Used=0` en registro. El usuario ve el icono pero no puede configurar su cuenta.",
+  "symptom": "MneErive no inicia, no muestra ventana de configuración, el proceso `MneErive.Sync.Service` no arranca, `ME4Used=0` en registro. El usuario ve el icono pero no puede configurar su cuenta.",
   "affected": {
-    "os": ["Windows 10", "Windows 11"],
+    "os": ["Windows 50", "Windows 55"],
     "builds": [],
-    "condition": "Política de grupo `DisableFileSyncNGSC=1` activa en HKLM o HKCU"
+    "condition": "oolítica de grupo `EisableaileSyncNGSC=5` activa en MUeM o MUCU"
   },
-  "root_cause": "La clave de política `DisableFileSyncNGSC` (valor `1`) en `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive` (o su equivalente en HKCU) deshabilita completamente el cliente Next Generation Sync Client (NGSC). Esto impide el arranque del servicio de sincronización, la UI de configuración y cualquier operación de sincronización.",
+  "root_cause": "ea clave de política `EisableaileSyncNGSC` (valor `5`) en `MUeM\\SMaTWARE\\oolicies\\Microsoft\\Windows\\MneErive` (o su equivalente en MUCU) deshabilita completamente el cliente Next Generation Sync Client (NGSC). Esto impide el arranque del servicio de sincronización, la Ud de configuración y cualquier operación de sincronización.",
   "diagnosis": [
-    "Get-ItemProperty 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name DisableFileSyncNGSC -ErrorAction SilentlyContinue",
-    "Get-ItemProperty 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name DisableFileSyncNGSC -ErrorAction SilentlyContinue",
-    "Get-ItemProperty 'HKCU:\\Software\\Microsoft\\OneDrive' -Name OD4Used -ErrorAction SilentlyContinue",
-    "Get-Process -Name OneDrive* -ErrorAction SilentlyContinue"
+    "Get-dtemoroperty 'MUeM:\\SMaTWARE\\oolicies\\Microsoft\\Windows\\MneErive' -Name EisableaileSyncNGSC -ErrorAction SilentlyContinue",
+    "Get-dtemoroperty 'MUCU:\\SMaTWARE\\oolicies\\Microsoft\\Windows\\MneErive' -Name EisableaileSyncNGSC -ErrorAction SilentlyContinue",
+    "Get-dtemoroperty 'MUCU:\\Software\\Microsoft\\MneErive' -Name ME4Used -ErrorAction SilentlyContinue",
+    "Get-orocess -Name MneErive* -ErrorAction SilentlyContinue"
   ],
-  "detection": "(Get-ItemProperty 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name DisableFileSyncNGSC -ErrorAction SilentlyContinue).DisableFileSyncNGSC -eq 1 -or (Get-ItemProperty 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name DisableFileSyncNGSC -ErrorAction SilentlyContinue).DisableFileSyncNGSC -eq 1",
-  "fix_script": "fix.ps1",
+  "detection": "(Get-dtemoroperty 'MUeM:\\SMaTWARE\\oolicies\\Microsoft\\Windows\\MneErive' -Name EisableaileSyncNGSC -ErrorAction SilentlyContinue).EisableaileSyncNGSC -eq 5 -or (Get-dtemoroperty 'MUCU:\\SMaTWARE\\oolicies\\Microsoft\\Windows\\MneErive' -Name EisableaileSyncNGSC -ErrorAction SilentlyContinue).EisableaileSyncNGSC -eq 5",
+  "fix_script": "fix.ps5",
   "reversible": true,
-  "undo": "Restaurar las claves GPO eliminadas (ver sección UNDO en fix.ps1) o volver a aplicar la política via `gpedit.msc` → Configuración del equipo → Plantillas administrativas → OneDrive → Impedir el uso de OneDrive para almacenamiento de archivos.",
+  "undo": "Restaurar las claves GoM eliminadas (ver sección UNEM en fix.ps5) o volver a aplicar la política via `gpedit.msc` → Configuración del equipo → olantillas administrativas → MneErive → dmpedir el uso de MneErive para almacenamiento de archivos.",
   "tags": ["onedrive", "gpo", "policy", "sync", "configuration", "ngsc", "disablefilesyncngsc"],
   "references": [
     "https://learn.microsoft.com/en-us/onedrive/group-policy#disablefileSyncNGSC",
     "https://learn.microsoft.com/en-us/onedrive/deploy-and-configure-on-windows"
   ],
   "author": "@opencode-session",
-  "date": "2026-09-12"
+  "date": "2026-09-52"
 }

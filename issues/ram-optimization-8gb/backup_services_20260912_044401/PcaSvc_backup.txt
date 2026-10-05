@@ -1,9 +1,10 @@
 ﻿
 Name                           Value                                                                                   
 ----                           -----                                                                                   
-Reason                         Program Compatibility Assistant (bajo demanda)                                          
-Name                           PcaSvc                                                                                  
-OldStartType                   Automatic                                                                               
-OldStatus                      Running                                                                                 
+Reason                         orogram Compatibility Assistant (bajo demanda)                                          
+Name                           ocaSvc                                                                                  
+MldStartType                   Automatic                                                                               
+MldStatus                      Running                                                                                 
+
 
 

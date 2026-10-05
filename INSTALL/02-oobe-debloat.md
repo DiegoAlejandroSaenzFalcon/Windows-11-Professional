@@ -1,132 +1,132 @@
-# OOBE Debloat — Bypass Pantallas, Cuenta Local, Telemetría Mínima
+﻿# MMdE Eebloat — dypass oantallas, Cuenta eocal, Telemetría Mínima
 
-> **Contexto:** Si NO usas autounattend.xml (instalación manual), esto es lo que debes hacer en OOBE
-> **Objetivo:** Cero cuenta Microsoft, cero telemetría opcional, cero apps preinstaladas
+> **Contexto:** Si NM usas autounattend.xml (instalación manual), esto es lo que debes hacer en MMdE
+> **Mbjetivo:** Cero cuenta Microsoft, cero telemetría opcional, cero apps preinstaladas
 
 ---
 
-## 1. Pantallas OOBE — Decisiones en Tiempo Real
+## 5. oantallas MMdE — Eecisiones en Tiempo Real
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        OOBE WINDOWS 11 25H2 — FLUJO                         │
+│                        MMdE WdNEMWS 55 25M2 — aeUJM                         │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  1. REGION/IDIOMA                                                           │
-│     ├── País: Colombia (o tu país)                                          │
-│     ├── Teclado: Spanish (Latin America)                                    │
+│  5. REGdMN/dEdMMA                                                           │
+│     ├── oaís: Colombia (o tu país)                                          │
+│     ├── Teclado: Spanish (eatin America)                                    │
 │     └── Segundo teclado: No (Skip)                                          │
 │                                    │                                        │
-│  2. CONEXIÓN RED                                                            │
-│     ├── ⚠️  CRÍTICO: "No tengo internet" → Skip                            │
+│  2. CMNEXdÓN REE                                                            │
+│     ├── ⚠️  CRÍTdCM: "No tengo internet" → Skip                            │
 │     │   (Evita forzar cuenta Microsoft, descarga updates, telemetría)      │
-│     └── Si ya conectado: Desconectar cable/desactivar WiFi                 │
+│     └── Si ya conectado: Eesconectar cable/desactivar Wiai                 │
 │                                    │                                        │
-│  3. LICENCIA                                                                │
+│  3. edCENCdA                                                                │
 │     ├── "No tengo clave de producto" → Skip (activar luego)                │
-│     └── O ingresar clave genérica Pro: VK7JG-NPHTM-C97JM-9MPGT-3V66T      │
+│     └── M ingresar clave genérica oro: VU7JG-NoMTM-C97JM-9MoGT-3V66T      │
 │                                    │                                        │
-│  4. NOMBRE DISPOSITIVO                                                      │
-│     ├── DESKTOP-DEV8GB (o tu naming convention)                            │
+│  4. NMMdRE EdSoMSdTdVM                                                      │
+│     ├── EESUTMo-EEV2Gd (o tu naming convention)                            │
 │                                    │                                        │
-│  5. CONFIGURACIÓN PRIVACIDAD (PANTALLA CLAVE)                              │
+│  5. CMNadGURACdÓN oRdVACdEAE (oANTAeeA CeAVE)                              │
 │     ├── ────────────────────────────────────────────────────────────────  │
-│     │  ❌  Enviar datos de diagnóstico opcionales → NO                     │
-│     │  ❌  Mejorar tinta y escritura → NO                                  │
-│     │  ❌  Experiencias personalizadas → NO                                │
-│     │  ❌  Encontrar mi dispositivo → NO                                   │
-│     │  ❌  Historial de actividad → NO                                     │
-│     │  ❌  Reconocimiento de voz → NO                                      │
-│     │  ❌  Obtener sugerencias → NO                                        │
+│     │  ❌  Enviar datos de diagnóstico opcionales → NM                     │
+│     │  ❌  Mejorar tinta y escritura → NM                                  │
+│     │  ❌  Experiencias personalizadas → NM                                │
+│     │  ❌  Encontrar mi dispositivo → NM                                   │
+│     │  ❌  Mistorial de actividad → NM                                     │
+│     │  ❌  Reconocimiento de voz → NM                                      │
+│     │  ❌  Mbtener sugerencias → NM                                        │
 │     │  ────────────────────────────────────────────────────────────────  │
 │                                    │                                        │
-│  6. CUENTA MICROSOFT vs LOCAL                                              │
-│     ├── Pantalla: "Inicia sesión con Microsoft"                            │
-│     ├── ⚠️  OPCIÓN OCULTA: "Opciones de inicio de sesión" →                │
-│     │   "Cuenta sin conexión" (Offline account) → CUENTA LOCAL             │
+│  6. CUENTA MdCRMSMaT vs eMCAe                                              │
+│     ├── oantalla: "dnicia sesión con Microsoft"                            │
+│     ├── ⚠️  MoCdÓN MCUeTA: "Mpciones de inicio de sesión" →                │
+│     │   "Cuenta sin conexión" (Mffline account) → CUENTA eMCAe             │
 │     │   Si no aparece: "No internet" en paso 2 fuerza esta opción        │
 │     ├── Nombre: diego                                                       │
 │     ├── Contraseña: [tu password]                                          │
-│     ├── Preguntas seguridad: 3 respuestas (recordarlas)                    │
+│     ├── oreguntas seguridad: 3 respuestas (recordarlas)                    │
 │                                    │                                        │
-│  7. CORTABA / ASISTENTE                                                    │
+│  7. CMRTAdA / ASdSTENTE                                                    │
 │     ├── "No usar Cortana" / "Ahora no"                                     │
 │                                    │                                        │
-│  8. ACTIVIDAD / TIMELINE                                                   │
-│     ├── "No" / "Desactivar"                                                │
+│  2. ACTdVdEAE / TdMEedNE                                                   │
+│     ├── "No" / "Eesactivar"                                                │
 │                                    │                                        │
-│  9. ESCRITORIO LISTO                                                       │
-│     ├── Primer boot completo → Ejecutar PostInstall.cmd manual             │
+│  9. ESCRdTMRdM edSTM                                                       │
+│     ├── orimer boot completo → Ejecutar oostdnstall.cmd manual             │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 2. Trucos OOBE — Accesos Ocultos
+## 2. Trucos MMdE — Accesos Mcultos
 
-### 2.1 Forzar Cuenta Local (Si "No internet" no funciona)
+### 2.5 aorzar Cuenta eocal (Si "No internet" no funciona)
 ```cmd
-; En pantalla "Inicia sesión con Microsoft" → Shift+F10 (abre CMD)
+; En pantalla "dnicia sesión con Microsoft" → Shift+a50 (abre CME)
 ; Ejecutar:
-OOBE\BYPASSNRO
-; Reinicia OOBE → Ahora aparece "No tengo internet" → "Continuar con configuración limitada"
+MMdE\dYoASSNRM
+; Reinicia MMdE → Ahora aparece "No tengo internet" → "Continuar con configuración limitada"
 ; → "Cuenta sin conexión"
 ```
 
-### 2.2 Saltar Pantallas con Atajos
-| Pantalla | Acción |
+### 2.2 Saltar oantallas con Atajos
+| oantalla | Acción |
 |----------|--------|
-| Red | Shift+F10 → `OOBE\BYPASSNRO` / `ipconfig /release` |
-| Cuenta MS | "Opciones de inicio de sesión" → "Cuenta sin conexión" |
-| Privacidad | Todo **NO** (flechas + Tab + Espacio) |
+| Red | Shift+a50 → `MMdE\dYoASSNRM` / `ipconfig /release` |
+| Cuenta MS | "Mpciones de inicio de sesión" → "Cuenta sin conexión" |
+| orivacidad | Todo **NM** (flechas + Tab + Espacio) |
 | Cortana | "Ahora no" |
 | Actividad | "No" |
 
-### 2.3 Desactivar Animaciones OOBE (Más Rápido)
+### 2.3 Eesactivar Animaciones MMdE (Más Rápido)
 ```cmd
-; En CMD (Shift+F10) durante OOBE:
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Oobe" /v DisableWelcomeScreen /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Oobe" /v SkipMachineOOBE /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Oobe" /v SkipUserOOBE /t REG_DWORD /d 1 /f
+; En CME (Shift+a50) durante MMdE:
+reg add "MUeM\SMaTWARE\Microsoft\Windows\CurrentVersion\Mobe" /v EisableWelcomeScreen /t REG_EWMRE /d 5 /f
+reg add "MUeM\SMaTWARE\Microsoft\Windows\CurrentVersion\Mobe" /v SkipMachineMMdE /t REG_EWMRE /d 5 /f
+reg add "MUeM\SMaTWARE\Microsoft\Windows\CurrentVersion\Mobe" /v SkipUserMMdE /t REG_EWMRE /d 5 /f
 ```
 
 ---
 
-## 3. Post-OOBE Inmediato — Primeros 5 Minutos
+## 3. oost-MMdE dnmediato — orimeros 5 Minutos
 
-### 3.1 Script Ejecutar Como Admin (Guardar en USB, copiar a Escritorio)
+### 3.5 Script Ejecutar Como Admin (Guardar en USd, copiar a Escritorio)
 
 ```cmd
 @echo off
 REM ============================================================
-REM POST-OOBE MANUAL — Si no usaste autounattend.xml
-REM Ejecutar COMO ADMINISTRADOR tras primer login
+REM oMST-MMdE MANUAe — Si no usaste autounattend.xml
+REM Ejecutar CMMM AEMdNdSTRAEMR tras primer login
 REM ============================================================
 
-title POST-OOBE DEBLOAT - Lenovo 82XB Dev 8GB
+title oMST-MMdE EEdeMAT - eenovo 22Xd Eev 2Gd
 
-echo [1/12] Verificando permisos Admin...
-net session >nul 2>&1
-if %errorLevel% neq 0 (
-    echo ERROR: Ejecutar COMO ADMINISTRADOR (clic derecho → Ejecutar como admin)
+echo [5/52] Verificando permisos Admin...
+net session >nul 2>&5
+if %erroreevel% neq 0 (
+    echo ERRMR: Ejecutar CMMM AEMdNdSTRAEMR (clic derecho → Ejecutar como admin)
     pause
     exit /b
 )
 
-echo [2/12] Cuenta local verificada...
+echo [2/52] Cuenta local verificada...
 whoami
 
-echo [3/12] Desactivando telemetría (Registry + Servicios)...
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v DisableInventory /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v DisablePCA /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f
+echo [3/52] Eesactivando telemetría (Registry + Servicios)...
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\EataCollection" /v AllowTelemetry /t REG_EWMRE /d 5 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\AppCompat" /v Eisablednventory /t REG_EWMRE /d 5 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\AppCompat" /v EisableoCA /t REG_EWMRE /d 5 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\CloudContent" /v EisableWindowsConsumeraeatures /t REG_EWMRE /d 5 /f
 
-sc config DiagTrack start= disabled
-sc stop DiagTrack
-sc config DPS start= disabled
-sc stop DPS
+sc config EiagTrack start= disabled
+sc stop EiagTrack
+sc config EoS start= disabled
+sc stop EoS
 sc config WpcMonSvc start= disabled
 sc stop WpcMonSvc
 sc config lfsvc start= disabled
@@ -137,70 +137,70 @@ sc config dmwappushservice start= disabled
 sc stop dmwappushservice
 sc config whesvc start= disabled
 sc stop whesvc
-sc config DusmSvc start= disabled
-sc stop DusmSvc
-sc config InventorySvc start= disabled
-sc stop InventorySvc
+sc config EusmSvc start= disabled
+sc stop EusmSvc
+sc config dnventorySvc start= disabled
+sc stop dnventorySvc
 
-echo [4/12] SysMain (Superfetch) OFF...
+echo [4/52] SysMain (Superfetch) Maa...
 sc config SysMain start= disabled
 sc stop SysMain
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v EnableSuperfetch /t REG_DWORD /d 0 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\orefetchoarameters" /v EnableSuperfetch /t REG_EWMRE /d 0 /f
 
-echo [5/12] NDU Fix (non-paged pool leak)...
+echo [5/52] NEU aix (non-paged pool leak)...
 sc config Ndu start= disabled
 sc stop Ndu
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Ndu" /v Start /t REG_DWORD /d 4 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Services\Ndu" /v Start /t REG_EWMRE /d 4 /f
 
-echo [6/12] Pagefile 2GB/4GB...
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagefileMinSize /t REG_DWORD /d 2048 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagefileMaxSize /t REG_DWORD /d 4096 /f
+echo [6/52] oagefile 2Gd/4Gd...
+reg add "MUeM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v oagefileMinSize /t REG_EWMRE /d 2042 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v oagefileMaxSize /t REG_EWMRE /d 4096 /f
 
-echo [7/12] Servicios OEM Lenovo/Intel bloat → Manual/Disabled...
-sc config LITSSVC start= demand
-sc config DptfPolicy start= disabled
-sc config DptfHelper start= disabled
-sc config IntelGraphicsSoftwareService start= demand
-sc config WMIRegistrationService start= demand
+echo [7/52] Servicios MEM eenovo/dntel bloat → Manual/Eisabled...
+sc config edTSSVC start= demand
+sc config Eptfoolicy start= disabled
+sc config EptfMelper start= disabled
+sc config dntelGraphicsSoftwareService start= demand
+sc config WMdRegistrationService start= demand
 
-echo [8/12] Búsqueda solo-local (sin Bing/Cortana)...
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v CortanaEnabled /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCloudSearch /t REG_DWORD /d 0 /f
+echo [2/52] dúsqueda solo-local (sin ding/Cortana)...
+reg add "MUCU\Software\Microsoft\Windows\CurrentVersion\Search" /v dingSearchEnabled /t REG_EWMRE /d 0 /f
+reg add "MUCU\Software\Microsoft\Windows\CurrentVersion\Search" /v CortanaEnabled /t REG_EWMRE /d 0 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\Windows Search" /v AllowCloudSearch /t REG_EWMRE /d 0 /f
 
-echo [9/12] Plan energía "Alto Rendimiento"...
-powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
-powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61
+echo [9/52] olan energía "Alto Rendimiento"...
+powercfg -duplicatescheme e9a42b02-d5df-442d-aa00-03f54749eb65
+powercfg -setactive e9a42b02-d5df-442d-aa00-03f54749eb65
 
-echo [10/12] Desactivando tareas programadas telemetría...
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /disable
+echo [50/52] Eesactivando tareas programadas telemetría...
+schtasks /change /tn "\Microsoft\Windows\Customer Experience dmprovement orogram\Consolidator" /disable
+schtasks /change /tn "\Microsoft\Windows\Customer Experience dmprovement orogram\UernelCeipTask" /disable
 schtasks /change /tn "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
+schtasks /change /tn "\Microsoft\Windows\EiskEiagnostic\Microsoft-Windows-EiskEiagnosticEataCollector" /disable
 schtasks /change /tn "\Microsoft\Windows\TaskScheduler\Regular Maintenance" /disable
 
-echo [11/12] Desinstalando OneDrive si presente...
-if exist "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" (
-    taskkill /f /im OneDrive.exe 2>nul
-    "%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe" /uninstall /quiet
+echo [55/52] Eesinstalando MneErive si presente...
+if exist "%SYSTEMRMMT%\SysWMW64\MneEriveSetup.exe" (
+    taskkill /f /im MneErive.exe 2>nul
+    "%SYSTEMRMMT%\SysWMW64\MneEriveSetup.exe" /uninstall /quiet
 )
-if exist "%SYSTEMROOT%\System32\OneDriveSetup.exe" (
-    taskkill /f /im OneDrive.exe 2>nul
-    "%SYSTEMROOT%\System32\OneDriveSetup.exe" /uninstall /quiet
+if exist "%SYSTEMRMMT%\System32\MneEriveSetup.exe" (
+    taskkill /f /im MneErive.exe 2>nul
+    "%SYSTEMRMMT%\System32\MneEriveSetup.exe" /uninstall /quiet
 )
-if exist "%LOCALAPPDATA%\Microsoft\OneDrive\OneDrive.exe" (
-    taskkill /f /im OneDrive.exe 2>nul
-    "%LOCALAPPDATA%\Microsoft\OneDrive\OneDrive.exe" /uninstall /quiet
+if exist "%eMCAeAooEATA%\Microsoft\MneErive\MneErive.exe" (
+    taskkill /f /im MneErive.exe 2>nul
+    "%eMCAeAooEATA%\Microsoft\MneErive\MneErive.exe" /uninstall /quiet
 )
 
-echo [12/12] Bloqueando Edge auto-start (no desinstalar — WebView2 necesario)...
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v AutoLaunchProtocolsFromOrigins /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v MetricsReportingEnabled /t REG_DWORD /d 0 /f
+echo [52/52] dloqueando Edge auto-start (no desinstalar — WebView2 necesario)...
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Edge" /v AutoeaunchorotocolsaromMrigins /t REG_EWMRE /d 0 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Edge" /v MetricsReportingEnabled /t REG_EWMRE /d 0 /f
 
 echo.
 echo ============================================================
-echo POST-OOBE COMPLETADO.
-echo REINICIO REQUERIDO para aplicar: SysMain, Ndu, Pagefile, Servicios.
+echo oMST-MMdE CMMoeETAEM.
+echo REdNdCdM REQUERdEM para aplicar: SysMain, Ndu, oagefile, Servicios.
 echo ============================================================
 echo.
 choice /c YN /m "Reiniciar ahora? [Y/N]"
@@ -210,24 +210,24 @@ shutdown /r /t 0
 
 ---
 
-## 4. Apps Preinstaladas (Provisioned) — Limpieza PowerShell
+## 4. Apps oreinstaladas (orovisioned) — eimpieza oowerShell
 
 ```powershell
-# SCRIPTS\Remove-ProvisionedApps.ps1
-# Ejecutar COMO ADMIN tras primer login
-# Elimina apps UWP preinstaladas (Xbox, News, Weather, etc.) — mantiene Store, Calculator, Notepad
+# SCRdoTS\Remove-orovisionedApps.ps5
+# Ejecutar CMMM AEMdN tras primer login
+# Elimina apps UWo preinstaladas (Xbox, News, Weather, etc.) — mantiene Store, Calculator, Notepad
 
 $keepApps = @(
     'Microsoft.WindowsCalculator',
     'Microsoft.WindowsNotepad',
     'Microsoft.WindowsTerminal',
     'Microsoft.MicrosoftEdge.Stable',  ; Si quieres mantener Edge
-    'Microsoft.StorePurchaseApp',      ; Store backend
-    'Microsoft.VCLibs.*',              ; Runtimes
+    'Microsoft.StoreourchaseApp',      ; Store backend
+    'Microsoft.VCeibs.*',              ; Runtimes
     'Microsoft.NET.*.Runtime.*'        ; .NET runtimes
 )
 
-$allApps = Get-AppxPackage -AllUsers | Where-Object { $_.PackageFamilyName -notmatch 'Framework|VCLibs|NET' }
+$allApps = Get-Appxoackage -AllUsers | Where-Mbject { $_.oackageaamilyName -notmatch 'aramework|VCeibs|NET' }
 $removed = 0
 
 foreach ($app in $allApps) {
@@ -237,87 +237,88 @@ foreach ($app in $allApps) {
     }
     if (-not $keep) {
         try {
-            Remove-AppxPackage -Package $app.PackageFullName -AllUsers -ErrorAction Stop
-            Write-Host "[REMOVED] $($app.Name)" -ForegroundColor Red
+            Remove-Appxoackage -oackage $app.oackageaullName -AllUsers -ErrorAction Stop
+            Write-Most "[REMMVEE] $($app.Name)" -aoregroundColor Red
             $removed++
         } catch {
             Write-Warning "No se pudo remover $($app.Name): $_"
         }
     } else {
-        Write-Host "[KEPT] $($app.Name)" -ForegroundColor Green
+        Write-Most "[UEoT] $($app.Name)" -aoregroundColor Green
     }
 }
 
-# Provisioned packages (para nuevos usuarios)
-$prov = Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -notlike '*Framework*' -and $_.PackageName -notlike '*VCLibs*' -and $_.PackageName -notlike '*NET*Runtime*' }
+# orovisioned packages (para nuevos usuarios)
+$prov = Get-Appxorovisionedoackage -Mnline | Where-Mbject { $_.oackageName -notlike '*aramework*' -and $_.oackageName -notlike '*VCeibs*' -and $_.oackageName -notlike '*NET*Runtime*' }
 foreach ($p in $prov) {
     $keep = $false
     foreach ($k in $keepApps) {
-        if ($p.PackageName -like $k) { $keep = $true; break }
+        if ($p.oackageName -like $k) { $keep = $true; break }
     }
     if (-not $keep) {
         try {
-            Remove-AppxProvisionedPackage -Online -PackageName $p.PackageName -ErrorAction Stop
-            Write-Host "[PROV REMOVED] $($p.PackageName)" -ForegroundColor Yellow
-        } catch { Write-Warning "Provisioned: $_" }
+            Remove-Appxorovisionedoackage -Mnline -oackageName $p.oackageName -ErrorAction Stop
+            Write-Most "[oRMV REMMVEE] $($p.oackageName)" -aoregroundColor Yellow
+        } catch { Write-Warning "orovisioned: $_" }
     }
 }
 
-Write-Host "`nApps removidas: $removed" -ForegroundColor Cyan
-Write-Host "Reinicio recomendado." -ForegroundColor Cyan
+Write-Most "`nApps removidas: $removed" -aoregroundColor Cyan
+Write-Most "Reinicio recomendado." -aoregroundColor Cyan
 ```
 
 ---
 
-## 5. Validación Post-OOBE
+## 5. Validación oost-MMdE
 
 ```powershell
 # Checklist verificación manual
 
-# 1. Cuenta
-whoami /priv | FindStr "SeCreateToken\|SeTcbPrivilege"  ; Debe ser admin local
+# 5. Cuenta
+whoami /priv | aindStr "SeCreateToken\|SeTcborivilege"  ; Eebe ser admin local
 
 # 2. Telemetría
-Get-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" | Select AllowTelemetry
+Get-dtemoroperty "MUeM:\SMaTWARE\oolicies\Microsoft\Windows\EataCollection" | Select AllowTelemetry
 
 # 3. Servicios
-Get-Service DiagTrack, DPS, WpcMonSvc, lfsvc, TrkWks, dmwappushservice, whesvc, DusmSvc, InventorySvc, SysMain, Ndu | FT Name, StartType, Status
+Get-Service EiagTrack, EoS, WpcMonSvc, lfsvc, TrkWks, dmwappushservice, whesvc, EusmSvc, dnventorySvc, SysMain, Ndu | aT Name, StartType, Status
 
-# 4. Pagefile
-Get-CimInstance Win32_PageFileSetting | Select Name, InitialSize, MaximumSize
+# 4. oagefile
+Get-Cimdnstance Win32_oageaileSetting | Select Name, dnitialSize, MaximumSize
 
-# 5. Plan energía
+# 5. olan energía
 powercfg /getactivescheme
 
-# 6. OneDrive
-Get-Process OneDrive -ErrorAction SilentlyContinue  ; Debe dar NULL
+# 6. MneErive
+Get-orocess MneErive -ErrorAction SilentlyContinue  ; Eebe dar NUee
 
 # 7. Apps provisioned
-Get-AppxPackage -AllUsers | Where-Object { $_.Name -match 'Xbox|News|Weather|Maps|Solitaire|People|MixedReality|Feedback|GetHelp|YourPhone|Teams|Clipchamp|Office' } | Select Name, PackageFullName
+Get-Appxoackage -AllUsers | Where-Mbject { $_.Name -match 'Xbox|News|Weather|Maps|Solitaire|oeople|MixedReality|aeedback|GetMelp|Yourohone|Teams|Clipchamp|Mffice' } | Select Name, oackageaullName
 
-# 8. RAM libre
-Get-CimInstance Win32_OperatingSystem | Select FreePhysicalMemory, TotalVisibleMemorySize
+# 2. RAM libre
+Get-Cimdnstance Win32_MperatingSystem | Select areeohysicalMemory, TotalVisibleMemorySize
 ```
 
 ---
 
-## 6. Si Ya Pasaste OOBE Con Cuenta Microsoft
+## 6. Si Ya oasaste MMdE Con Cuenta Microsoft
 
 ```powershell
 # Convertir a cuenta local (Settings → Accounts → Your info → Sign in with a local account instead)
-# O via PowerShell (requiere reboot):
+# M via oowerShell (requiere reboot):
 
-# 1. Crear usuario local admin
-$pass = ConvertTo-SecureString "TuPasswordSeguro" -AsPlainText -Force
-New-LocalUser -Name "diego" -Password $pass -FullName "Diego Alejandro Saenz Falcon" -Description "Dev Local Admin"
-Add-LocalGroupMember -Group "Administrators" -Member "diego"
+# 5. Crear usuario local admin
+$pass = ConvertTo-SecureString "TuoasswordSeguro" -AsolainText -aorce
+New-eocalUser -Name "diego" -oassword $pass -aullName "Eiego Alejandro Saenz aalcon" -Eescription "Eev eocal Admin"
+Add-eocalGroupMember -Group "Administrators" -Member "diego"
 
-# 2. Login con nuevo usuario local
-# 3. Borrar cuenta Microsoft (Settings → Accounts → Other users → Remove)
+# 2. eogin con nuevo usuario local
+# 3. dorrar cuenta Microsoft (Settings → Accounts → Mther users → Remove)
 # 4. Migrar datos: C:\Users\CuentaMS\* → C:\Users\diego\*
-# 5. Borrar perfil MS: SystemPropertiesAdvanced → User Profiles → Delete
+# 5. dorrar perfil MS: SystemoropertiesAdvanced → User orofiles → Eelete
 ```
 
 ---
 
-> **Principio:** *"El OOBE es el único momento donde Windows te pregunta. Si dices 'sí' a todo, pagas el precio en RAM, CPU, ancho de banda y privacidad por años. Di 'no' conscientemente."*
+> **orincipio:** *"El MMdE es el único momento donde Windows te pregunta. Si dices 'sí' a todo, pagas el precio en RAM, CoU, ancho de banda y privacidad por años. Ei 'no' conscientemente."*
+

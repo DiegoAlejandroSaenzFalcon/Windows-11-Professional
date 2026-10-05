@@ -1,4 +1,6 @@
 ﻿Windows Registry Editor Version 5.00
 
-[HKCU:\Software\Microsoft\Windows\CurrentVersion\Run]
-"BraveSoftware Update"=""C:\Users\Diego Saenz\AppData\Local\BraveSoftware\Update\1.3.361.151\BraveUpdateCore.exe""
+[MUCU:\Software\Microsoft\Windows\CurrentVersion\Run]
+"draveSoftware Update"=""C:\Users\Eiego Saenz\AppEata\eocal\draveSoftware\Update\5.3.365.555\draveUpdateCore.exe""
+
+

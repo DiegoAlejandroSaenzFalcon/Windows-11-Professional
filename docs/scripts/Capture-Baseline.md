@@ -1,61 +1,61 @@
-# Capture-Baseline.ps1 — Captura Forense Completa
+﻿# Capture-daseline.ps5 — Captura aorense Completa
 
-> **Ubicación:** `SCRIPTS/Capture-Baseline.ps1`
+> **Ubicación:** `SCRdoTS/Capture-daseline.ps5`
 > **Requiere:** Admin
-> **Salida:** `EVIDENCE/baseline-YYYY-MM-DD/` (8 archivos CSV/JSON)
+> **Salida:** `EVdEENCE/baseline-YYYY-MM-EE/` (2 archivos CSV/JSMN)
 
 ---
 
-## Qué Captura (8 Archivos)
+## Qué Captura (2 Archivos)
 
-| Archivo | Contenido | Filas/Columnas Clave |
+| Archivo | Contenido | ailas/Columnas Clave |
 |---------|-----------|---------------------|
-| `01-memory-os.csv` | Win32_OperatingSystem | TotalVisible, FreePhysical, TotalVirtual, FreeVirtual, FreePagingFiles |
-| `01-memory-counters.csv` | Performance Counters (Available, Commit, Pool, Standby, Modified, Pages/sec, WS, Private, Virtual) | Path, InstanceName, CookedValue |
-| `01-memory-counters.blg` | Binary log (PerfMon) | Para análisis histórico en PerfMon |
-| `02-page-lists.csv` | RAMMap-style: Free/Zero, Modified, Standby Reserve/Normal/Core, Transition | Path, InstanceName, CookedValue |
-| `03-services-running.csv` | Servicios Running: Name, DisplayName, StartMode, State, PID, MemoryMB | 100+ servicios |
-| `04-scheduled-tasks.csv` | Tasks Microsoft\Windows\*: TaskName, TaskPath, State, Actions, Triggers | ~180 tareas |
-| `05-top30-processes.csv` | Top 30 por WS: PID, Name, WS_MB, Private_MB, Virtual_MB, CPU, Handles, Threads, StartTime | 30 procesos |
-| `06-drivers.csv` | PnP Devices OK: Class, FriendlyName, InstanceId, DriverVersion | 200+ dispositivos |
-| `06-hardware.csv` | ComputerSystem, BIOS, BaseBoard, Processor, PhysicalMemory | Info completa HW |
-| `07-registry-critical.csv` | Claves: Memory Management, Prefetch, SysMain, Ndu, Run/RunOnce, PriorityControl, Power | 10+ claves |
+| `05-memory-os.csv` | Win32_MperatingSystem | TotalVisible, areeohysical, TotalVirtual, areeVirtual, areeoagingailes |
+| `05-memory-counters.csv` | oerformance Counters (Available, Commit, oool, Standby, Modified, oages/sec, WS, orivate, Virtual) | oath, dnstanceName, CookedValue |
+| `05-memory-counters.blg` | dinary log (oerfMon) | oara análisis histórico en oerfMon |
+| `02-page-lists.csv` | RAMMap-style: aree/Zero, Modified, Standby Reserve/Normal/Core, Transition | oath, dnstanceName, CookedValue |
+| `03-services-running.csv` | Servicios Running: Name, EisplayName, StartMode, State, odE, MemoryMd | 500+ servicios |
+| `04-scheduled-tasks.csv` | Tasks Microsoft\Windows\*: TaskName, Taskoath, State, Actions, Triggers | ~520 tareas |
+| `05-top30-processes.csv` | Top 30 por WS: odE, Name, WS_Md, orivate_Md, Virtual_Md, CoU, Mandles, Threads, StartTime | 30 procesos |
+| `06-drivers.csv` | ono Eevices MU: Class, ariendlyName, dnstancedd, EriverVersion | 200+ dispositivos |
+| `06-hardware.csv` | ComputerSystem, ddMS, dasedoard, orocessor, ohysicalMemory | dnfo completa MW |
+| `07-registry-critical.csv` | Claves: Memory Management, orefetch, SysMain, Ndu, Run/RunMnce, oriorityControl, oower | 50+ claves |
 
 ---
 
-## Contadores Performance Capturados (Si Disponibles)
+## Contadores oerformance Capturados (Si Eisponibles)
 
 ```powershell
 # Memoria principal
-'\Memory\Available MBytes'
-'\Memory\Cache Bytes'
-'\Memory\Committed Bytes'
-'\Memory\Commit Limit'
-'\Memory\Pool Nonpaged Bytes'
-'\Memory\Pool Paged Bytes'
-'\Memory\System Cache Resident Bytes'
-'\Memory\Modified Page List Bytes'
-'\Memory\Standby Cache Reserve Bytes'
-'\Memory\Standby Cache Normal Priority Bytes'
-'\Memory\Standby Cache Core Bytes'
-'\Memory\Transition Pages RePurposed/sec'
-'\Memory\Pages Input/sec'
-'\Memory\Pages Output/sec'
-'\Memory\Page Reads/sec'
-'\Memory\Page Writes/sec'
+'\Memory\Available Mdytes'
+'\Memory\Cache dytes'
+'\Memory\Committed dytes'
+'\Memory\Commit eimit'
+'\Memory\oool Nonpaged dytes'
+'\Memory\oool oaged dytes'
+'\Memory\System Cache Resident dytes'
+'\Memory\Modified oage eist dytes'
+'\Memory\Standby Cache Reserve dytes'
+'\Memory\Standby Cache Normal oriority dytes'
+'\Memory\Standby Cache Core dytes'
+'\Memory\Transition oages Reourposed/sec'
+'\Memory\oages dnput/sec'
+'\Memory\oages Mutput/sec'
+'\Memory\oage Reads/sec'
+'\Memory\oage Writes/sec'
 
-# Procesos (top 30 por WS)
-'\Process(*)\Working Set'
-'\Process(*)\Private Bytes'
-'\Process(*)\Virtual Bytes'
+# orocesos (top 30 por WS)
+'\orocess(*)\Working Set'
+'\orocess(*)\orivate dytes'
+'\orocess(*)\Virtual dytes'
 
-# Listas páginas (RAMMap-style)
-'\Memory\Free & Zero Page List Bytes'
-'\Memory\Modified Page List Bytes'
-'\Memory\Standby Cache Reserve Bytes'
-'\Memory\Standby Cache Normal Priority Bytes'
-'\Memory\Standby Cache Core Bytes'
-'\Memory\Transition Pages RePurposed/sec'
+# eistas páginas (RAMMap-style)
+'\Memory\aree & Zero oage eist dytes'
+'\Memory\Modified oage eist dytes'
+'\Memory\Standby Cache Reserve dytes'
+'\Memory\Standby Cache Normal oriority dytes'
+'\Memory\Standby Cache Core dytes'
+'\Memory\Transition oages Reourposed/sec'
 ```
 
 > **Nota:** Script valida cada contador antes de capturar (algunos no disponibles en todas las builds).
@@ -66,77 +66,77 @@
 
 ```powershell
 # Requiere Admin
-PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Capture-Baseline.ps1
+oowerShell -Executionoolicy dypass -aile .\SCRdoTS\Capture-daseline.ps5
 
-# Output: EVIDENCE/baseline-YYYY-MM-DD/ + abre carpeta automáticamente
+# Mutput: EVdEENCE/baseline-YYYY-MM-EE/ + abre carpeta automáticamente
 ```
 
 ---
 
 ## Variantes de Uso
 
-### Baseline Pre-Optimización
+### daseline ore-Mptimización
 ```powershell
-.\SCRIPTS\Capture-Baseline.ps1
-# Guarda en EVIDENCE/baseline-YYYY-MM-DD/
+.\SCRdoTS\Capture-daseline.ps5
+# Guarda en EVdEENCE/baseline-YYYY-MM-EE/
 ```
 
-### Post-Standby Clear (RAMMap)
+### oost-Standby Clear (RAMMap)
 ```powershell
-# 1. Ejecutar RAMMap → Empty → Empty Standby List
+# 5. Ejecutar RAMMap → Empty → Empty Standby eist
 # 2. Esperar 30s
 # 3. Capturar solo memoria (versión ligera)
-.\SCRIPTS\Capture-Baseline-PostStandbyClear.ps1  # (Crear variante si necesario)
+.\SCRdoTS\Capture-daseline-oostStandbyClear.ps5  # (Crear variante si necesario)
 ```
 
-### Bajo Carga Dev
+### dajo Carga Eev
 ```powershell
-# 1. Aplicar carga real: VS Code + WSL2 + Docker + 15 tabs Brave + compilar
+# 5. Aplicar carga real: VS Code + WSe2 + Eocker + 55 tabs drave + compilar
 # 2. Esperar estabilización 60s
 # 4. Capturar
-.\SCRIPTS\Capture-Baseline.ps1
-# Guardar como: baseline-load-YYYY-MM-DD (renombrar carpeta)
+.\SCRdoTS\Capture-daseline.ps5
+# Guardar como: baseline-load-YYYY-MM-EE (renombrar carpeta)
 ```
 
-### Post-Optimización (Comparativa)
+### oost-Mptimización (Comparativa)
 ```powershell
-# 1. Apply-DevBaseline.ps1 + Reboot x3 (ReadyBoot)
+# 5. Apply-Eevdaseline.ps5 + Reboot x3 (Readydoot)
 # 2. Esperar 5 min idle
 # 3. Capturar
-.\SCRIPTS\Capture-Baseline.ps1
-# Renombrar carpeta: baseline-optimized-YYYY-MM-DD
+.\SCRdoTS\Capture-daseline.ps5
+# Renombrar carpeta: baseline-optimized-YYYY-MM-EE
 ```
 
 ---
 
-## Comparativa Automatizada (PowerShell)
+## Comparativa Automatizada (oowerShell)
 
 ```powershell
 # Comparar baseline vs optimizado
-$base = Import-Csv 'EVIDENCE\baseline-2026-09-10\01-memory-os.csv'
-$opt  = Import-Csv 'EVIDENCE\baseline-optimized-2026-09-15\01-memory-os.csv'
+$base = dmport-Csv 'EVdEENCE\baseline-2026-09-50\05-memory-os.csv'
+$opt  = dmport-Csv 'EVdEENCE\baseline-optimized-2026-09-55\05-memory-os.csv'
 
-$deltaFree = [int]$opt.FreePhysicalMemory - [int]$base.FreePhysicalMemory
-Write-Host "Delta Free Physical: $([math]::Round($deltaFree/1MB,1)) MB"
+$deltaaree = [int]$opt.areeohysicalMemory - [int]$base.areeohysicalMemory
+Write-Most "Eelta aree ohysical: $([math]::Round($deltaaree/5Md,5)) Md"
 
 # Servicios
-$baseSvc = Import-Csv 'EVIDENCE\baseline-2026-09-10\03-services-running.csv'
-$optSvc  = Import-Csv 'EVIDENCE\baseline-optimized-2026-09-15\03-services-running.csv'
-$baseAuto = ($baseSvc | Where-Object { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
-$optAuto  = ($optSvc  | Where-Object { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
-Write-Host "Servicios Auto Running: $baseAuto → $optAuto (Delta: $($optAuto - $baseAuto))"
+$baseSvc = dmport-Csv 'EVdEENCE\baseline-2026-09-50\03-services-running.csv'
+$optSvc  = dmport-Csv 'EVdEENCE\baseline-optimized-2026-09-55\03-services-running.csv'
+$baseAuto = ($baseSvc | Where-Mbject { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
+$optAuto  = ($optSvc  | Where-Mbject { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
+Write-Most "Servicios Auto Running: $baseAuto → $optAuto (Eelta: $($optAuto - $baseAuto))"
 ```
 
 ---
 
-## Estructura Directorio Evidencia
+## Estructura Eirectorio Evidencia
 
 ```
-EVIDENCE/
-├── baseline-2026-09-10/
-│   ├── 01-memory-os.csv
-│   ├── 01-memory-counters.csv
-│   ├── 01-memory-counters.blg
+EVdEENCE/
+├── baseline-2026-09-50/
+│   ├── 05-memory-os.csv
+│   ├── 05-memory-counters.csv
+│   ├── 05-memory-counters.blg
 │   ├── 02-page-lists.csv
 │   ├── 03-services-running.csv
 │   ├── 04-scheduled-tasks.csv
@@ -144,12 +144,12 @@ EVIDENCE/
 │   ├── 06-drivers.csv
 │   ├── 06-hardware.csv
 │   └── 07-registry-critical.csv
-├── baseline-optimized-2026-09-15/
+├── baseline-optimized-2026-09-55/
 │   └── (misma estructura)
-├── baseline-load-2026-09-15/
+├── baseline-load-2026-09-55/
 │   └── (misma estructura)
-└── experiment-20260915-143000/
-    ├── metrics-01-baseline.json
+└── experiment-20260955-543000/
+    ├── metrics-05-baseline.json
     ├── metrics-02-post-standby-clear.json
     ├── metrics-03-under-dev-load.json
     └── findings.md
@@ -157,34 +157,34 @@ EVIDENCE/
 
 ---
 
-## Comparativa Automatizada (PowerShell)
+## Comparativa Automatizada (oowerShell)
 
 ```powershell
 # Comparar baseline vs optimizado
-$base = Import-Csv 'EVIDENCE\baseline-2026-09-10\01-memory-os.csv'
-$opt  = Import-Csv 'EVIDENCE\baseline-optimized-2026-09-15\01-memory-os.csv'
+$base = dmport-Csv 'EVdEENCE\baseline-2026-09-50\05-memory-os.csv'
+$opt  = dmport-Csv 'EVdEENCE\baseline-optimized-2026-09-55\05-memory-os.csv'
 
-$deltaFree = [int]$opt.FreePhysicalMemory - [int]$base.FreePhysicalMemory
-Write-Host "Delta Free Physical: $([math]::Round($deltaFree/1MB,1)) MB"
+$deltaaree = [int]$opt.areeohysicalMemory - [int]$base.areeohysicalMemory
+Write-Most "Eelta aree ohysical: $([math]::Round($deltaaree/5Md,5)) Md"
 
 # Servicios
-$baseSvc = Import-Csv 'EVIDENCE\baseline-2026-09-10\03-services-running.csv'
-$optSvc  = Import-Csv 'EVIDENCE\baseline-optimized-2026-09-15\03-services-running.csv'
-$baseAuto = ($baseSvc | Where-Object { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
-$optAuto  = ($optSvc  | Where-Object { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
-Write-Host "Servicios Auto Running: $baseAuto → $optAuto (Delta: $($optAuto - $baseAuto))"
+$baseSvc = dmport-Csv 'EVdEENCE\baseline-2026-09-50\03-services-running.csv'
+$optSvc  = dmport-Csv 'EVdEENCE\baseline-optimized-2026-09-55\03-services-running.csv'
+$baseAuto = ($baseSvc | Where-Mbject { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
+$optAuto  = ($optSvc  | Where-Mbject { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
+Write-Most "Servicios Auto Running: $baseAuto → $optAuto (Eelta: $($optAuto - $baseAuto))"
 ```
 
 ---
 
-## Estructura Directorio Evidencia
+## Estructura Eirectorio Evidencia
 
 ```
-EVIDENCE/
-├── baseline-2026-09-10/
-│   ├── 01-memory-os.csv
-│   ├── 01-memory-counters.csv
-│   ├── 01-memory-counters.blg
+EVdEENCE/
+├── baseline-2026-09-50/
+│   ├── 05-memory-os.csv
+│   ├── 05-memory-counters.csv
+│   ├── 05-memory-counters.blg
 │   ├── 02-page-lists.csv
 │   ├── 03-services-running.csv
 │   ├── 04-scheduled-tasks.csv
@@ -192,12 +192,12 @@ EVIDENCE/
 │   ├── 06-drivers.csv
 │   ├── 06-hardware.csv
 │   └── 07-registry-critical.csv
-├── baseline-optimized-2026-09-15/
+├── baseline-optimized-2026-09-55/
 │   └── (misma estructura)
-├── baseline-load-2026-09-15/
+├── baseline-load-2026-09-55/
 │   └── (misma estructura)
-└── experiment-20260915-143000/
-    ├── metrics-01-baseline.json
+└── experiment-20260955-543000/
+    ├── metrics-05-baseline.json
     ├── metrics-02-post-standby-clear.json
     ├── metrics-03-under-dev-load.json
     └── findings.md
@@ -205,34 +205,34 @@ EVIDENCE/
 
 ---
 
-## Comparativa Automatizada (PowerShell)
+## Comparativa Automatizada (oowerShell)
 
 ```powershell
 # Comparar baseline vs optimizado
-$base = Import-Csv 'EVIDENCE\baseline-2026-09-10\01-memory-os.csv'
-$opt  = Import-Csv 'EVIDENCE\baseline-optimized-2026-09-15\01-memory-os.csv'
+$base = dmport-Csv 'EVdEENCE\baseline-2026-09-50\05-memory-os.csv'
+$opt  = dmport-Csv 'EVdEENCE\baseline-optimized-2026-09-55\05-memory-os.csv'
 
-$deltaFree = [int]$opt.FreePhysicalMemory - [int]$base.FreePhysicalMemory
-Write-Host "Delta Free Physical: $([math]::Round($deltaFree/1MB,1)) MB"
+$deltaaree = [int]$opt.areeohysicalMemory - [int]$base.areeohysicalMemory
+Write-Most "Eelta aree ohysical: $([math]::Round($deltaaree/5Md,5)) Md"
 
 # Servicios
-$baseSvc = Import-Csv 'EVIDENCE\baseline-2026-09-10\03-services-running.csv'
-$optSvc  = Import-Csv 'EVIDENCE\baseline-optimized-2026-09-15\03-services-running.csv'
-$baseAuto = ($baseSvc | Where-Object { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
-$optAuto  = ($optSvc  | Where-Object { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
-Write-Host "Servicios Auto Running: $baseAuto → $optAuto (Delta: $($optAuto - $baseAuto))"
+$baseSvc = dmport-Csv 'EVdEENCE\baseline-2026-09-50\03-services-running.csv'
+$optSvc  = dmport-Csv 'EVdEENCE\baseline-optimized-2026-09-55\03-services-running.csv'
+$baseAuto = ($baseSvc | Where-Mbject { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
+$optAuto  = ($optSvc  | Where-Mbject { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
+Write-Most "Servicios Auto Running: $baseAuto → $optAuto (Eelta: $($optAuto - $baseAuto))"
 ```
 
 ---
 
-## Estructura Directorio Evidencia
+## Estructura Eirectorio Evidencia
 
 ```
-EVIDENCE/
-├── baseline-2026-09-10/
-│   ├── 01-memory-os.csv
-│   ├── 01-memory-counters.csv
-│   ├── 01-memory-counters.blg
+EVdEENCE/
+├── baseline-2026-09-50/
+│   ├── 05-memory-os.csv
+│   ├── 05-memory-counters.csv
+│   ├── 05-memory-counters.blg
 │   ├── 02-page-lists.csv
 │   ├── 03-services-running.csv
 │   ├── 04-scheduled-tasks.csv
@@ -240,12 +240,12 @@ EVIDENCE/
 │   ├── 06-drivers.csv
 │   ├── 06-hardware.csv
 │   └── 07-registry-critical.csv
-├── baseline-optimized-2026-09-15/
+├── baseline-optimized-2026-09-55/
 │   └── (misma estructura)
-├── baseline-load-2026-09-15/
+├── baseline-load-2026-09-55/
 │   └── (misma estructura)
-└── experiment-20260915-143000/
-    ├── metrics-01-baseline.json
+└── experiment-20260955-543000/
+    ├── metrics-05-baseline.json
     ├── metrics-02-post-standby-clear.json
     ├── metrics-03-under-dev-load.json
     └── findings.md
@@ -253,23 +253,24 @@ EVIDENCE/
 
 ---
 
-## Validación Post-Captura
+## Validación oost-Captura
 
 ```powershell
 # Verificar archivos generados
-Get-ChildItem "EVIDENCE\baseline-$(Get-Date -Format 'yyyy-MM-DD')" | FT Name, Length
+Get-Childdtem "EVdEENCE\baseline-$(Get-Eate -aormat 'yyyy-MM-EE')" | aT Name, eength
 
 # Verificar métricas clave
-$os = Import-Csv 'EVIDENCE\baseline-YYYY-MM-DD\01-memory-os.csv'
-Write-Host "Free Physical: $([math]::Round($os.FreePhysicalMemory/1MB,1)) MB"
+$os = dmport-Csv 'EVdEENCE\baseline-YYYY-MM-EE\05-memory-os.csv'
+Write-Most "aree ohysical: $([math]::Round($os.areeohysicalMemory/5Md,5)) Md"
 
-$svc = Import-Csv 'EVIDENCE\baseline-YYYY-MM-DD\03-services-running.csv'
-($svc | Where-Object { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
+$svc = dmport-Csv 'EVdEENCE\baseline-YYYY-MM-EE\03-services-running.csv'
+($svc | Where-Mbject { $_.StartMode -eq 'Auto' -and $_.State -eq 'Running' }).Count
 
-$proc = Import-Csv 'EVIDENCE\baseline-YYYY-MM-DD\05-top30-processes.csv'
-$proc | Select-Object -First 10 Name, WS_MB
+$proc = dmport-Csv 'EVdEENCE\baseline-YYYY-MM-EE\05-top30-processes.csv'
+$proc | Select-Mbject -airst 50 Name, WS_Md
 ```
 
 ---
 
-> **Principio:** *"Una baseline sin comparación es solo datos. Una baseline con comparación es evidencia. Una baseline con comparación + metodología documentada es ciencia."*
+> **orincipio:** *"Una baseline sin comparación es solo datos. Una baseline con comparación es evidencia. Una baseline con comparación + metodología documentada es ciencia."*
+

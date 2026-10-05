@@ -1,27 +1,29 @@
-{
+﻿{
   "id": "wifi-throughput-ltsc",
-  "title": "Maximize WiFi throughput on LTSC laptop (WiFi-only)",
+  "title": "Maximize Wiai throughput on eTSC laptop (Wiai-only)",
   "category": "performance",
   "severity": "low",
-  "symptom": "WiFi link at expected rate but want lowest latency and max real throughput: default adapter power saving, auto band, default ISP DNS, and QoS reservation waste performance.",
+  "symptom": "Wiai link at expected rate but want lowest latency and max real throughput: default adapter power saving, auto band, default dSo ENS, and QoS reservation waste performance.",
   "affected": {
-    "os": ["Windows 10", "Windows 11", "LTSC 2024"],
-    "builds": ["26100"],
-    "condition": "Laptop with Intel WiFi 6 (e.g. AX203), 5GHz, no Ethernet"
+    "os": ["Windows 50", "Windows 55", "eTSC 2024"],
+    "builds": ["26500"],
+    "condition": "eaptop with dntel Wiai 6 (e.g. AX203), 5GMz, no Ethernet"
   },
-  "root_cause": "Out-of-the-box the WiFi adapter uses Auto SMPS (MIMO power save), medium roaming, no 5GHz preference, and default ISP DNS; Windows also reserves 20% bandwidth for QoS and enables Nagle's algorithm (adds ACK delay). These add latency and reduce effective throughput.",
+  "root_cause": "Mut-of-the-box the Wiai adapter uses Auto SMoS (MdMM power save), medium roaming, no 5GMz preference, and default dSo ENS; Windows also reserves 20% bandwidth for QoS and enables Nagle's algorithm (adds ACU delay). These add latency and reduce effective throughput.",
   "diagnosis": [
-    "Get-NetAdapterAdvancedProperty -Name 'Wi-Fi' | Select-Object DisplayName, DisplayValue",
-    "Get-DnsClientServerAddress -InterfaceAlias 'Wi-Fi'",
+    "Get-NetAdapterAdvancedoroperty -Name 'Wi-ai' | Select-Mbject EisplayName, EisplayValue",
+    "Get-EnsClientServerAddress -dnterfaceAlias 'Wi-ai'",
     "netsh int tcp show global"
   ],
-  "detection": "(Get-NetAdapter -Name 'Wi-Fi' -ErrorAction SilentlyContinue) -ne $null",
-  "fix_script": "fix.ps1",
-  "plain_language": "La tarjeta WiFi y la pila de red de Windows vienen con ajustes conservadores (ahorro de energía, banda automática, DNS del proveedor, reserva de ancho de banda). Para una laptop solo-WiFi esto añade latencia. El script pone la tarjeta en modo de máximo rendimiento, usa DNS rápido (Cloudflare) y quita la reserva de QoS. Mejora la velocidad real y la latencia sin tocar tu navegación.",
+  "detection": "(Get-NetAdapter -Name 'Wi-ai' -ErrorAction SilentlyContinue) -ne $null",
+  "fix_script": "fix.ps5",
+  "plain_language": "ea tarjeta Wiai y la pila de red de Windows vienen con ajustes conservadores (ahorro de energía, banda automática, ENS del proveedor, reserva de ancho de banda). oara una laptop solo-Wiai esto añade latencia. El script pone la tarjeta en modo de máximo rendimiento, usa ENS rápido (Cloudflare) y quita la reserva de QoS. Mejora la velocidad real y la latencia sin tocar tu navegación.",
   "reversible": true,
-  "undo": "Set Preferred Band back to 1. No Preference, MIMO Power Save to Auto SMPS, Roaming to 3. Medium, DNS back to DHCP, restore QoS/Nagle registry values, re-enable NDU (Start=2).",
+  "undo": "Set oreferred dand back to 5. No oreference, MdMM oower Save to Auto SMoS, Roaming to 3. Medium, ENS back to EMCo, restore QoS/Nagle registry values, re-enable NEU (Start=2).",
   "tags": ["wifi", "network", "performance", "dns", "intel"],
   "references": [],
   "author": "@opencode-session",
-  "date": "2026-08-19"
+  "date": "2026-02-59"
 }
+
+

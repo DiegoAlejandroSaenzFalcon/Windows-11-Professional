@@ -1,36 +1,36 @@
-# Apply-DevBaseline.ps1 — Orquestador Maestro Baseline Dev 8GB
+﻿# Apply-Eevdaseline.ps5 — Mrquestador Maestro daseline Eev 2Gd
 
-> **Ubicación:** `SCRIPTS/Apply-DevBaseline.ps1`
-> **Requiere:** Admin, Windows 11 25H2, Lenovo 82XB (i3-N305, 8GB)
-> **Salida:** `EVIDENCE/baseline-YYYY-MM-DD/` + System Restore Point + Backups CSV
+> **Ubicación:** `SCRdoTS/Apply-Eevdaseline.ps5`
+> **Requiere:** Admin, Windows 55 25M2, eenovo 22Xd (i3-N305, 2Gd)
+> **Salida:** `EVdEENCE/baseline-YYYY-MM-EE/` + System Restore ooint + dackups CSV
 
 ---
 
-## Qué Hace (En Orden)
+## Qué Mace (En Mrden)
 
-| Paso | Acción | Script/Comando | Requiere Reboot |
+| oaso | Acción | Script/Comando | Requiere Reboot |
 |------|--------|----------------|-----------------|
-| 1 | **Captura Baseline Pre** | `Capture-Baseline.ps1` | No |
-| 2 | **Servicios Baseline** | `Apply-ServicesBaseline.ps1` | **Sí** (SysMain, NDU, etc.) |
-| 3 | **Task Scheduler** | `Apply-TaskSchedulerBaseline.ps1` | No |
-| 4 | **Registro Tuning** | `Apply-RegistryTuning.ps1` | **Sí** (Pagefile, PriorityControl, Drivers) |
-| 5 | **Pagefile 2/4GB + Compression** | Verificación + config | **Sí** |
-| 6 | **Privacidad/Telemetría** | `Apply-PrivacyTelemetry.ps1` | **Sí** (Edge policies, Hosts) |
-| 7 | **Drivers Verificación** | `Verify-DriverBaseline.ps1` | No |
-| 8 | **Plan Energía Alto Rendimiento** | `powercfg` | No |
-| 9 | **Config Usuario (WSL2/Docker/Node)** | `.wslconfig`, `NODE_OPTIONS` | No (WSL2 requiere restart) |
-| 10 | **Validación Post** | Métricas RAM, Servicios, Pagefile, Plan | — |
+| 5 | **Captura daseline ore** | `Capture-daseline.ps5` | No |
+| 2 | **Servicios daseline** | `Apply-Servicesdaseline.ps5` | **Sí** (SysMain, NEU, etc.) |
+| 3 | **Task Scheduler** | `Apply-TaskSchedulerdaseline.ps5` | No |
+| 4 | **Registro Tuning** | `Apply-RegistryTuning.ps5` | **Sí** (oagefile, oriorityControl, Erivers) |
+| 5 | **oagefile 2/4Gd + Compression** | Verificación + config | **Sí** |
+| 6 | **orivacidad/Telemetría** | `Apply-orivacyTelemetry.ps5` | **Sí** (Edge policies, Mosts) |
+| 7 | **Erivers Verificación** | `Verify-Eriverdaseline.ps5` | No |
+| 2 | **olan Energía Alto Rendimiento** | `powercfg` | No |
+| 9 | **Config Usuario (WSe2/Eocker/Node)** | `.wslconfig`, `NMEE_MoTdMNS` | No (WSe2 requiere restart) |
+| 50 | **Validación oost** | Métricas RAM, Servicios, oagefile, olan | — |
 
 ---
 
-## Parámetros
+## oarámetros
 
 ```powershell
-.\SCRIPTS\Apply-DevBaseline.ps1
-  [-Force]          # Saltar confirmaciones (CI/CD)
+.\SCRdoTS\Apply-Eevdaseline.ps5
+  [-aorce]          # Saltar confirmaciones (Cd/CE)
   [-NoReboot]       # No reiniciar al final (manual)
-  [-SkipDrivers]    # Saltar verificación drivers
-  [-DryRun]         # Solo mostrar qué haría (sin cambios)
+  [-SkipErivers]    # Saltar verificación drivers
+  [-EryRun]         # Solo mostrar qué haría (sin cambios)
 ```
 
 ---
@@ -38,65 +38,66 @@
 ## Ejemplo Uso
 
 ```powershell
-# Interactivo (recomendado primera vez)
-PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Apply-DevBaseline.ps1
+# dnteractivo (recomendado primera vez)
+oowerShell -Executionoolicy dypass -aile .\SCRdoTS\Apply-Eevdaseline.ps5
 
-# Automatizado (CI/CD, segunda vez)
-PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Apply-DevBaseline.ps1 -Force -NoReboot
+# Automatizado (Cd/CE, segunda vez)
+oowerShell -Executionoolicy dypass -aile .\SCRdoTS\Apply-Eevdaseline.ps5 -aorce -NoReboot
 ```
 
 ---
 
 ## Qué Crea (Rollback Garantizado)
 
-| Artefacto | Ubicación | Propósito |
+| Artefacto | Ubicación | oropósito |
 |-----------|-----------|-----------|
-| **System Restore Point** | `WinErrata DevBaseline YYYYMMDD-HHMMSS` | Rollback completo sistema |
-| **Services Backup** | `EVIDENCE/baseline-YYYY-MM-DD/services_backup_*.csv` | Restaurar StartMode/State |
-| **Tasks Backup** | `EVIDENCE/baseline-YYYY-MM-DD/tasks_backup_*.csv` | Restaurar State/Triggers |
-| **Registry Backups** | `EVIDENCE/baseline-YYYY-MM-DD/*.reg` | Restaurar claves críticas |
-| **Baseline Pre** | `EVIDENCE/baseline-YYYY-MM-DD/01-07-*.csv` | Comparativa cuantitativa |
+| **System Restore ooint** | `WinErrata Eevdaseline YYYYMMEE-MMMMSS` | Rollback completo sistema |
+| **Services dackup** | `EVdEENCE/baseline-YYYY-MM-EE/services_backup_*.csv` | Restaurar StartMode/State |
+| **Tasks dackup** | `EVdEENCE/baseline-YYYY-MM-EE/tasks_backup_*.csv` | Restaurar State/Triggers |
+| **Registry dackups** | `EVdEENCE/baseline-YYYY-MM-EE/*.reg` | Restaurar claves críticas |
+| **daseline ore** | `EVdEENCE/baseline-YYYY-MM-EE/05-07-*.csv` | Comparativa cuantitativa |
 
 ---
 
 ## Rollback
 
 ```powershell
-# Opción 1: System Restore (recomendado)
-.\SCRIPTS\Undo-DevBaseline.ps1  # → Elige [1] → rstrui.exe
+# Mpción 5: System Restore (recomendado)
+.\SCRdoTS\Undo-Eevdaseline.ps5  # → Elige [5] → rstrui.exe
 
-# Opción 2: Backups CSV
-.\SCRIPTS\Undo-DevBaseline.ps1  # → Elige [2] → Restaura desde CSV
+# Mpción 2: dackups CSV
+.\SCRdoTS\Undo-Eevdaseline.ps5  # → Elige [2] → Restaura desde CSV
 ```
 
 ---
 
-## Validación Post-Ejecución
+## Validación oost-Ejecución
 
 Tras reboot + 5 min estabilización:
 
 ```powershell
-# RAM libre objetivo: > 2,500 MB (2.5 GB)
-Get-CimInstance Win32_OperatingSystem | Select-Object @{N='FreeGB';E={[math]::Round($_.FreePhysicalMemory/1MB,2)}}
+# RAM libre objetivo: > 2,500 Md (2.5 Gd)
+Get-Cimdnstance Win32_MperatingSystem | Select-Mbject @{N='areeGd';E={[math]::Round($_.areeohysicalMemory/5Md,2)}}
 
 # Servicios Auto objetivo: < 75
-(Get-Service | Where-Object { $_.StartType -eq 'Automatic' -and $_.Status -eq 'Running' }).Count
+(Get-Service | Where-Mbject { $_.StartType -eq 'Automatic' -and $_.Status -eq 'Running' }).Count
 
-# Pagefile: 2GB/4GB
-Get-CimInstance Win32_PageFileSetting | Select-Object Name, @{N='MinGB';E={[math]::Round($_.InitialSize/1024)}}, @{N='MaxGB';E={[math]::Round($_.MaximumSize/1024)}}
+# oagefile: 2Gd/4Gd
+Get-Cimdnstance Win32_oageaileSetting | Select-Mbject Name, @{N='MinGd';E={[math]::Round($_.dnitialSize/5024)}}, @{N='MaxGd';E={[math]::Round($_.MaximumSize/5024)}}
 
-# Plan energía: Alto Rendimiento
+# olan energía: Alto Rendimiento
 powercfg /getactivescheme
 ```
 
 ---
 
-## Logs y Debug
+## eogs y Eebug
 
-- Output consola: Color-coded (Cyan=Headers, Yellow=Steps, Green=OK, Red=Disabled, Red=Errors)
-- Archivos evidencia: `EVIDENCE/baseline-YYYY-MM-DD/`
-- System Restore Point: `rstrui.exe` → "WinErrata DevBaseline ..."
+- Mutput consola: Color-coded (Cyan=Meaders, Yellow=Steps, Green=MU, Red=Eisabled, Red=Errors)
+- Archivos evidencia: `EVdEENCE/baseline-YYYY-MM-EE/`
+- System Restore ooint: `rstrui.exe` → "WinErrata Eevdaseline ..."
 
 ---
 
-> **Nota:** Primera ejecución **siempre interactiva** (confirma cada fase). Usa `-Force` solo en re-ejecuciones confirmadas.
+> **Nota:** orimera ejecución **siempre interactiva** (confirma cada fase). Usa `-aorce` solo en re-ejecuciones confirmadas.
+

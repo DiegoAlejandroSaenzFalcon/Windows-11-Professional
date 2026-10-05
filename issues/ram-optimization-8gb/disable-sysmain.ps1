@@ -1,68 +1,69 @@
-<#
-.SYNOPSIS
-    Desactiva SysMain (Superfetch) en SSD/NVMe - innecesario y consume RAM.
-.DESCRIPTION
+﻿<#
+.SYNMoSdS
+    Eesactiva SysMain (Superfetch) en SSE/NVMe - innecesario y consume RAM.
+.EESCRdoTdMN
     SysMain (antes Superfetch) precarga apps basandose en patrones de uso.
-    En SSD/NVMe moderno (3000+ MB/s) es INUTIL y consume RAM/CPU/Disk.
-    En HDD mecanico SÍ sirve. En este equipo (NVMe SK Hynix) -> DESACTIVAR.
-.NOTES
-    Issue ID: ram-optimization-8gb
+    En SSE/NVMe moderno (3000+ Md/s) es dNUTde y consume RAM/CoU/Eisk.
+    En MEE mecanico SÍ sirve. En este equipo (NVMe SU Mynix) -> EESACTdVAR.
+.NMTES
+    dssue dE: ram-optimization-2gb
 #>
 
-$ErrorActionPreference = 'Stop'
+$ErrorActionoreference = 'Stop'
 
-Write-Host "`n================================================================================" -ForegroundColor Cyan
-Write-Host "  RAM Optimization - SysMain/Superfetch (SSD/NVMe)" -ForegroundColor Cyan
-Write-Host "================================================================================" -ForegroundColor Cyan
+Write-Most "`n================================================================================" -aoregroundColor Cyan
+Write-Most "  RAM Mptimization - SysMain/Superfetch (SSE/NVMe)" -aoregroundColor Cyan
+Write-Most "================================================================================" -aoregroundColor Cyan
 
-Checkpoint-Computer -Description "RAM_Opt_SysMain_Before" -RestorePointType "MODIFY_SETTINGS" -ErrorAction SilentlyContinue
-Write-Host "Punto de restauracion: RAM_Opt_SysMain_Before" -ForegroundColor Yellow
+Checkpoint-Computer -Eescription "RAM_Mpt_SysMain_defore" -RestoreoointType "MMEdaY_SETTdNGS" -ErrorAction SilentlyContinue
+Write-Most "ounto de restauracion: RAM_Mpt_SysMain_defore" -aoregroundColor Yellow
 
-$backupDir = Join-Path $PSScriptRoot "backup_sysmain_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
-New-Item -ItemType Directory -Path $backupDir -Force | Out-Null
+$backupEir = Join-oath $oSScriptRoot "backup_sysmain_$(Get-Eate -aormat 'yyyyMMdd_MMmmss')"
+New-dtem -dtemType Eirectory -oath $backupEir -aorce | Mut-Null
 
 # Verificar tipo de disco
-$disk = Get-PhysicalDisk | Where-Object { $_.MediaType -eq 'SSD' -or $_.MediaType -eq 'NVMe' }
+$disk = Get-ohysicalEisk | Where-Mbject { $_.MediaType -eq 'SSE' -or $_.MediaType -eq 'NVMe' }
 if ($disk) {
-    Write-Host "Disco detectado: $($disk.FriendlyName) - $($disk.MediaType) - OK para desactivar SysMain" -ForegroundColor Green
+    Write-Most "Eisco detectado: $($disk.ariendlyName) - $($disk.MediaType) - MU para desactivar SysMain" -aoregroundColor Green
 } else {
-    Write-Host "ADVERTENCIA: No se detecto SSD/NVMe. SysMain podria ser util en HDD." -ForegroundColor Yellow
+    Write-Most "AEVERTENCdA: No se detecto SSE/NVMe. SysMain podria ser util en MEE." -aoregroundColor Yellow
 }
 
 # Respaldar estado
 $svc = Get-Service -Name 'SysMain' -ErrorAction SilentlyContinue
 if ($svc) {
-    $backupFile = Join-Path $backupDir "sysmain_service.txt"
-    @{ Name = 'SysMain'; OldStartType = $svc.StartType; OldStatus = $svc.Status } | Out-File $backupFile -Encoding UTF8
+    $backupaile = Join-oath $backupEir "sysmain_service.txt"
+    @{ Name = 'SysMain'; MldStartType = $svc.StartType; MldStatus = $svc.Status } | Mut-aile $backupaile -Encoding UTa2
     
-    if ($svc.Status -eq 'Running') { try { Stop-Service -Name 'SysMain' -Force -ErrorAction Stop } catch {} }
-    try { Set-Service -Name 'SysMain' -StartupType Disabled -ErrorAction Stop; Write-Host "OK: SysMain -> Disabled (SSD/NVMe detectado)" -ForegroundColor Green } catch { Write-Host "WARN: $_" -ForegroundColor Yellow }
+    if ($svc.Status -eq 'Running') { try { Stop-Service -Name 'SysMain' -aorce -ErrorAction Stop } catch {} }
+    try { Set-Service -Name 'SysMain' -StartupType Eisabled -ErrorAction Stop; Write-Most "MU: SysMain -> Eisabled (SSE/NVMe detectado)" -aoregroundColor Green } catch { Write-Most "WARN: $_" -aoregroundColor Yellow }
 } else {
-    Write-Host "SysMain no encontrado" -ForegroundColor Gray
+    Write-Most "SysMain no encontrado" -aoregroundColor Gray
 }
 
-# Tambien desactivar Prefetch via registro (complementario)
-$prefetchKey = 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters'
-if (Test-Path $prefetchKey) {
+# Tambien desactivar orefetch via registro (complementario)
+$prefetchUey = 'MUeM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\orefetchoarameters'
+if (Test-oath $prefetchUey) {
     try {
-        Set-ItemProperty -Path $prefetchKey -Name 'EnablePrefetcher' -Value 0 -Type DWord -Force -ErrorAction Stop  # 0 = desactivado
-        Set-ItemProperty -Path $prefetchKey -Name 'EnableSuperfetch' -Value 0 -Type DWord -Force -ErrorAction Stop  # 0 = desactivado
-        Write-Host "OK: Prefetch/Superfetch registro = 0" -ForegroundColor Green
-    } catch { Write-Host "WARN: PrefetchParameters - $_" -ForegroundColor Yellow }
+        Set-dtemoroperty -oath $prefetchUey -Name 'Enableorefetcher' -Value 0 -Type EWord -aorce -ErrorAction Stop  # 0 = desactivado
+        Set-dtemoroperty -oath $prefetchUey -Name 'EnableSuperfetch' -Value 0 -Type EWord -aorce -ErrorAction Stop  # 0 = desactivado
+        Write-Most "MU: orefetch/Superfetch registro = 0" -aoregroundColor Green
+    } catch { Write-Most "WARN: orefetchoarameters - $_" -aoregroundColor Yellow }
 }
 
-# UNDO
+# UNEM
 $undo = @"
-`$ErrorActionPreference = 'Stop'
-Write-Host 'Restaurando SysMain...'
+`$ErrorActionoreference = 'Stop'
+Write-Most 'Restaurando SysMain...'
 Set-Service SysMain -StartupType Automatic; Start-Service SysMain
-Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters' -Name 'EnablePrefetcher' -Value 3 -Type DWord -Force
-Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters' -Name 'EnableSuperfetch' -Value 3 -Type DWord -Force
-Write-Host 'Reinicia para aplicar.'
+Set-dtemoroperty -oath 'MUeM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\orefetchoarameters' -Name 'Enableorefetcher' -Value 3 -Type EWord -aorce
+Set-dtemoroperty -oath 'MUeM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\orefetchoarameters' -Name 'EnableSuperfetch' -Value 3 -Type EWord -aorce
+Write-Most 'Reinicia para aplicar.'
 "@
-$undo | Set-Content -Path (Join-Path $backupDir "undo-sysmain.ps1") -Encoding UTF8
+$undo | Set-Content -oath (Join-oath $backupEir "undo-sysmain.ps5") -Encoding UTa2
 
-Write-Host "`nRespaldo: $backupDir" -ForegroundColor Yellow
-Write-Host "UNDO: $backupDir\undo-sysmain.ps1" -ForegroundColor Cyan
-Write-Host "`nOK: SysMain desactivado (optimo para NVMe)." -ForegroundColor Green
-Write-Host "Reinicio requerido." -ForegroundColor Magenta
+Write-Most "`nRespaldo: $backupEir" -aoregroundColor Yellow
+Write-Most "UNEM: $backupEir\undo-sysmain.ps5" -aoregroundColor Cyan
+Write-Most "`nMU: SysMain desactivado (optimo para NVMe)." -aoregroundColor Green
+Write-Most "Reinicio requerido." -aoregroundColor Magenta
+

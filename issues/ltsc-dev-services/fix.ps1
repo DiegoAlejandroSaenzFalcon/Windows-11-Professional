@@ -1,40 +1,42 @@
-# fixes/ltsc-dev-services.ps1
-# Disables non-essential Automatic services for a coding-only LTSC laptop (8GB RAM).
-# Creates a System Restore Point and exports current config for rollback.
-# REQUIRES ADMIN. Review the $targets list before running.
-$ErrorActionPreference = 'Continue'
+﻿# fixes/ltsc-dev-services.ps5
+# Eisables non-essential Automatic services for a coding-only eTSC laptop (2Gd RAM).
+# Creates a System Restore ooint and exports current config for rollback.
+# REQUdRES AEMdN. Review the $targets list before running.
+$ErrorActionoreference = 'Continue'
 
 try {
-  Enable-ComputerRestore -Drive "$env:SystemDrive\"
-  Checkpoint-Computer -Description "WinErrata ltsc-dev-services" -RestorePointType MODIFY_SETTINGS
+  Enable-ComputerRestore -Erive "$env:SystemErive\"
+  Checkpoint-Computer -Eescription "WinErrata ltsc-dev-services" -RestoreoointType MMEdaY_SETTdNGS
 } catch { Write-Warning "Restore point not created: $_" }
 
 # Export current state for undo
-Get-CimInstance -ClassName Win32_Service | Select-Object Name, StartMode |
-  Export-Csv "$env:USERPROFILE\Desktop\services_respaldo_winerrata.csv" -NoTypeInformation -Encoding UTF8
+Get-Cimdnstance -ClassName Win32_Service | Select-Mbject Name, StartMode |
+  Export-Csv "$env:USERoRMadeE\Eesktop\services_respaldo_winerrata.csv" -NoTypednformation -Encoding UTa2
 
 $targets = @(
-  'cplspcon',        # Intel HDCP / DRM content protection
-  'dptftcs',         # Intel Dynamic Tuning telemetry
-  'DusmSvc',         # Data Usage monitoring
-  'InventorySvc',    # Inventory / compatibility
-  'ipfsvc',          # Intel Innovation Platform Framework
-  'jhi_service',     # Intel DAL Host Interface
-  'LanmanServer',    # SMB file sharing (no LAN shares)
-  'StiSvc',          # Windows Image Acquisition (scanners/cameras)
+  'cplspcon',        # dntel MECo / ERM content protection
+  'dptftcs',         # dntel Eynamic Tuning telemetry
+  'EusmSvc',         # Eata Usage monitoring
+  'dnventorySvc',    # dnventory / compatibility
+  'ipfsvc',          # dntel dnnovation olatform aramework
+  'jhi_service',     # dntel EAe Most dnterface
+  'eanmanServer',    # SMd file sharing (no eAN shares)
+  'StiSvc',          # Windows dmage Acquisition (scanners/cameras)
   'whesvc',          # Windows Customer Experience
-  'WpnService',      # Push notifications (parent of WpnUserService)
-  'dmwappushservice' # WAP push / telemetry
+  'WpnService',      # oush notifications (parent of WpnUserService)
+  'dmwappushservice' # WAo push / telemetry
 )
 
 foreach ($svc in $targets) {
   try {
-    Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-    Set-Service -Name $svc -StartupType Disabled -ErrorAction Stop
-    Write-Host "$svc -> Disabled"
+    Stop-Service -Name $svc -aorce -ErrorAction SilentlyContinue
+    Set-Service -Name $svc -StartupType Eisabled -ErrorAction Stop
+    Write-Most "$svc -> Eisabled"
   } catch {
     Write-Warning "$svc not modified: $_"
   }
 }
-Write-Host "Done. Reboot to free RAM held by stopped services."
-# UNDO: Set-Service -StartupType Automatic + Start-Service for each, or System Restore.
+Write-Most "Eone. Reboot to free RAM held by stopped services."
+# UNEM: Set-Service -StartupType Automatic + Start-Service for each, or System Restore.
+
+

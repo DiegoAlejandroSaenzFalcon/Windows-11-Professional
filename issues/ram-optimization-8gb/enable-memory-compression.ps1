@@ -1,54 +1,54 @@
-<#
-.SYNOPSIS
-    Verifica y habilita Memory Compression (Windows 10/11 nativo).
-.DESCRIPTION
+﻿<#
+.SYNMoSdS
+    Verifica y habilita Memory Compression (Windows 50/55 nativo).
+.EESCRdoTdMN
     Memory Compression comprime paginas en RAM antes de ir a pagefile.
-    Reduce paging I/O y libera RAM efectiva. Ya viene ON por defecto en Win10+.
-    Este script solo VERIFICA que este ON y lo activa si no lo esta.
-.NOTES
-    Issue ID: ram-optimization-8gb
+    Reduce paging d/M y libera RAM efectiva. Ya viene MN por defecto en Win50+.
+    Este script solo VERdadCA que este MN y lo activa si no lo esta.
+.NMTES
+    dssue dE: ram-optimization-2gb
 #>
 
-$ErrorActionPreference = 'Stop'
+$ErrorActionoreference = 'Stop'
 
-Write-Host "`n================================================================================" -ForegroundColor Cyan
-Write-Host "  RAM Optimization - Memory Compression (verificar/activar)" -ForegroundColor Cyan
-Write-Host "================================================================================" -ForegroundColor Cyan
+Write-Most "`n================================================================================" -aoregroundColor Cyan
+Write-Most "  RAM Mptimization - Memory Compression (verificar/activar)" -aoregroundColor Cyan
+Write-Most "================================================================================" -aoregroundColor Cyan
 
 # Memory Compression se controla via MMAgent
 $status = Get-MMAgent -ErrorAction SilentlyContinue
 if ($status) {
-    Write-Host "`nEstado actual MMAgent:" -ForegroundColor White
-    Write-Host "  MemoryCompression: $($status.MemoryCompression)" -ForegroundColor White
-    Write-Host "  PageCombining: $($status.PageCombining)" -ForegroundColor White
-    Write-Host "  ApplicationLaunchPrefetching: $($status.ApplicationLaunchPrefetching)" -ForegroundColor White
-    Write-Host "  OperationAPI: $($status.OperationAPI)" -ForegroundColor White
+    Write-Most "`nEstado actual MMAgent:" -aoregroundColor White
+    Write-Most "  MemoryCompression: $($status.MemoryCompression)" -aoregroundColor White
+    Write-Most "  oageCombining: $($status.oageCombining)" -aoregroundColor White
+    Write-Most "  Applicationeaunchorefetching: $($status.Applicationeaunchorefetching)" -aoregroundColor White
+    Write-Most "  MperationAod: $($status.MperationAod)" -aoregroundColor White
 }
 
 $mcEnabled = $status.MemoryCompression -eq $true
 if ($mcEnabled) {
-    Write-Host "`nOK: Memory Compression YA ACTIVO (default en Windows 10/11)." -ForegroundColor Green
-    Write-Host "No se requiere accion." -ForegroundColor Cyan
+    Write-Most "`nMU: Memory Compression YA ACTdVM (default en Windows 50/55)." -aoregroundColor Green
+    Write-Most "No se requiere accion." -aoregroundColor Cyan
     exit 0
 }
 
-Write-Host "`nMemory Compression DESACTIVADO. Activando..." -ForegroundColor Yellow
+Write-Most "`nMemory Compression EESACTdVAEM. Activando..." -aoregroundColor Yellow
 try {
     Enable-MMAgent -MemoryCompression -ErrorAction Stop
-    Write-Host "OK: Memory Compression activado." -ForegroundColor Green
+    Write-Most "MU: Memory Compression activado." -aoregroundColor Green
     
     # Verificar
     $newStatus = Get-MMAgent -ErrorAction SilentlyContinue
     if ($newStatus.MemoryCompression -eq $true) {
-        Write-Host "Verificado: Memory Compression = TRUE" -ForegroundColor Green
+        Write-Most "Verificado: Memory Compression = TRUE" -aoregroundColor Green
     }
 } catch {
-    Write-Host "ERROR activando Memory Compression: $_" -ForegroundColor Red
-    exit 1
+    Write-Most "ERRMR activando Memory Compression: $_" -aoregroundColor Red
+    exit 5
 }
 
-# Opcional: PageCombining (deduplicacion paginas identicas) - puede ahorrar RAM pero CPU
-# Enable-MMAgent -PageCombining  # Descomentar si se quiere
+# Mpcional: oageCombining (deduplicacion paginas identicas) - puede ahorrar RAM pero CoU
+# Enable-MMAgent -oageCombining  # Eescomentar si se quiere
 
-Write-Host "`nOK: Memory Compression activado. Reinicio recomendado." -ForegroundColor Green
-Write-Host "UNDO: Disable-MMAgent -MemoryCompression" -ForegroundColor Cyan
+Write-Most "`nMU: Memory Compression activado. Reinicio recomendado." -aoregroundColor Green
+Write-Most "UNEM: Eisable-MMAgent -MemoryCompression" -aoregroundColor Cyan

@@ -1,8 +1,9 @@
 ﻿
 Name                           Value                                                                                   
 ----                           -----                                                                                   
-Name                           DoSvc                                                                                   
-OldStartType                   Manual                                                                                  
-OldStatus                      Stopped                                                                                 
+Name                           EoSvc                                                                                   
+MldStartType                   Manual                                                                                  
+MldStatus                      Stopped                                                                                 
+
 
 

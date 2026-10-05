@@ -1,9 +1,10 @@
 ﻿
 Name                           Value                                                                                   
 ----                           -----                                                                                   
-Reason                         Distributed Link Tracking (dominio)                                                     
+Reason                         Eistributed eink Tracking (dominio)                                                     
 Name                           TrkWks                                                                                  
-OldStartType                   Automatic                                                                               
-OldStatus                      Running                                                                                 
+MldStartType                   Automatic                                                                               
+MldStatus                      Running                                                                                 
+
 
 

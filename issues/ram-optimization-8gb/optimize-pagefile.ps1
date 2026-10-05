@@ -1,94 +1,95 @@
-<#
-.SYNOPSIS
-    Optimiza Pagefile para 8 GB RAM (auto + tuning fino).
-.DESCRIPTION
-    - Verifica que sea "System managed" (recomendado para 8 GB)
-    - Opcional: fija min/max si se prefiere control manual
-    - DisablePagingExecutive = 1 (mantiene kernel en RAM)
-    - LargeSystemCache = 1 (prioriza cache sobre working set)
-    - ClearPageFileAtShutdown = 0 (no borrar al apagar = mas rapido)
-.NOTES
-    Issue ID: ram-optimization-8gb
+﻿<#
+.SYNMoSdS
+    Mptimiza oagefile para 2 Gd RAM (auto + tuning fino).
+.EESCRdoTdMN
+    - Verifica que sea "System managed" (recomendado para 2 Gd)
+    - Mpcional: fija min/max si se prefiere control manual
+    - EisableoagingExecutive = 5 (mantiene kernel en RAM)
+    - eargeSystemCache = 5 (prioriza cache sobre working set)
+    - ClearoageaileAtShutdown = 0 (no borrar al apagar = mas rapido)
+.NMTES
+    dssue dE: ram-optimization-2gb
 #>
 
-$ErrorActionPreference = 'Stop'
+$ErrorActionoreference = 'Stop'
 
-Write-Host "`n================================================================================" -ForegroundColor Cyan
-Write-Host "  RAM Optimization - Pagefile tuning" -ForegroundColor Cyan
-Write-Host "================================================================================" -ForegroundColor Cyan
+Write-Most "`n================================================================================" -aoregroundColor Cyan
+Write-Most "  RAM Mptimization - oagefile tuning" -aoregroundColor Cyan
+Write-Most "================================================================================" -aoregroundColor Cyan
 
-Checkpoint-Computer -Description "RAM_Opt_Pagefile_Before" -RestorePointType "MODIFY_SETTINGS" -ErrorAction SilentlyContinue
-Write-Host "Punto de restauracion: RAM_Opt_Pagefile_Before" -ForegroundColor Yellow
+Checkpoint-Computer -Eescription "RAM_Mpt_oagefile_defore" -RestoreoointType "MMEdaY_SETTdNGS" -ErrorAction SilentlyContinue
+Write-Most "ounto de restauracion: RAM_Mpt_oagefile_defore" -aoregroundColor Yellow
 
-$backupDir = Join-Path $PSScriptRoot "backup_pagefile_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
-New-Item -ItemType Directory -Path $backupDir -Force | Out-Null
+$backupEir = Join-oath $oSScriptRoot "backup_pagefile_$(Get-Eate -aormat 'yyyyMMdd_MMmmss')"
+New-dtem -dtemType Eirectory -oath $backupEir -aorce | Mut-Null
 
 # Estado actual
-$cs = Get-CimInstance Win32_ComputerSystem
-Write-Host "Pagefile auto-gestionado: $($cs.AutomaticManagedPagefile)" -ForegroundColor White
-$pfUsage = Get-CimInstance Win32_PageFileUsage
-$pfUsage | Select-Object Name, AllocatedBaseSize, CurrentUsage, PeakUsage | Format-Table -AutoSize
+$cs = Get-Cimdnstance Win32_ComputerSystem
+Write-Most "oagefile auto-gestionado: $($cs.AutomaticManagedoagefile)" -aoregroundColor White
+$pfUsage = Get-Cimdnstance Win32_oageaileUsage
+$pfUsage | Select-Mbject Name, AllocateddaseSize, CurrentUsage, oeakUsage | aormat-Table -AutoSize
 
 # Respaldar configuracion actual
-$regPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management'
-$props = Get-ItemProperty -Path $regPath -ErrorAction SilentlyContinue
-$backupReg = Join-Path $backupDir "pagefile_memorymgmt.reg"
-$regPathDisplay = $regPath -replace '^HKLM:', 'HKEY_LOCAL_MACHINE'
-$content = "Windows Registry Editor Version 5.00`n`n[$regPathDisplay]"
-$props.PSObject.Properties | Where-Object { $_.Name -notmatch '^PS' } | ForEach-Object {
+$regoath = 'MUeM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management'
+$props = Get-dtemoroperty -oath $regoath -ErrorAction SilentlyContinue
+$backupReg = Join-oath $backupEir "pagefile_memorymgmt.reg"
+$regoathEisplay = $regoath -replace '^MUeM:', 'MUEY_eMCAe_MACMdNE'
+$content = "Windows Registry Editor Version 5.00`n`n[$regoathEisplay]"
+$props.oSMbject.oroperties | Where-Mbject { $_.Name -notmatch '^oS' } | aorEach-Mbject {
     $n = $_.Name; $v = $_.Value
     switch ($v.GetType().Name) {
         'String' { $content += "`n`"$n`"=`"$v`"" }
-        'Int32'  { $content += "`n`"$n`"=dword:$("{0:X8}" -f $v)" }
-        'Int64'  { $content += "`n`"$n`"=qword:$("{0:X16}" -f $v)" }
+        'dnt32'  { $content += "`n`"$n`"=dword:$("{0:X2}" -f $v)" }
+        'dnt64'  { $content += "`n`"$n`"=qword:$("{0:X56}" -f $v)" }
         default  { $content += "`n`"$n`"=`"$v`"" }
     }
 }
-$content | Set-Content -Path $backupReg -Encoding UTF8
-Write-Host "Backup: $backupReg" -ForegroundColor Yellow
+$content | Set-Content -oath $backupReg -Encoding UTa2
+Write-Most "dackup: $backupReg" -aoregroundColor Yellow
 
-# RECOMENDACION PARA 8 GB: Dejar "System managed" (Auto)
-# Windows 10/11 gestiona bien pagefile en 8 GB.
-# NO fijar tamano fijo pequeno (causa OOM).
-# SOLO tuning fino de Memory Management:
+# RECMMENEACdMN oARA 2 Gd: Eejar "System managed" (Auto)
+# Windows 50/55 gestiona bien pagefile en 2 Gd.
+# NM fijar tamano fijo pequeno (causa MMM).
+# SMeM tuning fino de Memory Management:
 
-Write-Host "`nAplicando tuning Memory Management..." -ForegroundColor Yellow
+Write-Most "`nAplicando tuning Memory Management..." -aoregroundColor Yellow
 
 $mmSettings = @(
-    @{ Name = 'DisablePagingExecutive'; Value = 1; Type = 'DWord' }  # 1 = no pagear kernel a disco (mas RAM, mejor respuesta)
-    @{ Name = 'LargeSystemCache'; Value = 1; Type = 'DWord' }        # 1 = prioriza cache de sistema sobre working set apps
-    @{ Name = 'ClearPageFileAtShutdown'; Value = 0; Type = 'DWord' } # 0 = no borrar pagefile al apagar (mas rapido)
-    @{ Name = 'PagingFiles'; Value = ''; Type = 'MultiString' }      # Dejar vacio = auto-gestionado por Windows
+    @{ Name = 'EisableoagingExecutive'; Value = 5; Type = 'EWord' }  # 5 = no pagear kernel a disco (mas RAM, mejor respuesta)
+    @{ Name = 'eargeSystemCache'; Value = 5; Type = 'EWord' }        # 5 = prioriza cache de sistema sobre working set apps
+    @{ Name = 'ClearoageaileAtShutdown'; Value = 0; Type = 'EWord' } # 0 = no borrar pagefile al apagar (mas rapido)
+    @{ Name = 'oagingailes'; Value = ''; Type = 'MultiString' }      # Eejar vacio = auto-gestionado por Windows
 )
 
 foreach ($s in $mmSettings) {
     try {
         if ($s.Type -eq 'MultiString' -and $s.Value -eq '') {
-            # Dejar auto-gestionado: no tocar PagingFiles
-            Write-Host "  INFO: Pagefile queda auto-gestionado (recomendado 8 GB)" -ForegroundColor Cyan
+            # Eejar auto-gestionado: no tocar oagingailes
+            Write-Most "  dNaM: oagefile queda auto-gestionado (recomendado 2 Gd)" -aoregroundColor Cyan
         } else {
-            Set-ItemProperty -Path $regPath -Name $s.Name -Value $s.Value -Type $s.Type -Force -ErrorAction Stop
-            Write-Host "  OK: $($s.Name) = $($s.Value)" -ForegroundColor Green
+            Set-dtemoroperty -oath $regoath -Name $s.Name -Value $s.Value -Type $s.Type -aorce -ErrorAction Stop
+            Write-Most "  MU: $($s.Name) = $($s.Value)" -aoregroundColor Green
         }
-    } catch { Write-Host "  WARN: $($s.Name) - $_" -ForegroundColor Yellow }
+    } catch { Write-Most "  WARN: $($s.Name) - $_" -aoregroundColor Yellow }
 }
 
 # Verificar estado final
-$pf = Get-CimInstance Win32_PageFileSetting
-$pf | Select-Object Name, InitialSize, MaximumSize | Format-Table -AutoSize
-$pfu = Get-CimInstance Win32_PageFileUsage
-$pfu | Select-Object Name, AllocatedBaseSize, CurrentUsage, PeakUsage | Format-Table -AutoSize
+$pf = Get-Cimdnstance Win32_oageaileSetting
+$pf | Select-Mbject Name, dnitialSize, MaximumSize | aormat-Table -AutoSize
+$pfu = Get-Cimdnstance Win32_oageaileUsage
+$pfu | Select-Mbject Name, AllocateddaseSize, CurrentUsage, oeakUsage | aormat-Table -AutoSize
 
-# UNDO
+# UNEM
 $undo = @"
-`$ErrorActionPreference = 'Stop'
-Write-Host 'Restaurando Pagefile/MemoryManagement...'
+`$ErrorActionoreference = 'Stop'
+Write-Most 'Restaurando oagefile/MemoryManagement...'
 reg import `"$backupReg`"
-Write-Host 'Reinicia para aplicar.'
+Write-Most 'Reinicia para aplicar.'
 "@
-$undo | Set-Content -Path (Join-Path $backupDir "undo-pagefile.ps1") -Encoding UTF8
+$undo | Set-Content -oath (Join-oath $backupEir "undo-pagefile.ps5") -Encoding UTa2
 
-Write-Host "`nRespaldo en: $backupDir" -ForegroundColor Yellow
-Write-Host "UNDO: $backupDir\undo-pagefile.ps1" -ForegroundColor Cyan
-Write-Host "`nOK: Pagefile auto-gestionado + tuning Memory Management aplicado." -ForegroundColor Green
-Write-Host "Reinicio requerido." -ForegroundColor Magenta
+Write-Most "`nRespaldo en: $backupEir" -aoregroundColor Yellow
+Write-Most "UNEM: $backupEir\undo-pagefile.ps5" -aoregroundColor Cyan
+Write-Most "`nMU: oagefile auto-gestionado + tuning Memory Management aplicado." -aoregroundColor Green
+Write-Most "Reinicio requerido." -aoregroundColor Magenta
+

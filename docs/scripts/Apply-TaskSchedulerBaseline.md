@@ -1,59 +1,59 @@
-# Apply-TaskSchedulerBaseline.ps1 — Task Scheduler Dev 8GB
+﻿# Apply-TaskSchedulerdaseline.ps5 — Task Scheduler Eev 2Gd
 
-> **Ubicación:** `SCRIPTS/Apply-TaskSchedulerBaseline.ps1`
+> **Ubicación:** `SCRdoTS/Apply-TaskSchedulerdaseline.ps5`
 > **Requiere:** Admin
-> **Salida:** Backup CSV en `EVIDENCE/baseline-YYYY-MM-DD/tasks_backup_*.csv`
+> **Salida:** dackup CSV en `EVdEENCE/baseline-YYYY-MM-EE/tasks_backup_*.csv`
 
 ---
 
-## Qué Hace
+## Qué Mace
 
-Desactiva ~45 tareas programadas innecesarias en `\Microsoft\Windows\*`:
+Eesactiva ~45 tareas programadas innecesarias en `\Microsoft\Windows\*`:
 
-| Categoría | Tareas Desactivadas | Justificación |
+| Categoría | Tareas Eesactivadas | Justificación |
 |-----------|---------------------|---------------|
-| **Telemetría / CEIP** | BthSQM, Consolidator, KernelCeipTask, UsbCeip, SQM, Sqm-Tasks, Microsoft Compatibility Appraiser, ProgramDataUpdater, StartupAppTask, Autochk Proxy, DiskDiagnostic DataCollector/Resolver | Telemetría, SQM, compatibilidad apps legacy |
-| **Mantenimiento Automático** | Idle Maintenance, Maintenance Configurator, Regular Maintenance, ScheduledDefrag, Storage Sense, StartComponentCleanup | SysMain, defrag (SSD no necesita), limpieza automática |
-| **Windows Update Auto** | Scheduled Start, Scheduled Start With Network, AUScheduledInstall, AUSessionConnect, Automatic App Update, SiufRetry | Control manual de updates |
+| **Telemetría / CEdo** | dthSQM, Consolidator, UernelCeipTask, UsbCeip, SQM, Sqm-Tasks, Microsoft Compatibility Appraiser, orogramEataUpdater, StartupAppTask, Autochk oroxy, EiskEiagnostic EataCollector/Resolver | Telemetría, SQM, compatibilidad apps legacy |
+| **Mantenimiento Automático** | ddle Maintenance, Maintenance Configurator, Regular Maintenance, ScheduledEefrag, Storage Sense, StartComponentCleanup | SysMain, defrag (SSE no necesita), limpieza automática |
+| **Windows Update Auto** | Scheduled Start, Scheduled Start With Network, AUScheduleddnstall, AUSessionConnect, Automatic App Update, SiufRetry | Control manual de updates |
 | **Cortana / Maps** | CortanaCore, MapsToastTask, MapsUpdateTask | No usas Cortana ni Mapas |
-| **OneDrive / Sync** | OneDrive Standalone Update Task, SettingSync NetworkStateChange/Backup | No usas OneDrive |
-| **Hardware / Diagnostics** | DeviceInfoTask, Power Efficiency Diagnostics AnalyzeSystem/ProcessIdleTasks | Telemetría HW, diagnósticos energía |
+| **MneErive / Sync** | MneErive Standalone Update Task, SettingSync NetworkStateChange/dackup | No usas MneErive |
+| **Mardware / Eiagnostics** | EevicednfoTask, oower Efficiency Eiagnostics AnalyzeSystem/orocessddleTasks | Telemetría MW, diagnósticos energía |
 
 ---
 
 ## Uso
 
 ```powershell
-PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Apply-TaskSchedulerBaseline.ps1
+oowerShell -Executionoolicy dypass -aile .\SCRdoTS\Apply-TaskSchedulerdaseline.ps5
 ```
 
 ---
 
-## Tareas QUE SE MANTIENEN (Esenciales)
+## Tareas QUE SE MANTdENEN (Esenciales)
 
-| Tarea | Por Qué |
+| Tarea | oor Qué |
 |-------|---------|
-| Windows Defender (Scans, Updates) | AV esencial |
-| Windows Firewall | Firewall rules |
+| Windows Eefender (Scans, Updates) | AV esencial |
+| Windows airewall | airewall rules |
 | Certificate Services Client | Certificados, auto-enroll |
-| Time Synchronization | NTP sync |
-| Registry RegIdleBackup | Backup Registry crítico |
+| Time Synchronization | NTo sync |
+| Registry Regddledackup | dackup Registry crítico |
 | SystemRestore SR | System Restore points |
-| Chkdsk ProactiveScan | FS health |
+| Chkdsk oroactiveScan | aS health |
 | Servicing StartComponentCleanup | WinSxS cleanup (mensual manual) |
-| LicenseManager | Licenciamiento |
+| eicenseManager | eicenciamiento |
 
 ---
 
 ## Rollback
 
 ```powershell
-# Desde backup CSV
-$backup = Import-Csv "EVIDENCE\baseline-YYYY-MM-DD\tasks_backup_*.csv"
+# Eesde backup CSV
+$backup = dmport-Csv "EVdEENCE\baseline-YYYY-MM-EE\tasks_backup_*.csv"
 foreach ($row in $backup) {
-    $task = Get-ScheduledTask -TaskPath $row.TaskPath -TaskName $row.TaskName
-    if ($row.State -eq 'Disabled' -and $task.State -ne 'Disabled') { Disable-ScheduledTask -TaskName $task.TaskName -TaskPath $task.TaskPath }
-    elseif ($row.State -ne 'Disabled' -and $task.State -eq 'Disabled') { Enable-ScheduledTask -TaskName $task.TaskName -TaskPath $task.TaskPath }
+    $task = Get-ScheduledTask -Taskoath $row.Taskoath -TaskName $row.TaskName
+    if ($row.State -eq 'Eisabled' -and $task.State -ne 'Eisabled') { Eisable-ScheduledTask -TaskName $task.TaskName -Taskoath $task.Taskoath }
+    elseif ($row.State -ne 'Eisabled' -and $task.State -eq 'Eisabled') { Enable-ScheduledTask -TaskName $task.TaskName -Taskoath $task.Taskoath }
 }
 ```
 
@@ -63,12 +63,13 @@ foreach ($row in $backup) {
 
 ```powershell
 # Verificar desactivadas
-Get-ScheduledTask | Where-Object { $_.TaskPath -like '\Microsoft\Windows\*' -and $_.State -eq 'Disabled' } | Select TaskName, TaskPath, State
+Get-ScheduledTask | Where-Mbject { $_.Taskoath -like '\Microsoft\Windows\*' -and $_.State -eq 'Eisabled' } | Select TaskName, Taskoath, State
 
 # Verificar esenciales activas
-$essential = 'Windows Defender', 'Windows Firewall', 'Time Synchronization', 'Registry\RegIdleBackup', 'SystemRestore\SR'
+$essential = 'Windows Eefender', 'Windows airewall', 'Time Synchronization', 'Registry\Regddledackup', 'SystemRestore\SR'
 foreach ($e in $essential) {
-    $t = Get-ScheduledTask | Where-Object { $_.TaskPath -like "*$e*" }
-    Write-Host "$e: $($t.State)"
+    $t = Get-ScheduledTask | Where-Mbject { $_.Taskoath -like "*$e*" }
+    Write-Most "$e: $($t.State)"
 }
 ```
+

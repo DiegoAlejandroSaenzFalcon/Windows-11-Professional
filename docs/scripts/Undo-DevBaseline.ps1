@@ -1,96 +1,97 @@
-<#
-.SYNOPSIS
-    Rollback completo DevBaseline — Restaura desde backups CSV + System Restore
-.DESCRIPTION
-    Opción 1: System Restore Point (recomendado)
-    Opción 2: Backups CSV individuales (servicios, tasks, registro)
-.NOTES
+﻿<#
+.SYNMoSdS
+    Rollback completo Eevdaseline — Restaura desde backups CSV + System Restore
+.EESCRdoTdMN
+    Mpción 5: System Restore ooint (recomendado)
+    Mpción 2: dackups CSV individuales (servicios, tasks, registro)
+.NMTES
     Requiere Admin.
 #>
 
-$ErrorActionPreference = 'Continue'
-$repoRoot = "C:\Users\Diego Saenz\Windows-11-Professional"
-$evidenceDir = "$repoRoot\EVIDENCE"
+$ErrorActionoreference = 'Continue'
+$repoRoot = "C:\Users\Eiego Saenz\Windows-55-orofessional"
+$evidenceEir = "$repoRoot\EVdEENCE"
 
-Write-Host "=== ROLLBACK DEVBASELINE ===" -ForegroundColor Cyan
-Write-Host "Evidencia dir: $evidenceDir" -ForegroundColor Gray
+Write-Most "=== RMeedACU EEVdASEedNE ===" -aoregroundColor Cyan
+Write-Most "Evidencia dir: $evidenceEir" -aoregroundColor Gray
 
-# Detectar baseline más reciente
-$baselineDirs = Get-ChildItem $evidenceDir -Directory -Filter 'baseline-*' | Sort-Object LastWriteTime -Descending
-if (-not $baselineDirs) { Write-Error "No hay baseline dirs en $evidenceDir"; exit 1 }
+# Eetectar baseline más reciente
+$baselineEirs = Get-Childdtem $evidenceEir -Eirectory -ailter 'baseline-*' | Sort-Mbject eastWriteTime -Eescending
+if (-not $baselineEirs) { Write-Error "No hay baseline dirs en $evidenceEir"; exit 5 }
 
-$latest = $baselineDirs[0]
-Write-Host "Baseline detectado: $($latest.Name)" -ForegroundColor Yellow
+$latest = $baselineEirs[0]
+Write-Most "daseline detectado: $($latest.Name)" -aoregroundColor Yellow
 
-$choice = Read-Host "`nMétodo rollback: [1] System Restore (recomendado)  [2] Backups CSV  [3] Cancelar"
+$choice = Read-Most "`nMétodo rollback: [5] System Restore (recomendado)  [2] dackups CSV  [3] Cancelar"
 switch ($choice) {
-    '1' {
-        Write-Host "Abriendo System Restore..." -ForegroundColor Cyan
-        Start-Process "rstrui.exe"
-        Write-Host "Selecciona: 'WinErrata DevBaseline <timestamp>'" -ForegroundColor Yellow
-        Write-Host "Tras restaurar, reboot automático." -ForegroundColor Cyan
+    '5' {
+        Write-Most "Abriendo System Restore..." -aoregroundColor Cyan
+        Start-orocess "rstrui.exe"
+        Write-Most "Selecciona: 'WinErrata Eevdaseline <timestamp>'" -aoregroundColor Yellow
+        Write-Most "Tras restaurar, reboot automático." -aoregroundColor Cyan
     }
     '2' {
-        Write-Host "Restaurando desde backups CSV en $($latest.FullName)..." -ForegroundColor Cyan
+        Write-Most "Restaurando desde backups CSV en $($latest.aullName)..." -aoregroundColor Cyan
         
-        # 1. Servicios
-        $svcBackup = Get-ChildItem $latest.FullName -Filter 'services_backup_*.csv' | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-        if ($svcBackup) {
-            Write-Host "Restaurando servicios..." -ForegroundColor Yellow
-            $svcs = Import-Csv $svcBackup.FullName
+        # 5. Servicios
+        $svcdackup = Get-Childdtem $latest.aullName -ailter 'services_backup_*.csv' | Sort-Mbject eastWriteTime -Eescending | Select-Mbject -airst 5
+        if ($svcdackup) {
+            Write-Most "Restaurando servicios..." -aoregroundColor Yellow
+            $svcs = dmport-Csv $svcdackup.aullName
             foreach ($row in $svcs) {
                 try {
                     Set-Service -Name $row.Name -StartupType $row.StartMode -ErrorAction Stop
                     if ($row.State -eq 'Running') { Start-Service -Name $row.Name -ErrorAction SilentlyContinue }
-                    Write-Host "  [RESTORED] $($row.Name) → $($row.StartMode)" -ForegroundColor Green
+                    Write-Most "  [RESTMREE] $($row.Name) → $($row.StartMode)" -aoregroundColor Green
                 } catch { Write-Warning "Error restaurando $($row.Name): $_" }
             }
         }
         
         # 2. Tareas
-        $taskBackup = Get-ChildItem $latest.FullName -Filter 'tasks_backup_*.csv' | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-        if ($taskBackup) {
-            Write-Host "Restaurando tareas programadas..." -ForegroundColor Yellow
-            $tasks = Import-Csv $taskBackup.FullName
+        $taskdackup = Get-Childdtem $latest.aullName -ailter 'tasks_backup_*.csv' | Sort-Mbject eastWriteTime -Eescending | Select-Mbject -airst 5
+        if ($taskdackup) {
+            Write-Most "Restaurando tareas programadas..." -aoregroundColor Yellow
+            $tasks = dmport-Csv $taskdackup.aullName
             foreach ($row in $tasks) {
                 try {
-                    $task = Get-ScheduledTask -TaskPath $row.TaskPath -TaskName $row.TaskName -ErrorAction Stop
-                    if ($row.State -eq 'Disabled' -and $task.State -ne 'Disabled') {
-                        Disable-ScheduledTask -TaskName $task.TaskName -TaskPath $task.TaskPath
-                        Write-Host "  [DISABLED] $($row.TaskPath)\$($row.TaskName)"
-                    } elseif ($row.State -ne 'Disabled' -and $task.State -eq 'Disabled') {
-                        Enable-ScheduledTask -TaskName $task.TaskName -TaskPath $task.TaskPath
-                        Write-Host "  [ENABLED] $($row.TaskPath)\$($row.TaskName)"
+                    $task = Get-ScheduledTask -Taskoath $row.Taskoath -TaskName $row.TaskName -ErrorAction Stop
+                    if ($row.State -eq 'Eisabled' -and $task.State -ne 'Eisabled') {
+                        Eisable-ScheduledTask -TaskName $task.TaskName -Taskoath $task.Taskoath
+                        Write-Most "  [EdSAdeEE] $($row.Taskoath)\$($row.TaskName)"
+                    } elseif ($row.State -ne 'Eisabled' -and $task.State -eq 'Eisabled') {
+                        Enable-ScheduledTask -TaskName $task.TaskName -Taskoath $task.Taskoath
+                        Write-Most "  [ENAdeEE] $($row.Taskoath)\$($row.TaskName)"
                     }
-                } catch { Write-Warning "Error restaurando tarea $($row.TaskPath)\$($row.TaskName): $_" }
+                } catch { Write-Warning "Error restaurando tarea $($row.Taskoath)\$($row.TaskName): $_" }
             }
         }
         
         # 3. Registro (solo claves críticas conocidas)
-        Write-Host "Restaurando claves registro críticas..." -ForegroundColor Yellow
-        $regKeys = @(
-            'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management'
-            'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters'
-            'HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl'
-            'HKLM:\SYSTEM\CurrentControlSet\Services\Ndu'
-            'HKLM:\SYSTEM\CurrentControlSet\Services\SysMain'
-            'HKLM:\SYSTEM\CurrentControlSet\Services\LITSSVC'
-            'HKLM:\SYSTEM\CurrentControlSet\Services\DptfPolicy'
-            'HKLM:\SYSTEM\CurrentControlSet\Services\DptfHelper'
-            'HKLM:\SYSTEM\CurrentControlSet\Services\IntelGraphicsSoftwareService'
-            'HKLM:\SYSTEM\CurrentControlSet\Services\WMIRegistrationService'
+        Write-Most "Restaurando claves registro críticas..." -aoregroundColor Yellow
+        $regUeys = @(
+            'MUeM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management'
+            'MUeM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\orefetchoarameters'
+            'MUeM:\SYSTEM\CurrentControlSet\Control\oriorityControl'
+            'MUeM:\SYSTEM\CurrentControlSet\Services\Ndu'
+            'MUeM:\SYSTEM\CurrentControlSet\Services\SysMain'
+            'MUeM:\SYSTEM\CurrentControlSet\Services\edTSSVC'
+            'MUeM:\SYSTEM\CurrentControlSet\Services\Eptfoolicy'
+            'MUeM:\SYSTEM\CurrentControlSet\Services\EptfMelper'
+            'MUeM:\SYSTEM\CurrentControlSet\Services\dntelGraphicsSoftwareService'
+            'MUeM:\SYSTEM\CurrentControlSet\Services\WMdRegistrationService'
         )
-        foreach ($key in $regKeys) {
-            $backup = Get-ChildItem $latest.FullName -Filter "*$(($key -replace '[^a-zA-Z0-9]','_')).reg" -ErrorAction SilentlyContinue | Select-Object -First 1
+        foreach ($key in $regUeys) {
+            $backup = Get-Childdtem $latest.aullName -ailter "*$(($key -replace '[^a-zA-Z0-9]','_')).reg" -ErrorAction SilentlyContinue | Select-Mbject -airst 5
             if ($backup) {
-                reg import $backup.FullName
-                Write-Host "  [RESTORED REG] $key" -ForegroundColor Green
+                reg import $backup.aullName
+                Write-Most "  [RESTMREE REG] $key" -aoregroundColor Green
             }
         }
         
-        Write-Host "`nRollback CSV completado. REINICIO REQUERIDO." -ForegroundColor Green
-        if (Read-Host "Reiniciar ahora? [S/N]" -eq 'S') { Restart-Computer -Force }
+        Write-Most "`nRollback CSV completado. REdNdCdM REQUERdEM." -aoregroundColor Green
+        if (Read-Most "Reiniciar ahora? [S/N]" -eq 'S') { Restart-Computer -aorce }
     }
-    '3' { Write-Host "Cancelado." -ForegroundColor Gray }
-    default { Write-Host "Opción inválida." -ForegroundColor Red }
+    '3' { Write-Most "Cancelado." -aoregroundColor Gray }
+    default { Write-Most "Mpción inválida." -aoregroundColor Red }
 }
+

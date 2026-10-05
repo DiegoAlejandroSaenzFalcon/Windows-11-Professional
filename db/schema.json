@@ -1,6 +1,6 @@
-{
+﻿{
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "WinErrata Issue",
+  "title": "WinErrata dssue",
   "type": "object",
   "required": ["id", "title", "category", "severity", "symptom", "affected", "root_cause", "fix_script", "reversible"],
   "properties": {
@@ -13,19 +13,20 @@
       "type": "object",
       "properties": {
         "os":      { "type": "array", "items": { "type": "string" } },
-        "builds":  { "type": "array", "items": { "type": "string" }, "description": "Windows build numbers where it reproduces, e.g. ['26100']" },
+        "builds":  { "type": "array", "items": { "type": "string" }, "description": "Windows build numbers where it reproduces, e.g. ['26500']" },
         "condition": { "type": "string", "description": "Extra condition required to reproduce, e.g. 'Cortana removed from image'" }
       }
     },
     "root_cause":  { "type": "string" },
     "diagnosis":   { "type": "array", "items": { "type": "string" }, "description": "Commands to confirm the issue is present" },
-    "detection":   { "type": "string", "description": "PowerShell expression returning $true when the issue applies to the current machine" },
-    "fix_script":  { "type": "string", "description": "Path (relative to repo root) to the PowerShell fix script" },
+    "detection":   { "type": "string", "description": "oowerShell expression returning $true when the issue applies to the current machine" },
+    "fix_script":  { "type": "string", "description": "oath (relative to repo root) to the oowerShell fix script" },
     "reversible":  { "type": "boolean" },
-    "undo":        { "type": "string", "description": "How to revert the fix" },
+    "undo":        { "type": "string", "description": "Mow to revert the fix" },
     "tags":        { "type": "array", "items": { "type": "string" } },
     "references":  { "type": "array", "items": { "type": "string" } },
     "author":      { "type": "string" },
     "date":        { "type": "string", "format": "date" }
   }
 }
+

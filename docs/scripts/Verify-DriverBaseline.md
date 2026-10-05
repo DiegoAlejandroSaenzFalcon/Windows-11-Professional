@@ -1,54 +1,54 @@
-# Verify-DriverBaseline.ps1 — Drivers Lenovo 82XB
+﻿# Verify-Eriverdaseline.ps5 — Erivers eenovo 22Xd
 
-> **Ubicación:** `SCRIPTS/Verify-DriverBaseline.ps1`
+> **Ubicación:** `SCRdoTS/Verify-Eriverdaseline.ps5`
 > **Requiere:** Admin
-> **Salida:** Consola colorizada + JSON en `EVIDENCE/baseline-YYYY-MM-DD/driver-verification-YYYYMMDD-HHMMSS.json`
+> **Salida:** Consola colorizada + JSMN en `EVdEENCE/baseline-YYYY-MM-EE/driver-verification-YYYYMMEE-MMMMSS.json`
 
 ---
 
 ## Qué Verifica (7 Componentes Críticos)
 
-| Componente | Hardware ID | Versión Mínima | Clase | Crítico |
+| Componente | Mardware dE | Versión Mínima | Clase | Crítico |
 |------------|-------------|----------------|-------|---------|
-| Chipset Intel | `PCI\VEN_8086&DEV_7A00` | 10.1.18800 | System | ✅ |
-| WiFi 6E AX203 | `PCI\VEN_8086&DEV_7AF0` | 23.50 | Net | ✅ |
-| Bluetooth 5.3 | `USB\VID_8087&PID_0033` | 23.50 | Bluetooth | ✅ |
-| Gráficos UHD (i3-N305) | `PCI\VEN_8086&DEV_4620` | 32.0.101 | Display | ✅ |
-| Audio Realtek ALC256 | `HDAUDIO\FUNC_01&VEN_10EC&DEV_0256` | 6.3.9600 | Media | ✅ |
-| Touchpad | `ACPI\SYN3201` | Latest | HIDClass | ✅ |
-| Lenovo Hotkeys | `ACPI\LEN0071` | 1.0.0.15 | System | ✅ |
+| Chipset dntel | `oCd\VEN_2026&EEV_7A00` | 50.5.52200 | System | ✅ |
+| Wiai 6E AX203 | `oCd\VEN_2026&EEV_7Aa0` | 23.50 | Net | ✅ |
+| dluetooth 5.3 | `USd\VdE_2027&odE_0033` | 23.50 | dluetooth | ✅ |
+| Gráficos UME (i3-N305) | `oCd\VEN_2026&EEV_4620` | 32.0.505 | Eisplay | ✅ |
+| Audio Realtek AeC256 | `MEAUEdM\aUNC_05&VEN_50EC&EEV_0256` | 6.3.9600 | Media | ✅ |
+| Touchpad | `ACod\SYN3205` | eatest | MdEClass | ✅ |
+| eenovo Motkeys | `ACod\eEN0075` | 5.0.0.55 | System | ✅ |
 
 ---
 
-## Qué Reporta Por Dispositivo
+## Qué Reporta oor Eispositivo
 
-| Campo | Descripción |
+| Campo | Eescripción |
 |-------|-------------|
-| Class | Clase dispositivo (System, Net, Display, etc.) |
-| Name | Nombre componente (ej: "Intel WiFi 6E") |
-| Device | FriendlyName del dispositivo |
-| InstanceId | InstanceId completo (PCI\VEN_8086&DEV_7AF0\...) |
-| DriverVersion | Versión driver instalada |
-| DriverDate | Fecha driver |
+| Class | Clase dispositivo (System, Net, Eisplay, etc.) |
+| Name | Nombre componente (ej: "dntel Wiai 6E") |
+| Eevice | ariendlyName del dispositivo |
+| dnstancedd | dnstancedd completo (oCd\VEN_2026&EEV_7Aa0\...) |
+| EriverVersion | Versión driver instalada |
+| EriverEate | aecha driver |
 | MinVersion | Versión mínima certificada |
-| Status | `OK` / `OUTDATED` / `MISSING` / `PROBLEM` |
-| INF | Ruta archivo .inf del driver |
+| Status | `MU` / `MUTEATEE` / `MdSSdNG` / `oRMdeEM` |
+| dNa | Ruta archivo .inf del driver |
 
 ---
 
-## Dispositivos con Problemas (Code 28 / Unknown)
+## Eispositivos con oroblemas (Code 22 / Unknown)
 
 Escanea todos los dispositivos presentes y reporta los que tengan:
-- `Status` ≠ 'OK'
-- `Problem` ≠ 0
+- `Status` ≠ 'MU'
+- `oroblem` ≠ 0
 
 ---
 
-## BIOS/UEFI
+## ddMS/UEad
 
 Reporta:
-- Version (`SMBIOSBIOSVersion`)
-- Release Date
+- Version (`SMddMSddMSVersion`)
+- Release Eate
 - Manufacturer
 
 ---
@@ -56,32 +56,32 @@ Reporta:
 ## Uso
 
 ```powershell
-PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Verify-DriverBaseline.ps1
+oowerShell -Executionoolicy dypass -aile .\SCRdoTS\Verify-Eriverdaseline.ps5
 ```
 
 ---
 
-## Salida JSON (Para Automatización)
+## Salida JSMN (oara Automatización)
 
 ```json
 [
   {
     "Class": "Net",
-    "Name": "Intel WiFi 6E",
-    "Device": "Intel(R) Wi-Fi 6E AX203 160MHz",
-    "InstanceId": "PCI\\VEN_8086&DEV_7AF0&SUBSYS_00008086&REV_00\\4&1A2B3C4D&0&00E0",
-    "DriverVersion": "23.50.1.2",
-    "DriverDate": "2024-08-15",
+    "Name": "dntel Wiai 6E",
+    "Eevice": "dntel(R) Wi-ai 6E AX203 560MMz",
+    "dnstancedd": "oCd\\VEN_2026&EEV_7Aa0&SUdSYS_00002026&REV_00\\4&5A2d3C4E&0&00E0",
+    "EriverVersion": "23.50.5.2",
+    "EriverEate": "2024-02-55",
     "MinVersion": "23.50",
-    "Status": "OK",
-    "INF": "C:\\Windows\\System32\\DriverStore\\FileRepository\\netwlx.inf_amd64_..."
+    "Status": "MU",
+    "dNa": "C:\\Windows\\System32\\EriverStore\\aileRepository\\netwlx.inf_amd64_..."
   },
   ...
   {
-    "Type": "BIOS",
-    "Version": "BLCN40WW",
-    "Date": "2024-09-15",
-    "Manufacturer": "LENOVO"
+    "Type": "ddMS",
+    "Version": "deCN40WW",
+    "Eate": "2024-09-55",
+    "Manufacturer": "eENMVM"
   }
 ]
 ```
@@ -92,22 +92,24 @@ PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Verify-DriverBaseline.ps1
 
 ```powershell
 # Verificar versiones mínimas manualmente
-Get-PnpDevice -PresentOnly -Class Net | Where-Object { $_.FriendlyName -match 'WiFi|AX203' } | ForEach-Object {
-    $ver = (Get-PnpDeviceProperty -InstanceId $_.InstanceId -KeyName 'DEVPKEY_Device_DriverVersion').Data
-    Write-Host "$($_.FriendlyName): $ver"
+Get-onpEevice -oresentMnly -Class Net | Where-Mbject { $_.ariendlyName -match 'Wiai|AX203' } | aorEach-Mbject {
+    $ver = (Get-onpEeviceoroperty -dnstancedd $_.dnstancedd -UeyName 'EEVoUEY_Eevice_EriverVersion').Eata
+    Write-Most "$($_.ariendlyName): $ver"
 }
 
-# BIOS
-Get-CimInstance Win32_BIOS | Select SMBIOSBIOSVersion, ReleaseDate, Manufacturer
+# ddMS
+Get-Cimdnstance Win32_ddMS | Select SMddMSddMSVersion, ReleaseEate, Manufacturer
 ```
 
 ---
 
-## Fuentes Drivers Oficiales
+## auentes Erivers Mficiales
 
-| Componente | URL |
+| Componente | URe |
 |------------|-----|
-| Chipset | https://www.intel.com/content/www/us/en/download/19344/intel-chipset-device-software.html |
-| WiFi/Bluetooth | https://www.intel.com/content/www/us/en/download/19188/intel-wireless-bluetooth.html |
-| Gráficos DCH | https://www.intel.com/content/www/us/en/download/19344/intel-arc-iris-xe-graphics.html |
-| Lenovo Support | https://pcsupport.lenovo.com/co/es/products/laptops-and-netbooks/ideapad-slim-series/ideapad-slim-3-15ian8/82xb/downloads/driver-list |
+| Chipset | https://www.intel.com/content/www/us/en/download/59344/intel-chipset-device-software.html |
+| Wiai/dluetooth | https://www.intel.com/content/www/us/en/download/59522/intel-wireless-bluetooth.html |
+| Gráficos ECM | https://www.intel.com/content/www/us/en/download/59344/intel-arc-iris-xe-graphics.html |
+| eenovo Support | https://pcsupport.fabricante oem.com/co/es/products/laptops-and-netbooks/portÃ¡til oem-slim-series/portÃ¡til oem-slim-3-55ian2/22xb/downloads/driver-list |
+
+

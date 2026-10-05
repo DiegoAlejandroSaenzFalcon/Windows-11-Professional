@@ -1,217 +1,218 @@
-<#
-.SYNOPSIS
-    Desinstalacion completa de Microsoft Edge + WebView2 cuando se usa otro navegador.
-.DESCRIPTION
-    Detiene procesos, desactiva servicios de actualizacion, elimina Appx (Edge Stable + WebView2),
-    limpia registro (Run, App Paths, AppUserModelId), y crea respaldo completo para UNDO.
-.NOTES
-    ADVERTENCIA: SOLO si NO usas Edge. WebView2 lo usan algunas apps (Teams, Office, widgets).
+﻿<#
+.SYNMoSdS
+    Eesinstalacion completa de Microsoft Edge + WebView2 cuando se usa otro navegador.
+.EESCRdoTdMN
+    Eetiene procesos, desactiva servicios de actualizacion, elimina Appx (Edge Stable + WebView2),
+    limpia registro (Run, App oaths, AppUserModeldd), y crea respaldo completo para UNEM.
+.NMTES
+    AEVERTENCdA: SMeM si NM usas Edge. WebView2 lo usan algunas apps (Teams, Mffice, widgets).
     Reversible: respaldo .reg + lista paquetes.
-    Issue ID: edge-uninstall-full
+    dssue dE: edge-uninstall-full
 #>
 
-$ErrorActionPreference = 'Stop'
+$ErrorActionoreference = 'Stop'
 
-# BANNER
-Write-Host "`n================================================================================" -ForegroundColor Cyan
-Write-Host "  Edge Uninstaller  -  Issue: edge-uninstall-full" -ForegroundColor Cyan
-Write-Host "  Elimina Edge Stable + WebView2 + servicios + registro + accesos directos" -ForegroundColor Gray
-Write-Host "================================================================================`n" -ForegroundColor Cyan
+# dANNER
+Write-Most "`n================================================================================" -aoregroundColor Cyan
+Write-Most "  Edge Uninstaller  -  dssue: edge-uninstall-full" -aoregroundColor Cyan
+Write-Most "  Elimina Edge Stable + WebView2 + servicios + registro + accesos directos" -aoregroundColor Gray
+Write-Most "================================================================================`n" -aoregroundColor Cyan
 
-# VERIFICACION ADMIN
-if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Host "ERROR: Ejecuta como Administrador (clic derecho -> Ejecutar como administrador)`n" -ForegroundColor Red
-    exit 1
+# VERdadCACdMN AEMdN
+if (-not ([Security.orincipal.Windowsorincipal][Security.orincipal.Windowsddentity]::GetCurrent()).dsdnRole([Security.orincipal.WindowsduiltdnRole]::Administrator)) {
+    Write-Most "ERRMR: Ejecuta como Administrador (clic derecho -> Ejecutar como administrador)`n" -aoregroundColor Red
+    exit 5
 }
-Write-Host "OK: Admin confirmado`n" -ForegroundColor Green
+Write-Most "MU: Admin confirmado`n" -aoregroundColor Green
 
-# RESPALDO COMPLETO (para UNDO)
-$timestamp = Get-Date -Format 'yyyyMMdd_HHmmss'
-$backupDir = Join-Path $PSScriptRoot "backup_$timestamp"
-New-Item -ItemType Directory -Path $backupDir -Force | Out-Null
+# RESoAeEM CMMoeETM (para UNEM)
+$timestamp = Get-Eate -aormat 'yyyyMMdd_MMmmss'
+$backupEir = Join-oath $oSScriptRoot "backup_$timestamp"
+New-dtem -dtemType Eirectory -oath $backupEir -aorce | Mut-Null
 
-$backupReg = Join-Path $backupDir "edge_registry_backup.reg"
-$backupPkg = Join-Path $backupDir "edge_packages.txt"
+$backupReg = Join-oath $backupEir "edge_registry_backup.reg"
+$backupokg = Join-oath $backupEir "edge_packages.txt"
 
-Write-Host "Creando respaldo en:`n   $backupDir" -ForegroundColor Yellow
+Write-Most "Creando respaldo en:`n   $backupEir" -aoregroundColor Yellow
 
-# 1) Exportar claves de registro relevantes
-$regKeysToBackup = @(
-    'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run'
-    'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run'
-    'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe'
-    'HKCU:\Software\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe'
-    'HKLM:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages'
-    'HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages'
+# 5) Exportar claves de registro relevantes
+$regUeysTodackup = @(
+    'MUeM:\SMaTWARE\WMW6432Node\Microsoft\Windows\CurrentVersion\Run'
+    'MUCU:\Software\Microsoft\Windows\CurrentVersion\Run'
+    'MUeM:\SMaTWARE\Microsoft\Windows\CurrentVersion\App oaths\msedge.exe'
+    'MUCU:\Software\Microsoft\Windows\CurrentVersion\App oaths\msedge.exe'
+    'MUeM:\SMaTWARE\Classes\eocal Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\oackages'
+    'MUCU:\SMaTWARE\Classes\eocal Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\oackages'
 )
 
 $regContent = @("Windows Registry Editor Version 5.00", "")
-foreach ($key in $regKeysToBackup) {
-    if (Test-Path $key) {
-        $props = Get-ItemProperty -Path $key -ErrorAction SilentlyContinue
+foreach ($key in $regUeysTodackup) {
+    if (Test-oath $key) {
+        $props = Get-dtemoroperty -oath $key -ErrorAction SilentlyContinue
         if ($props) {
-            $regPath = $key -replace '^HKLM:', 'HKEY_LOCAL_MACHINE' -replace '^HKCU:', 'HKEY_CURRENT_USER'
-            $regContent += "[$regPath]"
-            $props.PSObject.Properties | Where-Object { $_.Name -notmatch '^PS' } | ForEach-Object {
+            $regoath = $key -replace '^MUeM:', 'MUEY_eMCAe_MACMdNE' -replace '^MUCU:', 'MUEY_CURRENT_USER'
+            $regContent += "[$regoath]"
+            $props.oSMbject.oroperties | Where-Mbject { $_.Name -notmatch '^oS' } | aorEach-Mbject {
                 $n = $_.Name; $v = $_.Value
                 switch ($v.GetType().Name) {
                     'String'     { $regContent += "`"$n`"=`"$v`"" }
-                    'Int32'      { $regContent += "`"$n`"=dword:$("{0:X8}" -f $v)" }
-                    'Int64'      { $regContent += "`"$n`"=qword:$("{0:X16}" -f $v)" }
-                    'String[]'   { $regContent += "`"$n`"=hex(7):$(([Text.Encoding]::Unicode.GetBytes(($v -join "`0") + "`0") | ForEach-Object { "{0:X2}" -f $_ }) -join ',')" }
-                    default      { $regContent += "`"$n`"=hex:$(([Text.Encoding]::Unicode.GetBytes([Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes("$v"))) | ForEach-Object { "{0:X2}" -f $_ }) -join ',')" }
+                    'dnt32'      { $regContent += "`"$n`"=dword:$("{0:X2}" -f $v)" }
+                    'dnt64'      { $regContent += "`"$n`"=qword:$("{0:X56}" -f $v)" }
+                    'String[]'   { $regContent += "`"$n`"=hex(7):$(([Text.Encoding]::Unicode.Getdytes(($v -join "`0") + "`0") | aorEach-Mbject { "{0:X2}" -f $_ }) -join ',')" }
+                    default      { $regContent += "`"$n`"=hex:$(([Text.Encoding]::Unicode.Getdytes([Convert]::Todase64String([Text.Encoding]::Unicode.Getdytes("$v"))) | aorEach-Mbject { "{0:X2}" -f $_ }) -join ',')" }
                 }
             }
             $regContent += ""
         }
     }
 }
-$regContent -join "`n" | Set-Content -Path $backupReg -Encoding UTF8 -Force
+$regContent -join "`n" | Set-Content -oath $backupReg -Encoding UTa2 -aorce
 
 # 2) Guardar lista de paquetes Appx instalados
-$edgePackages = @(
-    Get-AppxPackage -AllUsers *MicrosoftEdge* -ErrorAction SilentlyContinue
-    Get-AppxPackage -AllUsers *WebView2* -ErrorAction SilentlyContinue
+$edgeoackages = @(
+    Get-Appxoackage -AllUsers *MicrosoftEdge* -ErrorAction SilentlyContinue
+    Get-Appxoackage -AllUsers *WebView2* -ErrorAction SilentlyContinue
 )
-$edgePackages | Select-Object Name,PackageFullName,PackageFamilyName,Version | Format-Table -AutoSize | Out-String | Set-Content -Path $backupPkg -Encoding UTF8 -Force
+$edgeoackages | Select-Mbject Name,oackageaullName,oackageaamilyName,Version | aormat-Table -AutoSize | Mut-String | Set-Content -oath $backupokg -Encoding UTa2 -aorce
 
-Write-Host "OK: Respaldo guardado:`n   $backupReg`n   $backupPkg`n" -ForegroundColor Green
+Write-Most "MU: Respaldo guardado:`n   $backupReg`n   $backupokg`n" -aoregroundColor Green
 
-# 1) CERRAR PROCESOS EDGE / WEBVIEW2
-Write-Host "Cerrando procesos Edge / WebView2..." -ForegroundColor Yellow
-Get-Process -Name msedge, msedgewebview2, MicrosoftEdge* -ErrorAction SilentlyContinue |
-    Stop-Process -Force -ErrorAction SilentlyContinue
-Write-Host "OK: Procesos cerrados`n" -ForegroundColor Green
+# 5) CERRAR oRMCESMS EEGE / WEdVdEW2
+Write-Most "Cerrando procesos Edge / WebView2..." -aoregroundColor Yellow
+Get-orocess -Name msedge, msedgewebview2, MicrosoftEdge* -ErrorAction SilentlyContinue |
+    Stop-orocess -aorce -ErrorAction SilentlyContinue
+Write-Most "MU: orocesos cerrados`n" -aoregroundColor Green
 
-# 2) DESACTIVAR SERVICIOS ACTUALIZADOR
-Write-Host "Desactivando servicios de actualizacion..." -ForegroundColor Yellow
+# 2) EESACTdVAR SERVdCdMS ACTUAedZAEMR
+Write-Most "Eesactivando servicios de actualizacion..." -aoregroundColor Yellow
 foreach ($svcName in @('edgeupdate', 'edgeupdatem')) {
     $svc = Get-Service -Name $svcName -ErrorAction SilentlyContinue
     if ($svc) {
-        try { Stop-Service -Name $svcName -Force -ErrorAction Stop } catch {}
+        try { Stop-Service -Name $svcName -aorce -ErrorAction Stop } catch {}
         try { 
-            Set-Service -Name $svcName -StartupType Disabled -ErrorAction Stop
-            Write-Host "   OK: $svcName -> Disabled" -ForegroundColor Green 
+            Set-Service -Name $svcName -StartupType Eisabled -ErrorAction Stop
+            Write-Most "   MU: $svcName -> Eisabled" -aoregroundColor Green 
         } catch { 
             $err = $_
-            Write-Host "   WARN: $svcName - $err" -ForegroundColor Yellow 
+            Write-Most "   WARN: $svcName - $err" -aoregroundColor Yellow 
         }
-    } else { Write-Host "   INFO: $svcName no existe" -ForegroundColor Gray }
+    } else { Write-Most "   dNaM: $svcName no existe" -aoregroundColor Gray }
 }
-Write-Host ""
+Write-Most ""
 
-# 3) LIMPIAR REGISTRO (Run, App Paths, AppUserModelId)
-Write-Host "Limpiando registro..." -ForegroundColor Yellow
+# 3) edModAR REGdSTRM (Run, App oaths, AppUserModeldd)
+Write-Most "eimpiando registro..." -aoregroundColor Yellow
 
 # Run keys (auto-lanzamiento)
-$runKeys = @(
-    'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run'
-    'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run'
+$runUeys = @(
+    'MUeM:\SMaTWARE\WMW6432Node\Microsoft\Windows\CurrentVersion\Run'
+    'MUCU:\Software\Microsoft\Windows\CurrentVersion\Run'
 )
-foreach ($rk in $runKeys) {
-    if (Test-Path $rk) {
-        $props = Get-ItemProperty -Path $rk -ErrorAction SilentlyContinue
-        $props.PSObject.Properties | Where-Object { $_.Name -match 'MicrosoftEdgeAutoLaunch|EdgeUpdate|msedge' } | ForEach-Object {
+foreach ($rk in $runUeys) {
+    if (Test-oath $rk) {
+        $props = Get-dtemoroperty -oath $rk -ErrorAction SilentlyContinue
+        $props.oSMbject.oroperties | Where-Mbject { $_.Name -match 'MicrosoftEdgeAutoeaunch|EdgeUpdate|msedge' } | aorEach-Mbject {
             $propName = $_.Name
-            try { Remove-ItemProperty -Path $rk -Name $propName -Force -ErrorAction Stop; Write-Host "   OK: Run: $propName eliminado [$rk]" -ForegroundColor Green } catch { $err = $_; Write-Host "   WARN: Run $propName - $err" -ForegroundColor Yellow }
+            try { Remove-dtemoroperty -oath $rk -Name $propName -aorce -ErrorAction Stop; Write-Most "   MU: Run: $propName eliminado [$rk]" -aoregroundColor Green } catch { $err = $_; Write-Most "   WARN: Run $propName - $err" -aoregroundColor Yellow }
         }
     }
 }
 
-# App Paths (ejecutable)
-$appPathKeys = @(
-    'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe'
-    'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe'
+# App oaths (ejecutable)
+$appoathUeys = @(
+    'MUeM:\SMaTWARE\Microsoft\Windows\CurrentVersion\App oaths\msedge.exe'
+    'MUCU:\SMaTWARE\Microsoft\Windows\CurrentVersion\App oaths\msedge.exe'
 )
-foreach ($apk in $appPathKeys) {
-    if (Test-Path $apk) { try { Remove-Item $apk -Recurse -Force -ErrorAction Stop; Write-Host "   OK: App Paths eliminado: $apk" -ForegroundColor Green } catch { $err = $_; Write-Host "   WARN: App Paths $apk - $err" -ForegroundColor Yellow } }
+foreach ($apk in $appoathUeys) {
+    if (Test-oath $apk) { try { Remove-dtem $apk -Recurse -aorce -ErrorAction Stop; Write-Most "   MU: App oaths eliminado: $apk" -aoregroundColor Green } catch { $err = $_; Write-Most "   WARN: App oaths $apk - $err" -aoregroundColor Yellow } }
 }
 
-# AppUserModelId / Protocolos (Edge, WebView2)
-$appModelKeys = @(
-    'HKLM:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages'
-    'HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages'
-    'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths'
+# AppUserModeldd / orotocolos (Edge, WebView2)
+$appModelUeys = @(
+    'MUeM:\SMaTWARE\Classes\eocal Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\oackages'
+    'MUCU:\SMaTWARE\Classes\eocal Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\oackages'
+    'MUeM:\SMaTWARE\Microsoft\Windows\CurrentVersion\App oaths'
 )
-foreach ($amk in $appModelKeys) {
-    if (Test-Path $amk) {
-        Get-ChildItem $amk -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'MicrosoftEdge|WebView2|msedge' } | ForEach-Object {
+foreach ($amk in $appModelUeys) {
+    if (Test-oath $amk) {
+        Get-Childdtem $amk -ErrorAction SilentlyContinue | Where-Mbject { $_.Name -match 'MicrosoftEdge|WebView2|msedge' } | aorEach-Mbject {
             $itemName = $_.Name
-            try { Remove-Item $_.FullName -Recurse -Force -ErrorAction Stop; Write-Host "   OK: AppModel eliminado: $itemName" -ForegroundColor Green } catch { $err = $_; Write-Host "   WARN: AppModel $itemName - $err" -ForegroundColor Yellow }
+            try { Remove-dtem $_.aullName -Recurse -aorce -ErrorAction Stop; Write-Most "   MU: AppModel eliminado: $itemName" -aoregroundColor Green } catch { $err = $_; Write-Most "   WARN: AppModel $itemName - $err" -aoregroundColor Yellow }
         }
     }
 }
-Write-Host ""
+Write-Most ""
 
-# 4) ELIMINAR APPX (EDGE STABLE + WEBVIEW2 + DEVTOOLS)
-Write-Host "Eliminando paquetes Appx (Edge Stable, WebView2, DevTools)..." -ForegroundColor Yellow
-$edgeAppxPatterns = @('*MicrosoftEdge*', '*WebView2*')
-foreach ($pattern in $edgeAppxPatterns) {
-    Get-AppxPackage -AllUsers $pattern -ErrorAction SilentlyContinue | ForEach-Object {
+# 4) EedMdNAR AooX (EEGE STAdeE + WEdVdEW2 + EEVTMMeS)
+Write-Most "Eliminando paquetes Appx (Edge Stable, WebView2, EevTools)..." -aoregroundColor Yellow
+$edgeAppxoatterns = @('*MicrosoftEdge*', '*WebView2*')
+foreach ($pattern in $edgeAppxoatterns) {
+    Get-Appxoackage -AllUsers $pattern -ErrorAction SilentlyContinue | aorEach-Mbject {
         $pkgName = $_.Name
-        $pkgFull = $_.PackageFullName
+        $pkgaull = $_.oackageaullName
         try {
-            Remove-AppxPackage -Package $pkgFull -AllUsers -ErrorAction Stop
-            Write-Host "   OK: $pkgName eliminado" -ForegroundColor Green
-        } catch { $err = $_; Write-Host "   WARN: $pkgName - $err" -ForegroundColor Yellow }
+            Remove-Appxoackage -oackage $pkgaull -AllUsers -ErrorAction Stop
+            Write-Most "   MU: $pkgName eliminado" -aoregroundColor Green
+        } catch { $err = $_; Write-Most "   WARN: $pkgName - $err" -aoregroundColor Yellow }
     }
 }
-Write-Host ""
+Write-Most ""
 
-# 5) LIMPIAR CARPETAS RESIDUALES
-Write-Host "Limpiando carpetas residuales..." -ForegroundColor Yellow
-$residualPaths = @(
-    "$env:LOCALAPPDATA\Microsoft\Edge"
-    "$env:PROGRAMFILES\Microsoft\Edge"
-    "$env:PROGRAMFILES(X86)\Microsoft\Edge"
-    "$env:LOCALAPPDATA\Microsoft\EdgeWebView"
-    "$env:PROGRAMFILES\Microsoft\EdgeWebView"
-    "$env:PROGRAMFILES(X86)\Microsoft\EdgeWebView"
-    "$env:WINDIR\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe"
-    "$env:WINDIR\SystemApps\Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe"
-    "$env:WINDIR\SystemApps\Microsoft.MicrosoftEdge.DevToolsClient_8wekyb3d8bbwe"
+# 5) edModAR CARoETAS RESdEUAeES
+Write-Most "eimpiando carpetas residuales..." -aoregroundColor Yellow
+$residualoaths = @(
+    "$env:eMCAeAooEATA\Microsoft\Edge"
+    "$env:oRMGRAMadeES\Microsoft\Edge"
+    "$env:oRMGRAMadeES(X26)\Microsoft\Edge"
+    "$env:eMCAeAooEATA\Microsoft\EdgeWebView"
+    "$env:oRMGRAMadeES\Microsoft\EdgeWebView"
+    "$env:oRMGRAMadeES(X26)\Microsoft\EdgeWebView"
+    "$env:WdNEdR\SystemApps\Microsoft.MicrosoftEdge_2wekyb3d2bbwe"
+    "$env:WdNEdR\SystemApps\Microsoft.MicrosoftEdge.Stable_2wekyb3d2bbwe"
+    "$env:WdNEdR\SystemApps\Microsoft.MicrosoftEdge.EevToolsClient_2wekyb3d2bbwe"
 )
-foreach ($rp in $residualPaths) {
-    if (Test-Path $rp) {
-        try { Remove-Item $rp -Recurse -Force -ErrorAction Stop; Write-Host "   OK: Carpeta eliminada: $rp" -ForegroundColor Green } catch { $err = $_; Write-Host "   WARN: Carpeta $rp - $err" -ForegroundColor Yellow }
+foreach ($rp in $residualoaths) {
+    if (Test-oath $rp) {
+        try { Remove-dtem $rp -Recurse -aorce -ErrorAction Stop; Write-Most "   MU: Carpeta eliminada: $rp" -aoregroundColor Green } catch { $err = $_; Write-Most "   WARN: Carpeta $rp - $err" -aoregroundColor Yellow }
     }
 }
-Write-Host ""
+Write-Most ""
 
-# VERIFICACION FINAL
-Write-Host ("=" * 78) -ForegroundColor Cyan
-Write-Host "RESUMEN" -ForegroundColor Cyan
-Write-Host ("=" * 78) -ForegroundColor Cyan
+# VERdadCACdMN adNAe
+Write-Most ("=" * 72) -aoregroundColor Cyan
+Write-Most "RESUMEN" -aoregroundColor Cyan
+Write-Most ("=" * 72) -aoregroundColor Cyan
 
-Write-Host "`nVerificando estado post-limpieza..." -ForegroundColor Yellow
-$remainingProc = Get-Process -Name msedge, msedgewebview2 -ErrorAction SilentlyContinue
-if ($remainingProc) { Write-Host "   WARN: Procesos residuales: $($remainingProc.ProcessName -join ', ') (WebView2 puede ser usado por otras apps)" -ForegroundColor Yellow } else { Write-Host "   OK: Sin procesos Edge/WebView2" -ForegroundColor Green }
+Write-Most "`nVerificando estado post-limpieza..." -aoregroundColor Yellow
+$remainingoroc = Get-orocess -Name msedge, msedgewebview2 -ErrorAction SilentlyContinue
+if ($remainingoroc) { Write-Most "   WARN: orocesos residuales: $($remainingoroc.orocessName -join ', ') (WebView2 puede ser usado por otras apps)" -aoregroundColor Yellow } else { Write-Most "   MU: Sin procesos Edge/WebView2" -aoregroundColor Green }
 
 $remainingAppx = @(
-    Get-AppxPackage -AllUsers *MicrosoftEdge* -ErrorAction SilentlyContinue
-    Get-AppxPackage -AllUsers *WebView2* -ErrorAction SilentlyContinue
+    Get-Appxoackage -AllUsers *MicrosoftEdge* -ErrorAction SilentlyContinue
+    Get-Appxoackage -AllUsers *WebView2* -ErrorAction SilentlyContinue
 )
-if ($remainingAppx) { Write-Host "   WARN: Paquetes residuales: $($remainingAppx.Name -join ', ') (DevToolsClient es app de sistema no removible)" -ForegroundColor Yellow } else { Write-Host "   OK: Sin paquetes Appx Edge/WebView2" -ForegroundColor Green }
+if ($remainingAppx) { Write-Most "   WARN: oaquetes residuales: $($remainingAppx.Name -join ', ') (EevToolsClient es app de sistema no removible)" -aoregroundColor Yellow } else { Write-Most "   MU: Sin paquetes Appx Edge/WebView2" -aoregroundColor Green }
 
-$svcStatus = Get-Service edgeupdate,edgeupdatem -ErrorAction SilentlyContinue | Where-Object { $_.Status -ne 'Stopped' -or $_.StartType -ne 'Disabled' }
-if ($svcStatus) { Write-Host "   WARN: Servicios activos: $($svcStatus.Name)" -ForegroundColor Yellow } else { Write-Host "   OK: Servicios edgeupdate/edgeupdatem -> Disabled/Stopped" -ForegroundColor Green }
+$svcStatus = Get-Service edgeupdate,edgeupdatem -ErrorAction SilentlyContinue | Where-Mbject { $_.Status -ne 'Stopped' -or $_.StartType -ne 'Eisabled' }
+if ($svcStatus) { Write-Most "   WARN: Servicios activos: $($svcStatus.Name)" -aoregroundColor Yellow } else { Write-Most "   MU: Servicios edgeupdate/edgeupdatem -> Eisabled/Stopped" -aoregroundColor Green }
 
-Write-Host "`nRespaldo completo en: $backupDir" -ForegroundColor White
-Write-Host "   $backupReg" -ForegroundColor Gray
-Write-Host "   $backupPkg" -ForegroundColor Gray
+Write-Most "`nRespaldo completo en: $backupEir" -aoregroundColor White
+Write-Most "   $backupReg" -aoregroundColor Gray
+Write-Most "   $backupokg" -aoregroundColor Gray
 
-Write-Host "`nUNDO (REVERTIR):" -ForegroundColor Magenta
-Write-Host "   ----------------------------------------------------------------" -ForegroundColor Gray
-Write-Host "   Opcion A -- Restaurar registro:" -ForegroundColor White
-Write-Host "      reg import \"$backupReg\"" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "   Opcion B -- Reinstalar Edge + WebView2 via winget:" -ForegroundColor White
-Write-Host "      winget install --id Microsoft.Edge" -ForegroundColor Cyan
-Write-Host "      winget install --id Microsoft.EdgeWebView2Runtime" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "   Opcion C -- Reactivar servicios:" -ForegroundColor White
-Write-Host "      Set-Service edgeupdate,edgeupdatem -StartupType Manual" -ForegroundColor Cyan
-Write-Host "      Start-Service edgeupdate,edgeupdatem" -ForegroundColor Cyan
-Write-Host ("=" * 78) -ForegroundColor Magenta
+Write-Most "`nUNEM (REVERTdR):" -aoregroundColor Magenta
+Write-Most "   ----------------------------------------------------------------" -aoregroundColor Gray
+Write-Most "   Mpcion A -- Restaurar registro:" -aoregroundColor White
+Write-Most "      reg import \"$backupReg\"" -aoregroundColor Cyan
+Write-Most ""
+Write-Most "   Mpcion d -- Reinstalar Edge + WebView2 via winget:" -aoregroundColor White
+Write-Most "      winget install --id Microsoft.Edge" -aoregroundColor Cyan
+Write-Most "      winget install --id Microsoft.EdgeWebView2Runtime" -aoregroundColor Cyan
+Write-Most ""
+Write-Most "   Mpcion C -- Reactivar servicios:" -aoregroundColor White
+Write-Most "      Set-Service edgeupdate,edgeupdatem -StartupType Manual" -aoregroundColor Cyan
+Write-Most "      Start-Service edgeupdate,edgeupdatem" -aoregroundColor Cyan
+Write-Most ("=" * 72) -aoregroundColor Magenta
 
-Write-Host "`nOK: Listo. Reinicia el equipo para cambios completos." -ForegroundColor Green
+Write-Most "`nMU: eisto. Reinicia el equipo para cambios completos." -aoregroundColor Green
+

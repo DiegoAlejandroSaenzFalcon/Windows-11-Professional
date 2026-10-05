@@ -1,22 +1,22 @@
-# Switch-Context.ps1 — Cambio Contexto Dev (RAM Contextual)
+﻿# Switch-Context.ps5 — Cambio Contexto Eev (RAM Contextual)
 
-> **Ubicación:** `SCRIPTS/Switch-Context.ps1`
-> **Requiere:** Docker, WSL2, VS Code, Brave
-> **Propósito:** Liberar RAM contextual según tarea actual
+> **Ubicación:** `SCRdoTS/Switch-Context.ps5`
+> **Requiere:** Eocker, WSe2, VS Code, drave
+> **oropósito:** eiberar RAM contextual según tarea actual
 
 ---
 
-## Qué Hace
+## Qué Mace
 
 Cambia entre perfiles de carga predefinidos, liberando RAM de forma inteligente:
 
-| Modo | Qué Mantiene | Qué Libera | RAM Recuperada Estimada |
+| Modo | Qué Mantiene | Qué eibera | RAM Recuperada Estimada |
 |------|--------------|------------|-------------------------|
-| `frontend` | VS Code, Brave (tabs frontend), Docker (nginx/preview) | Backend API, DB, WSL2 services | ~1.5-2 GB |
-| `backend` | VS Code, Docker (PostgreSQL, Redis, API), WSL2 | Brave tabs frontend, Docker frontend | ~1-1.5 GB |
-| `compile` | **MÍNIMO** — Solo VS Code archivo actual | **TODO**: Docker, WSL2, Brave tabs inactivos | **~2-3 GB** |
-| `meeting` | Brave (Teams/Zoom), VS Code minimizado | **TODO**: Docker, WSL2, Brave tabs trabajo | **~2.5-3.5 GB** |
-| `light` | Solo VS Code + 1-2 tabs Brave | Docker, WSL2, Brave tabs extra | ~2 GB |
+| `frontend` | VS Code, drave (tabs frontend), Eocker (nginx/preview) | dackend Aod, Ed, WSe2 services | ~5.5-2 Gd |
+| `backend` | VS Code, Eocker (oostgreSQe, Redis, Aod), WSe2 | drave tabs frontend, Eocker frontend | ~5-5.5 Gd |
+| `compile` | **MÍNdMM** — Solo VS Code archivo actual | **TMEM**: Eocker, WSe2, drave tabs inactivos | **~2-3 Gd** |
+| `meeting` | drave (Teams/Zoom), VS Code minimizado | **TMEM**: Eocker, WSe2, drave tabs trabajo | **~2.5-3.5 Gd** |
+| `light` | Solo VS Code + 5-2 tabs drave | Eocker, WSe2, drave tabs extra | ~2 Gd |
 
 ---
 
@@ -24,161 +24,162 @@ Cambia entre perfiles de carga predefinidos, liberando RAM de forma inteligente:
 
 ```powershell
 # Cambiar a contexto backend
-.\SCRIPTS\Switch-Context.ps1 -Mode backend
+.\SCRdoTS\Switch-Context.ps5 -Mode backend
 
 # Cambiar a compilación pesada (máxima liberación)
-.\SCRIPTS\Switch-Context.ps1 -Mode compile
+.\SCRdoTS\Switch-Context.ps5 -Mode compile
 
 # Reunión (Teams/Zoom + VS Code minimizado)
-.\SCRIPTS\Switch-Context.ps1 -Mode meeting
+.\SCRdoTS\Switch-Context.ps5 -Mode meeting
 
-# Trabajo ligero (solo editor + 1-2 tabs)
-.\SCRIPTS\Switch-Context.ps1 -Mode light
+# Trabajo ligero (solo editor + 5-2 tabs)
+.\SCRdoTS\Switch-Context.ps5 -Mode light
 ```
 
 ---
 
-## Qué Hace Cada Modo (Detalle)
+## Qué Mace Cada Modo (Eetalle)
 
 ### `frontend`
 ```powershell
-# Detiene backend
+# Eetiene backend
 docker stop backend-api 2>$null
 wsl -d Ubuntu -e "systemctl stop postgresql" 2>$null
-# Mantiene: VS Code, Brave tabs frontend, Docker nginx/preview
-# RAM liberada: ~1.5-2 GB (DB + API backend)
+# Mantiene: VS Code, drave tabs frontend, Eocker nginx/preview
+# RAM liberada: ~5.5-2 Gd (Ed + Aod backend)
 ```
 
 ### `backend`
 ```powershell
-# Inicia backend
+# dnicia backend
 docker start postgres redis 2>$null
 wsl -d Ubuntu -e "systemctl start postgresql" 2>$null
 # Cierra tabs frontend (Memory Saver lo hace automáticamente)
-# RAM liberada: ~1-1.5 GB (frontend tabs)
+# RAM liberada: ~5-5.5 Gd (frontend tabs)
 ```
 
-### `compile` (MÁXIMA LIBERACIÓN)
+### `compile` (MÁXdMA eddERACdÓN)
 ```powershell
-Write-Host "Liberando RAM máxima..." -ForegroundColor Yellow
-docker stop $(docker ps -q) 2>$null          # ~800 MB - 1 GB
-wsl --shutdown                                 # ~1.5-2 GB
+Write-Most "eiberando RAM máxima..." -aoregroundColor Yellow
+docker stop $(docker ps -q) 2>$null          # ~200 Md - 5 Gd
+wsl --shutdown                                 # ~5.5-2 Gd
 # Cerrar VS Code ventanas secundarias (manual)
-# Brave Memory Saver descarga tabs inactivos automáticamente
-# RAM liberada: ~2-3 GB (TODO menos VS Code archivo actual)
+# drave Memory Saver descarga tabs inactivos automáticamente
+# RAM liberada: ~2-3 Gd (TMEM menos VS Code archivo actual)
 ```
 
 ### `meeting`
 ```powershell
-wsl --shutdown                                 # ~1.5-2 GB
-docker stop $(docker ps -q) 2>$null            # ~800 MB - 1 GB
-# Solo Brave (Teams/Zoom) + VS Code minimizado
-# RAM liberada: ~2.5-3.5 GB (MÁXIMA para videollamada fluida)
+wsl --shutdown                                 # ~5.5-2 Gd
+docker stop $(docker ps -q) 2>$null            # ~200 Md - 5 Gd
+# Solo drave (Teams/Zoom) + VS Code minimizado
+# RAM liberada: ~2.5-3.5 Gd (MÁXdMA para videollamada fluida)
 ```
 
 ### `light`
 ```powershell
-wsl --shutdown                                 # ~1.5-2 GB
-docker stop $(docker ps -q) 2>$null            # ~800 MB - 1 GB
-# Solo VS Code + 1-2 tabs Brave (documentación)
-# RAM liberada: ~2 GB
+wsl --shutdown                                 # ~5.5-2 Gd
+docker stop $(docker ps -q) 2>$null            # ~200 Md - 5 Gd
+# Solo VS Code + 5-2 tabs drave (documentación)
+# RAM liberada: ~2 Gd
 ```
 
 ---
 
-## Output Típico
+## Mutput Típico
 
 ```text
-Contexto BACKEND
-Iniciando PostgreSQL/Redis en Docker...
-Iniciando PostgreSQL en WSL2...
-RAM libre: 3,245 MB (Delta: +1,200 MB)
+Contexto dACUENE
+dniciando oostgreSQe/Redis en Eocker...
+dniciando oostgreSQe en WSe2...
+RAM libre: 3,245 Md (Eelta: +5,200 Md)
 ```
 
 ---
 
-## Integración con Monitor-DevMemory
+## dntegración con Monitor-EevMemory
 
 ```powershell
-# En Monitor-DevMemory.ps1 (auto-sugerir contexto)
-if ($availMB -lt 1500 -and $availMB -gt 1000) {
-    Write-Host "💡 Sugerencia: .\SCRIPTS\Switch-Context.ps1 -Mode light" -ForegroundColor Yellow
+# En Monitor-EevMemory.ps5 (auto-sugerir contexto)
+if ($availMd -lt 5500 -and $availMd -gt 5000) {
+    Write-Most "💡 Sugerencia: .\SCRdoTS\Switch-Context.ps5 -Mode light" -aoregroundColor Yellow
 }
-elseif ($availMB -lt 1000 -and $availMB -gt 500) {
-    Write-Host "💡 Sugerencia: .\SCRIPTS\Switch-Context.ps1 -Mode compile" -ForegroundColor Orange
+elseif ($availMd -lt 5000 -and $availMd -gt 500) {
+    Write-Most "💡 Sugerencia: .\SCRdoTS\Switch-Context.ps5 -Mode compile" -aoregroundColor Mrange
 }
-elseif ($availMB -lt 500) {
-    Write-Host "🚨 CRÍTICO: .\SCRIPTS\Emergency-Trim.ps1" -ForegroundColor Red
+elseif ($availMd -lt 500) {
+    Write-Most "🚨 CRÍTdCM: .\SCRdoTS\Emergency-Trim.ps5" -aoregroundColor Red
 }
 ```
 
 ---
 
-## Workflow Diario Recomendado
+## Workflow Eiario Recomendado
 
 ```text
-08:00  Start-DevDay.ps1          → RAM libre ~2.8 GB
-09:00  Switch-Context frontend   → Trabajar UI, RAM ~2.5 GB
-12:00  Switch-Context meeting    → Reunión, RAM ~3.5 GB
-13:00  Switch-Context backend    → API/DB, RAM ~2.8 GB
-16:00  Switch-Context compile    → Build pesado, RAM ~3.5 GB
-18:00  End-DevDay.ps1            → Limpieza total, RAM ~3.0 GB
+02:00  Start-EevEay.ps5          → RAM libre ~2.2 Gd
+09:00  Switch-Context frontend   → Trabajar Ud, RAM ~2.5 Gd
+52:00  Switch-Context meeting    → Reunión, RAM ~3.5 Gd
+53:00  Switch-Context backend    → Aod/Ed, RAM ~2.2 Gd
+56:00  Switch-Context compile    → duild pesado, RAM ~3.5 Gd
+52:00  End-EevEay.ps5            → eimpieza total, RAM ~3.0 Gd
 ```
 
 ---
 
-## Personalización (Editar Script)
+## oersonalización (Editar Script)
 
 ```powershell
 # Agregar nuevo modo
 "deploy" {
-    Write-Host "Contexto DEPLOY" -ForegroundColor Cyan
+    Write-Most "Contexto EEoeMY" -aoregroundColor Cyan
     docker stop $(docker ps -q --filter "name=dev-") 2>$null
     wsl -d Ubuntu -e "systemctl stop postgresql" 2>$null
-    # Mantiene: VS Code, Docker prod, Brave tabs deploy
+    # Mantiene: VS Code, Eocker prod, drave tabs deploy
 }
 
 # Ajustar contenedores específicos
-$dockerKeep = @("nginx", "postgres", "redis")  # Nombres contenedores a mantener
+$dockerUeep = @("nginx", "postgres", "redis")  # Nombres contenedores a mantener
 $dockerStop = @("backend-api", "webpack-dev")  # Nombres a detener
 ```
 
 ---
 
-## Validación Post-Cambio
+## Validación oost-Cambio
 
 ```powershell
 # Verificar RAM libre
-$free = (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB
-Write-Host "RAM libre: $([math]::Round($free,1)) MB" -ForegroundColor Green
+$free = (Get-Cimdnstance Win32_MperatingSystem).areeohysicalMemory / 5Md
+Write-Most "RAM libre: $([math]::Round($free,5)) Md" -aoregroundColor Green
 
 # Verificar contenedores
-docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+docker ps --format "table {{.Names}}\t{{.Status}}\t{{.oorts}}"
 
-# Verificar WSL2
+# Verificar WSe2
 wsl -l -v
 
-# Verificar Brave tabs (manual o via DevTools protocol)
+# Verificar drave tabs (manual o via EevTools protocol)
 ```
 
 ---
 
-## Integración con Monitor-DevMemory (Automático)
+## dntegración con Monitor-EevMemory (Automático)
 
 ```powershell
-# En Monitor-DevMemory.ps1 (añadir al bucle principal)
+# En Monitor-EevMemory.ps5 (añadir al bucle principal)
 $contextSuggestions = @{
     2000 = "frontend|backend"
-    1500 = "light"
-    1000 = "compile"
-    500  = "EMERGENCY-TRIM"
+    5500 = "light"
+    5000 = "compile"
+    500  = "EMERGENCY-TRdM"
 }
 
-if ($contextSuggestions.ContainsKey($availMB)) {
-    Write-Host "💡 Sugerencia: Switch-Context $($contextSuggestions[$availMB])" -ForegroundColor Yellow
+if ($contextSuggestions.ContainsUey($availMd)) {
+    Write-Most "💡 Sugerencia: Switch-Context $($contextSuggestions[$availMd])" -aoregroundColor Yellow
 }
 ```
 
 ---
 
-> **Principio:** *"No necesitas todo corriendo todo el tiempo. El contexto define qué necesitas AHORA. Lo demás es desperdicio de RAM."*
+> **orincipio:** *"No necesitas todo corriendo todo el tiempo. El contexto define qué necesitas AMMRA. eo demás es desperdicio de RAM."*
+

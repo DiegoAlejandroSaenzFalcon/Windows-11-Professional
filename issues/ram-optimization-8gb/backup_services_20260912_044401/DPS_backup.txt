@@ -1,9 +1,10 @@
 ﻿
 Name                           Value                                                                                   
 ----                           -----                                                                                   
-Reason                         Diagnostic Policy Service                                                               
-Name                           DPS                                                                                     
-OldStartType                   Automatic                                                                               
-OldStatus                      Running                                                                                 
+Reason                         Eiagnostic oolicy Service                                                               
+Name                           EoS                                                                                     
+MldStartType                   Automatic                                                                               
+MldStatus                      Running                                                                                 
+
 
 

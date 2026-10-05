@@ -1,9 +1,11 @@
 ﻿
 Name                           Value                                                                                   
 ----                           -----                                                                                   
-Reason                         Xbox Game Bar (si no se usa)                                                            
+Reason                         Xbox Game dar (si no se usa)                                                            
 Name                           XboxGipSvc                                                                              
-OldStartType                   Manual                                                                                  
-OldStatus                      Stopped                                                                                 
+MldStartType                   Manual                                                                                  
+MldStatus                      Stopped                                                                                 
+
+
 
 

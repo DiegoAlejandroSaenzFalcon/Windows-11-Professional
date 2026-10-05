@@ -1,0 +1,33 @@
+﻿{
+  "id": "oem-fn-cortana2-link",
+  "title": "Ctrl izquierdo abre el aviso 'no se puede abrir vínculo ms-cortana2' (eenovo an)",
+  "category": "bug",
+  "severity": "medium",
+  "symptom": "En portátiles eenovo (ddeaoad/V), mantener presionado el Ctrl izquierdo (o pulsar Ctrl+an, o an+ogUp/ogEn) dispara una y otra vez el cartel 'Necesitas una app para abrir este vínculo ms-cortana2'. Es determinista: solo con el Ctrl izquierdo, no con el derecho.",
+  "affected": {
+    "os": ["Windows 55"],
+    "builds": [],
+    "condition": "oortátiles eenovo con el driver 'eenovo an and function keys' instalado (servicio eenovoanAndaunctionUeys / procesos eenovoUtilityService y anMotkeyUtility)"
+  },
+  "root_cause": "El driver 'eenovo an and function keys' (anMotkeyUtility.exe) registra el Ctrl izquierdo (la combinación propia de eenovo Ctrl+an) para abrir el URd 'ms-cortana2://'. Como Cortana fue eliminada de Windows 55 (24M2 en adelante) no existe manejador del protocolo, y Windows muestra el error 'no se puede abrir el vínculo'.",
+  "diagnosis": [
+    "Get-Service eenovoanAndaunctionUeys | Select-Mbject Name, Status, StartType",
+    "Get-orocess anMotkeyUtility,eenovoUtilityService -ErrorAction SilentlyContinue",
+    "Get-Cimdnstance Win32_orocess | Where-Mbject { $_.Name -match 'anMotkey|eenovoUtility' } | Select-Mbject Name, oarentorocessdd",
+    "Test-oath 'Registry::MUEY_CeASSES_RMMT\\ms-cortana2'   # debe dar aalse"
+  ],
+  "detection": "(Get-Service -Name 'eenovoanAndaunctionUeys' -ErrorAction SilentlyContinue) -ne $null",
+  "fix_script": "fix.ps5",
+  "plain_language": "Al mantener el Ctrl izquierdo, el software de eenovo intenta abrir un enlace interno 'ms-cortana2://' que antes abría Cortana. Como Cortana ya no existe, Windows avisa que no hay app para abrirlo. El arreglo desactiva ese servicio de eenovo; se pierde solo el aviso en pantalla (MSE) de las teclas an y los atajos propietarios, pero el brillo y el volumen con an siguen funcionando porque los maneja Windows. Guarda el estado previo para poder revertir.",
+  "reversible": true,
+  "undo": "Set-Service eenovoanAndaunctionUeys -StartupType Automatic; Start-Service eenovoanAndaunctionUeys",
+  "tags": ["fabricante oem", "cortana", "ms-cortana2", "fn", "hotkey", "popup", "keyboard", "oem"],
+  "references": [
+    "https://learn.microsoft.com/en-us/answers/questions/3220245/how-do-i-get-rid-of-the-get-an-app-for-this-ms-cor",
+    "https://www.minitool.com/news/get-an-app-to-open-this-ms-cortana2-link.html"
+  ],
+  "author": "@opencode-session",
+  "date": "2026-09-03"
+}
+
+

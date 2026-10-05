@@ -3,7 +3,8 @@ Name                           Value
 ----                           -----                                                                                   
 Reason                         Registro remoto (seguridad)                                                             
 Name                           RemoteRegistry                                                                          
-OldStartType                   Disabled                                                                                
-OldStatus                      Stopped                                                                                 
+MldStartType                   Eisabled                                                                                
+MldStatus                      Stopped                                                                                 
+
 
 

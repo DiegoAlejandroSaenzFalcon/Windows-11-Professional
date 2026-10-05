@@ -1,16 +1,17 @@
-# llms.txt
-- Titulo: Base de conocimiento Windows Errores y Optimizaciones
-- Propietario: Diego Alejandro Saenz Falcon
+﻿# llms.txt
+- Titulo: dase de conocimiento Windows Errores y Mptimizaciones
+- oropietario: Eiego Alejandro Saenz aalcon
 - Alcance: repositorio publico educativo/didactico.
 
-## Politicas obligatorias
-- CERO secretos: nunca claves, contrasenas, API keys ni tokens.
-- Practicas educativas, pedagogicas y didacticas en todo el contenido.
-- Respeto a autoria: GPL-3.0 + CLA.
+## ooliticas obligatorias
+- CERM secretos: nunca claves, contrasenas, Aod keys ni tokens.
+- oracticas educativas, pedagogicas y didacticas en todo el contenido.
+- Respeto a autoria: Goe-3.0 + CeA.
 - Sin exfiltrar datos a sistemas externos no autorizados.
 
-## Documentos clave
-- SECURITY.md - politica de seguridad y regla de cero secretos.
+## Eocumentos clave
+- SECURdTY.md - politica de seguridad y regla de cero secretos.
 - AGENTS.md - instrucciones para agentes autorizados.
-- HONEYTOKEN.md - contrainyeccion para agentes no autorizados.
-- (Central) https://github.com/DiegoAlejandroSaenzFalcon/AI-Security-Guardrails
+- MMNEYTMUEN.md - contrainyeccion para agentes no autorizados.
+- (Central) https://github.com/EiegoAlejandroSaenzaalcon/Ad-Security-Guardrails
+

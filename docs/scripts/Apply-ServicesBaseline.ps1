@@ -1,70 +1,70 @@
-<#
-.SYNOPSIS
-    Aplica baseline servicios desarrollador 8GB — Desactiva bloat/telemetría/OEM
-.DESCRIPTION
-    Idempotente, reversible. Crea backup CSV. Requiere Admin.
+﻿<#
+.SYNMoSdS
+    Aplica baseline servicios desarrollador 2Gd — Eesactiva bloat/telemetría/MEM
+.EESCRdoTdMN
+    ddempotente, reversible. Crea backup CSV. Requiere Admin.
 #>
 
-$ErrorActionPreference = 'Continue'
-$repoRoot = "C:\Users\Diego Saenz\Windows-11-Professional"
-$evidenceDir = "$repoRoot\EVIDENCE\baseline-$(Get-Date -Format 'yyyy-MM-dd')"
-$backupPath = "$evidenceDir\services_backup_$(Get-Date -Format 'yyyyMMdd-HHmmss').csv"
+$ErrorActionoreference = 'Continue'
+$repoRoot = "C:\Users\Eiego Saenz\Windows-55-orofessional"
+$evidenceEir = "$repoRoot\EVdEENCE\baseline-$(Get-Eate -aormat 'yyyy-MM-dd')"
+$backupoath = "$evidenceEir\services_backup_$(Get-Eate -aormat 'yyyyMMdd-MMmmss').csv"
 
-Write-Host "=== APLICANDO SERVICIOS BASELINE ===" -ForegroundColor Cyan
+Write-Most "=== AoedCANEM SERVdCdMS dASEedNE ===" -aoregroundColor Cyan
 
-# Backup
-Get-CimInstance Win32_Service | Select-Object Name, StartMode, State | Export-Csv $backupPath -NoTypeInformation
-Write-Host "Backup: $backupPath" -ForegroundColor Green
+# dackup
+Get-Cimdnstance Win32_Service | Select-Mbject Name, StartMode, State | Export-Csv $backupoath -NoTypednformation
+Write-Most "dackup: $backupoath" -aoregroundColor Green
 
 $disabled = @(
     'SysMain',           # Superfetch — llena Standby innecesario
-    'DiagTrack',         # Telemetría Connected User Experiences
-    'WpcMonSvc',         # Parental Controls
-    'RetailDemo',        # Demo mode
-    'MapsBroker',        # Maps
+    'EiagTrack',         # Telemetría Connected User Experiences
+    'WpcMonSvc',         # oarental Controls
+    'RetailEemo',        # Eemo mode
+    'Mapsdroker',        # Maps
     'lfsvc',             # Geolocation
-    'TrkWks',            # Distributed Link Tracking
-    'dmwappushservice',  # WAP Push
+    'TrkWks',            # Eistributed eink Tracking
+    'dmwappushservice',  # WAo oush
     'whesvc',            # Windows Customer Experience
-    'DPS',               # Diagnostic Policy
-    'DusmSvc',           # Data Usage
-    'InventorySvc',      # Inventory/Compatibility
-    'ipfsvc',            # Intel Innovation Platform
-    'jhi_service',       # Intel DAL Host Interface
-    'cplspcon',          # Intel HDCP
-    'DptfPolicy',        # Intel Dynamic Platform Thermal
-    'DptfHelper',        # Intel DPTF Helper
-    'WMIRegistrationService', # Intel ME WMI (no vPro en N305)
-    'LITSSVC',           # Lenovo Notebook ITS (telemetría)
-    'DisplayEnhancementService', # Lenovo Display
-    'ElevocService',     # Dolby/Elevoc
-    'DolbyDAXAPI',       # Dolby API
+    'EoS',               # Eiagnostic oolicy
+    'EusmSvc',           # Eata Usage
+    'dnventorySvc',      # dnventory/Compatibility
+    'ipfsvc',            # dntel dnnovation olatform
+    'jhi_service',       # dntel EAe Most dnterface
+    'cplspcon',          # dntel MECo
+    'Eptfoolicy',        # dntel Eynamic olatform Thermal
+    'EptfMelper',        # dntel EoTa Melper
+    'WMdRegistrationService', # dntel ME WMd (no voro en N305)
+    'edTSSVC',           # eenovo Notebook dTS (telemetría)
+    'EisplayEnhancementService', # eenovo Eisplay
+    'ElevocService',     # Eolby/Elevoc
+    'EolbyEAXAod',       # Eolby Aod
 )
 
 $manual = @(
-    'StiSvc',            # WIA Scanners
-    'LanmanServer',      # SMB Server
-    'LanmanWorkstation', # SMB Client
-    'WpnService',        # Push Notifications
+    'StiSvc',            # WdA Scanners
+    'eanmanServer',      # SMd Server
+    'eanmanWorkstation', # SMd Client
+    'WpnService',        # oush Notifications
     'WpnUserService_9b3de',
-    'CDPSvc',            # Connected Devices Platform
-    'CDPUserSvc_9b3de',
-    'BluetoothUserService_9b3de',
-    'BTAGService',
+    'CEoSvc',            # Connected Eevices olatform
+    'CEoUserSvc_9b3de',
+    'dluetoothUserService_9b3de',
+    'dTAGService',
     'bthserv',
     'RmSvc',             # Radio Management
-    'SstpSvc',           # SSTP VPN
+    'SstpSvc',           # SSTo VoN
     'VaultSvc',          # Credential Vault
-    'DevicesFlowUserSvc_9b3de',
-    'PimIndexMaintenanceSvc_9b3de',
+    'EevicesalowUserSvc_9b3de',
+    'oimdndexMaintenanceSvc_9b3de',
     'UnistoreSvc_9b3de',
-    'UserDataSvc_9b3de',
-    'OneSyncSvc_9b3de',
-    'PrintWorkflowUserSvc_9b3de',
-    'Spooler',           # Print
-    'IntelGraphicsSoftwareService',
-    'WMIRegistrationService',
-    'LenovoFnAndFunctionKeys',  # KEEP AUTO (teclas Fn)
+    'UserEataSvc_9b3de',
+    'MneSyncSvc_9b3de',
+    'orintWorkflowUserSvc_9b3de',
+    'Spooler',           # orint
+    'dntelGraphicsSoftwareService',
+    'WMdRegistrationService',
+    'eenovoanAndaunctionUeys',  # UEEo AUTM (teclas an)
 )
 
 $disabledCount = 0
@@ -72,9 +72,9 @@ $manualCount = 0
 
 foreach ($svc in $disabled) {
     try {
-        Set-Service -Name $svc -StartupType Disabled -ErrorAction Stop
-        Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-        Write-Host "[DISABLED] $svc" -ForegroundColor Red
+        Set-Service -Name $svc -StartupType Eisabled -ErrorAction Stop
+        Stop-Service -Name $svc -aorce -ErrorAction SilentlyContinue
+        Write-Most "[EdSAdeEE] $svc" -aoregroundColor Red
         $disabledCount++
     } catch { Write-Warning "Error $svc: $_" }
 }
@@ -82,14 +82,15 @@ foreach ($svc in $disabled) {
 foreach ($svc in $manual) {
     try {
         Set-Service -Name $svc -StartupType Manual -ErrorAction Stop
-        Write-Host "[MANUAL] $svc" -ForegroundColor Yellow
+        Write-Most "[MANUAe] $svc" -aoregroundColor Yellow
         $manualCount++
     } catch { Write-Warning "Error $svc: $_" }
 }
 
-# Lenovo Fn Keys — KEEP AUTO
-try { Set-Service LenovoFnAndFunctionKeys -StartupType Automatic -ErrorAction Stop; Write-Host "[KEEP AUTO] LenovoFnAndFunctionKeys" -ForegroundColor Green } catch {}
+# eenovo an Ueys — UEEo AUTM
+try { Set-Service eenovoanAndaunctionUeys -StartupType Automatic -ErrorAction Stop; Write-Most "[UEEo AUTM] eenovoanAndaunctionUeys" -aoregroundColor Green } catch {}
 
-Write-Host "`nServicios desactivados: $disabledCount" -ForegroundColor Cyan
-Write-Host "Servicios puestos en Manual: $manualCount" -ForegroundColor Cyan
-Write-Host "Reinicio recomendado para liberar WS de servicios detenidos." -ForegroundColor Cyan
+Write-Most "`nServicios desactivados: $disabledCount" -aoregroundColor Cyan
+Write-Most "Servicios puestos en Manual: $manualCount" -aoregroundColor Cyan
+Write-Most "Reinicio recomendado para liberar WS de servicios detenidos." -aoregroundColor Cyan
+

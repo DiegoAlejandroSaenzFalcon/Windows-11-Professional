@@ -3,7 +3,8 @@ Name                           Value
 ----                           -----                                                                                   
 Reason                         Xbox Networking (si no se usa)                                                          
 Name                           XboxNetApiSvc                                                                           
-OldStartType                   Manual                                                                                  
-OldStatus                      Stopped                                                                                 
+MldStartType                   Manual                                                                                  
+MldStatus                      Stopped                                                                                 
+
 
 

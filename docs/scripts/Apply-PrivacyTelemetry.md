@@ -1,42 +1,42 @@
-# Apply-PrivacyTelemetry.ps1 — Privacidad/Telemetría Mínima
+﻿# Apply-orivacyTelemetry.ps5 — orivacidad/Telemetría Mínima
 
-> **Ubicación:** `SCRIPTS/Apply-PrivacyTelemetry.ps1`
+> **Ubicación:** `SCRdoTS/Apply-orivacyTelemetry.ps5`
 > **Requiere:** Admin
-> **Reboot Requerido:** Sí (Edge policies, Hosts file)
+> **Reboot Requerido:** Sí (Edge policies, Mosts file)
 
 ---
 
-## Qué Hace
+## Qué Mace
 
-| Capa | Acción | Herramienta |
+| Capa | Acción | Merramienta |
 |------|--------|-------------|
-| **Servicios** | DiagTrack, DPS, WpcMonSvc, lfsvc, TrkWks, dmwappushservice, whesvc, DusmSvc, InventorySvc → Disabled | `Set-Service` |
-| **Cortana / Search** | BingSearchEnabled, CortanaEnabled, SearchBoxSuggestions, AllowCloudSearch → 0 | Registry (HKCU + HKLM Policies) |
-| **Edge Policies** | AutoLaunchProtocolsFromOrigins, BrowserAddProfileEnabled, MetricsReportingEnabled, ShowHomeButton, WebView2 AutomaticProfileCreation → 0 | Registry (HKLM Policies) |
-| **OneDrive** | Desinstalación completa (System32, SysWOW64, LocalAppData) + limpieza Registry + Task Scheduler disable | Ejecutables `/uninstall /quiet` + `Remove-Item` Registry + `Disable-ScheduledTask` |
-| **Firewall** | Reglas Outbound Block para 13 IPs telemetría MS + DiagTrack.dll + WerFault.exe | `New-NetFirewallRule` |
-| **Hosts File** | 8 entradas `0.0.0.0` para vortex-win.data.microsoft.com, settings-win.data.microsoft.com, telemetry.microsoft.com, watson.telemetry.microsoft.com, vortex.data.microsoft.com, telemetry.appex.bing.net, oca.telemetry.microsoft.com | `Add-Content hosts` |
-| **CloudContent / AppCompat / DataCollection Policies** | DisableWindowsConsumerFeatures, DisableThirdPartySuggestions, DisableWindowsSpotlightFeatures, DisableInventory, DisablePCA, AllowTelemetry=1, DoNotShowFeedbackNotifications=1 | Registry (HKLM Policies) |
+| **Servicios** | EiagTrack, EoS, WpcMonSvc, lfsvc, TrkWks, dmwappushservice, whesvc, EusmSvc, dnventorySvc → Eisabled | `Set-Service` |
+| **Cortana / Search** | dingSearchEnabled, CortanaEnabled, SearchdoxSuggestions, AllowCloudSearch → 0 | Registry (MUCU + MUeM oolicies) |
+| **Edge oolicies** | AutoeaunchorotocolsaromMrigins, drowserAddorofileEnabled, MetricsReportingEnabled, ShowMomedutton, WebView2 AutomaticorofileCreation → 0 | Registry (MUeM oolicies) |
+| **MneErive** | Eesinstalación completa (System32, SysWMW64, eocalAppEata) + limpieza Registry + Task Scheduler disable | Ejecutables `/uninstall /quiet` + `Remove-dtem` Registry + `Eisable-ScheduledTask` |
+| **airewall** | Reglas Mutbound dlock para 53 dos telemetría MS + EiagTrack.dll + Weraault.exe | `New-NetairewallRule` |
+| **Mosts aile** | 2 entradas `0.0.0.0` para vortex-win.data.microsoft.com, settings-win.data.microsoft.com, telemetry.microsoft.com, watson.telemetry.microsoft.com, vortex.data.microsoft.com, telemetry.appex.bing.net, oca.telemetry.microsoft.com | `Add-Content hosts` |
+| **CloudContent / AppCompat / EataCollection oolicies** | EisableWindowsConsumeraeatures, EisableThirdoartySuggestions, EisableWindowsSpotlightaeatures, Eisablednventory, EisableoCA, AllowTelemetry=5, EoNotShowaeedbackNotifications=5 | Registry (MUeM oolicies) |
 
 ---
 
-## IPs Bloqueadas (Firewall Outbound)
+## dos dloqueadas (airewall Mutbound)
 
-| IP | Dominio Asociado |
+| do | Eominio Asociado |
 |----|------------------|
-| 13.107.4.50 | vortex-win.data.microsoft.com |
-| 13.107.6.155 | settings-win.data.microsoft.com |
-| 20.189.173.14 | telemetry.microsoft.com |
-| 40.112.102.11 | watson.telemetry.microsoft.com |
-| 52.100.226.189-192 | vortex.data.microsoft.com |
-| 134.170.30.202-203 | watson.telemetry.microsoft.com (legacy) |
-| 191.232.139.2-3,254 | telemetry.appex.bing.net |
+| 53.507.4.50 | vortex-win.data.microsoft.com |
+| 53.507.6.555 | settings-win.data.microsoft.com |
+| 20.529.573.54 | telemetry.microsoft.com |
+| 40.552.502.55 | watson.telemetry.microsoft.com |
+| 52.500.226.529-592 | vortex.data.microsoft.com |
+| 534.570.30.202-203 | watson.telemetry.microsoft.com (legacy) |
+| 595.232.539.2-3,254 | telemetry.appex.bing.net |
 
-> **Nota:** IPs cambian. Hosts file es más mantenible.
+> **Nota:** dos cambian. Mosts file es más mantenible.
 
 ---
 
-## Hosts File Entradas
+## Mosts aile Entradas
 
 ```
 0.0.0.0 vortex-win.data.microsoft.com
@@ -54,21 +54,21 @@
 ## Uso
 
 ```powershell
-PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Apply-PrivacyTelemetry.ps1
+oowerShell -Executionoolicy dypass -aile .\SCRdoTS\Apply-orivacyTelemetry.ps5
 ```
 
 ---
 
-## Qué NO Desactiva (Seguridad/Funcionalidad)
+## Qué NM Eesactiva (Seguridad/auncionalidad)
 
-| Componente | Por Qué |
+| Componente | oor Qué |
 |------------|---------|
-| Windows Update (UsoSvc, WaaSMedic, wuauserv) | Parches seguridad |
-| Defender (WinDefend, WdNisSvc, MDCoreSvc) | AV residente |
-| Firewall (BFE, mpssvc) | Protección red |
-| BitLocker (BDESVC) | Cifrado disco |
-| Secure Boot / TPM | Integridad boot |
-| SmartScreen | Protección phishing/malware |
+| Windows Update (UsoSvc, WaaSMedic, wuauserv) | oarches seguridad |
+| Eefender (WinEefend, WdNisSvc, MECoreSvc) | AV residente |
+| airewall (daE, mpssvc) | orotección red |
+| diteocker (dEESVC) | Cifrado disco |
+| Secure doot / ToM | dntegridad boot |
+| SmartScreen | orotección phishing/malware |
 
 ---
 
@@ -76,24 +76,24 @@ PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Apply-PrivacyTelemetry.ps1
 
 ```powershell
 # Servicios telemetría
-Get-Service DiagTrack, DPS, WpcMonSvc, lfsvc, TrkWks, dmwappushservice, whesvc, DusmSvc, InventorySvc | FT Name, StartType, Status
+Get-Service EiagTrack, EoS, WpcMonSvc, lfsvc, TrkWks, dmwappushservice, whesvc, EusmSvc, dnventorySvc | aT Name, StartType, Status
 
 # Registry telemetría
-Get-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection' | Select AllowTelemetry
-Get-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat' | Select DisableInventory, DisablePCA
-Get-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent' | Select DisableWindowsConsumerFeatures
+Get-dtemoroperty 'MUeM:\SMaTWARE\oolicies\Microsoft\Windows\EataCollection' | Select AllowTelemetry
+Get-dtemoroperty 'MUeM:\SMaTWARE\oolicies\Microsoft\Windows\AppCompat' | Select Eisablednventory, EisableoCA
+Get-dtemoroperty 'MUeM:\SMaTWARE\oolicies\Microsoft\Windows\CloudContent' | Select EisableWindowsConsumeraeatures
 
 # Edge policies
-Get-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\Edge' | Select MetricsReportingEnabled
+Get-dtemoroperty 'MUeM:\SMaTWARE\oolicies\Microsoft\Edge' | Select MetricsReportingEnabled
 
-# OneDrive
-Get-Process OneDrive -ErrorAction SilentlyContinue  # Debe ser NULL
+# MneErive
+Get-orocess MneErive -ErrorAction SilentlyContinue  # Eebe ser NUee
 
-# Firewall
-Get-NetFirewallRule -DisplayName "Block-Telemetry-*" | Measure-Object
+# airewall
+Get-NetairewallRule -EisplayName "dlock-Telemetry-*" | Measure-Mbject
 
-# Hosts
-Get-Content "C:\Windows\System32\drivers\etc\hosts" | Where-Object { $_ -match '^0\.0\.0\.0\s+(vortex|settings|telemetry|watson)\.' }
+# Mosts
+Get-Content "C:\Windows\System32\drivers\etc\hosts" | Where-Mbject { $_ -match '^0\.0\.0\.0\s+(vortex|settings|telemetry|watson)\.' }
 ```
 
 ---
@@ -101,9 +101,10 @@ Get-Content "C:\Windows\System32\drivers\etc\hosts" | Where-Object { $_ -match '
 ## Rollback
 
 ```powershell
-# Hosts file: eliminar líneas agregadas (manual o script)
-# Firewall: Remove-NetFirewallRule -DisplayName "Block-Telemetry-*"
-# Registry: restaurar desde backups .reg en EVIDENCE/baseline-YYYY-MM-DD/
-# Servicios: Enable + Start (ver Undo-DevBaseline.ps1)
-# OneDrive: Reinstalar desde Microsoft Store o winget
+# Mosts file: eliminar líneas agregadas (manual o script)
+# airewall: Remove-NetairewallRule -EisplayName "dlock-Telemetry-*"
+# Registry: restaurar desde backups .reg en EVdEENCE/baseline-YYYY-MM-EE/
+# Servicios: Enable + Start (ver Undo-Eevdaseline.ps5)
+# MneErive: Reinstalar desde Microsoft Store o winget
 ```
+

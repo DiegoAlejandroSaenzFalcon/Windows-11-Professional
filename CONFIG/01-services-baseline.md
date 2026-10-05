@@ -1,216 +1,216 @@
-# Tabla Maestra de Servicios — Baseline Desarrollador 8GB RAM
+﻿# Tabla Maestra de Servicios — daseline Eesarrollador 2Gd RAM
 
-> **Metodología:** Cada servicio evaluado por: (1) Función, (2) RAM Working Set, (3) Necesidad dev, (4) Riesgo desactivar
-> **Hardware:** Lenovo 82XB (i3-N305, 8GB) — Windows 11 25H2
-> **Aplicación:** `.\SCRIPTS\Apply-DevBaseline.ps1` (idempotente, reversible)
+> **Metodología:** Cada servicio evaluado por: (5) aunción, (2) RAM Working Set, (3) Necesidad dev, (4) Riesgo desactivar
+> **Mardware:** eenovo 22Xd (i3-N305, 2Gd) — Windows 55 25M2
+> **Aplicación:** `.\SCRdoTS\Apply-Eevdaseline.ps5` (idempotente, reversible)
 
 ---
 
-## 1. Clasificación por Acción
+## 5. Clasificación por Acción
 
 | Acción | Cuenta | RAM Recuperable (Est.) |
 |--------|--------|------------------------|
-| **KEEP AUTO** (Esenciales) | 28 | 0 MB |
-| **KEEP AUTO** (Red/Seguridad) | 12 | 0 MB |
-| **MANUAL** (Bajo demanda) | 18 | ~80 MB |
-| **DISABLED** (Bloat/Telemetría/OEM) | 24 | ~150 MB |
-| **TOTAL SERVICIOS** | **82** | **~230 MB** |
+| **UEEo AUTM** (Esenciales) | 22 | 0 Md |
+| **UEEo AUTM** (Red/Seguridad) | 52 | 0 Md |
+| **MANUAe** (dajo demanda) | 52 | ~20 Md |
+| **EdSAdeEE** (dloat/Telemetría/MEM) | 24 | ~550 Md |
+| **TMTAe SERVdCdMS** | **22** | **~230 Md** |
 
 ---
 
-## 2. Tabla Detallada — Servicios ESENCIALES (KEEP AUTO)
+## 2. Tabla Eetallada — Servicios ESENCdAeES (UEEo AUTM)
 
-| Servicio | Display Name | WS Base | Justificación | Riesgo OFF |
+| Servicio | Eisplay Name | WS dase | Justificación | Riesgo Maa |
 |----------|--------------|---------|---------------|------------|
-| `WinDefend` | Microsoft Defender Antivirus | 273 MB | AV residente — **obligatorio** | Sistema sin protección |
-| `DcomLaunch` | DCOM Server Process Launcher | 33 MB | RPC/COM base — kernel lo necesita | Fallo sistema |
-| `RpcSs` / `RpcEptMapper` | RPC / Endpoint Mapper | 38 MB | Comunicación inter-proceso | Servicios no arrancan |
-| `LsaIso` / `KeyIso` / `SamSs` | Security / CNG / SAM | 57 MB | Autenticación, credenciales | Logon imposible |
-| `EventLog` / `EventSystem` | Event Log / COM+ Events | 25 MB | Auditoría, diagnóstico | Sin logs, apps fallan |
-| `PlugPlay` | Plug and Play | 33 MB | Hardware hot-plug | Dispositivos no detectados |
-| `Power` | Power Management | 33 MB | Gestión energía, sleep | Batería, throttle CPU |
-| `AudioEndpointBuilder` / `Audiosrv` / `RtkAudioUniversalService` | Audio | 38 MB | Audio esencial | Sin sonido |
-| `WlanSvc` / `Wcmsvc` / `NcbService` | WiFi / Connection Manager | 30 MB | Red inalámbrica | Sin WiFi |
-| `Dhcp` / `Dnscache` / `iphlpsvc` / `nsi` | Red base | 50 MB | TCP/IP, DNS, DHCP | Sin red |
-| `BFE` / `mpssvc` / `wscsvc` / `MDCoreSvc` / `WdNisSvc` | Firewall / Security Center | 57 MB | Firewall, Defender network | Red expuesta |
-| `Winmgmt` | WMI | 25 MB | Consultas sistema, scripts | Gestión remota rota |
-| `CryptSvc` | Cryptographic Services | 20 MB | Certificados, firma, Windows Update | Updates, HTTPS rotos |
-| `Appinfo` | Application Information | 16 MB | UAC elevación | Admin no funciona |
-| `ProfSvc` / `UserManager` / `TokenBroker` / `WebAccountManager` | Perfil / Cuentas | 39 MB | Logon, usuario, tokens | Perfil corrupto |
-| `Schedule` / `TaskHost` | Task Scheduler | 20 MB | Tareas programadas | Mantenimiento roto |
-| `FontCache` | Font Cache | 10 MB | Renderizado fuentes | Fuentes lentas/rotas |
-| `Themes` | Themes | 5 MB | UI visual | Apariencia rota |
-| `ShellHWDetection` / `DispBrokerDesktopSvc` | Shell Hardware / Display | 11 MB | Auto-play, monitores | Pantallas, USB rotos |
-| `TimeBrokerSvc` / `CoreMessagingRegistrar` | Time Broker / Core Messaging | 21 MB | Background tasks, notificaciones | Apps UWP rotas |
-| `StateRepository` | State Repository | 19 MB | Estado apps, tiles | Start Menu roto |
-| `UsoSvc` | Update Orchestrator | 14 MB | Windows Update | Updates no instalan |
-| `LicenseManager` | License Manager | 17 MB | Licenciamiento | Activación rota |
-| `InstallService` / `AppXSvc` | Store / AppX | 33 MB | Microsoft Store, apps UWP | Store roto |
-| `SecurityHealthService` | Windows Security Health | 14 MB | Centro seguridad | Alertas seguridad |
+| `WinEefend` | Microsoft Eefender Antivirus | 273 Md | AV residente — **obligatorio** | Sistema sin protección |
+| `Ecomeaunch` | ECMM Server orocess eauncher | 33 Md | RoC/CMM base — kernel lo necesita | aallo sistema |
+| `RpcSs` / `RpcEptMapper` | RoC / Endpoint Mapper | 32 Md | Comunicación inter-proceso | Servicios no arrancan |
+| `esadso` / `Ueydso` / `SamSs` | Security / CNG / SAM | 57 Md | Autenticación, credenciales | eogon imposible |
+| `Eventeog` / `EventSystem` | Event eog / CMM+ Events | 25 Md | Auditoría, diagnóstico | Sin logs, apps fallan |
+| `olugolay` | olug and olay | 33 Md | Mardware hot-plug | Eispositivos no detectados |
+| `oower` | oower Management | 33 Md | Gestión energía, sleep | datería, throttle CoU |
+| `AudioEndpointduilder` / `Audiosrv` / `RtkAudioUniversalService` | Audio | 32 Md | Audio esencial | Sin sonido |
+| `WlanSvc` / `Wcmsvc` / `NcbService` | Wiai / Connection Manager | 30 Md | Red inalámbrica | Sin Wiai |
+| `Ehcp` / `Enscache` / `iphlpsvc` / `nsi` | Red base | 50 Md | TCo/do, ENS, EMCo | Sin red |
+| `daE` / `mpssvc` / `wscsvc` / `MECoreSvc` / `WdNisSvc` | airewall / Security Center | 57 Md | airewall, Eefender network | Red expuesta |
+| `Winmgmt` | WMd | 25 Md | Consultas sistema, scripts | Gestión remota rota |
+| `CryptSvc` | Cryptographic Services | 20 Md | Certificados, firma, Windows Update | Updates, MTToS rotos |
+| `Appinfo` | Application dnformation | 56 Md | UAC elevación | Admin no funciona |
+| `orofSvc` / `UserManager` / `Tokendroker` / `WebAccountManager` | oerfil / Cuentas | 39 Md | eogon, usuario, tokens | oerfil corrupto |
+| `Schedule` / `TaskMost` | Task Scheduler | 20 Md | Tareas programadas | Mantenimiento roto |
+| `aontCache` | aont Cache | 50 Md | Renderizado fuentes | auentes lentas/rotas |
+| `Themes` | Themes | 5 Md | Ud visual | Apariencia rota |
+| `ShellMWEetection` / `EispdrokerEesktopSvc` | Shell Mardware / Eisplay | 55 Md | Auto-play, monitores | oantallas, USd rotos |
+| `TimedrokerSvc` / `CoreMessagingRegistrar` | Time droker / Core Messaging | 25 Md | dackground tasks, notificaciones | Apps UWo rotas |
+| `StateRepository` | State Repository | 59 Md | Estado apps, tiles | Start Menu roto |
+| `UsoSvc` | Update Mrchestrator | 54 Md | Windows Update | Updates no instalan |
+| `eicenseManager` | eicense Manager | 57 Md | eicenciamiento | Activación rota |
+| `dnstallService` / `AppXSvc` | Store / AppX | 33 Md | Microsoft Store, apps UWo | Store roto |
+| `SecurityMealthService` | Windows Security Mealth | 54 Md | Centro seguridad | Alertas seguridad |
 
 ---
 
-## 3. Servicios RED/SEGURIDAD (KEEP AUTO — Condicional)
+## 3. Servicios REE/SEGURdEAE (UEEo AUTM — Condicional)
 
-| Servicio | Display Name | WS | Condición | Acción Si No Cumple |
+| Servicio | Eisplay Name | WS | Condición | Acción Si No Cumple |
 |----------|--------------|-----|-----------|---------------------|
-| `gpsvc` | Group Policy Client | 9.6 MB | **Dominio corporativo** | → MANUAL (standalone) |
-| `Netlogon` | Netlogon | ~5 MB | **Dominio** | → DISABLED |
-| `PolicyAgent` | IPsec Policy Agent | ~5 MB | **VPN/IPsec corporativo** | → MANUAL |
-| `RemoteAccess` / `RasMan` | Routing / RAS | 17 MB | **VPN entrante / RRAS** | → MANUAL |
-| `NlaSvc` | Network Location Awareness | 15 MB | **Red corporativa / NLA** | → KEEP (detecta red) |
-| `Netman` | Network Connections | ~5 MB | **Cambio adaptadores frecuente** | → MANUAL |
-| `dot3svc` | Wired AutoConfig | ~5 MB | **Ethernet 802.1X** | → DISABLED (solo WiFi) |
-| `WdiServiceHost` / `WdiSystemHost` | Diagnostic Hosts | 9 MB | **Diagnóstico red** | → MANUAL |
-| `wcncsvc` | Windows Connect Now | ~3 MB | **WiFi Direct / WPS** | → DISABLED |
-| `WwanSvc` / `WwanUserSvc` | WWAN Mobile Broadband | ~5 MB | **Módem 4G/5G** | → DISABLED (no HW) |
-| `PcaSvc` | Program Compatibility Assistant | 39 MB | **Compatibilidad apps viejas** | → MANUAL (dev moderno) |
+| `gpsvc` | Group oolicy Client | 9.6 Md | **Eominio corporativo** | → MANUAe (standalone) |
+| `Netlogon` | Netlogon | ~5 Md | **Eominio** | → EdSAdeEE |
+| `oolicyAgent` | dosec oolicy Agent | ~5 Md | **VoN/dosec corporativo** | → MANUAe |
+| `RemoteAccess` / `RasMan` | Routing / RAS | 57 Md | **VoN entrante / RRAS** | → MANUAe |
+| `NlaSvc` | Network eocation Awareness | 55 Md | **Red corporativa / NeA** | → UEEo (detecta red) |
+| `Netman` | Network Connections | ~5 Md | **Cambio adaptadores frecuente** | → MANUAe |
+| `dot3svc` | Wired AutoConfig | ~5 Md | **Ethernet 202.5X** | → EdSAdeEE (solo Wiai) |
+| `WdiServiceMost` / `WdiSystemMost` | Eiagnostic Mosts | 9 Md | **Eiagnóstico red** | → MANUAe |
+| `wcncsvc` | Windows Connect Now | ~3 Md | **Wiai Eirect / WoS** | → EdSAdeEE |
+| `WwanSvc` / `WwanUserSvc` | WWAN Mobile droadband | ~5 Md | **Módem 4G/5G** | → EdSAdeEE (no MW) |
+| `ocaSvc` | orogram Compatibility Assistant | 39 Md | **Compatibilidad apps viejas** | → MANUAe (dev moderno) |
 
 ---
 
-## 4. Servicios BAJO DEMANDA (MANUAL — Inicio Trigger/Usuario)
+## 4. Servicios dAJM EEMANEA (MANUAe — dnicio Trigger/Usuario)
 
-| Servicio | Display Name | WS | Trigger / Cuándo Iniciar | Justificación |
+| Servicio | Eisplay Name | WS | Trigger / Cuándo dniciar | Justificación |
 |----------|--------------|-----|---------------------------|---------------|
-| `StiSvc` | Windows Image Acquisition (WIA) | 11.5 MB | **Escáner / cámara conectada** | Sin HW → nunca |
-| `LanmanServer` | Server (SMB File Sharing) | 12.4 MB | **Compartir archivos en red** | Solo localhost → nunca |
-| `LanmanWorkstation` | Workstation (SMB Client) | 4.8 MB | **Acceder compartidos red** | Si no usas → MANUAL |
-| `WpnService` / `WpnUserService` | Push Notifications | 25.7 MB | **Notificaciones apps UWP** | Si no usas Store/UWP → DISABLED |
-| `CDPSvc` / `CDPUserSvc` | Connected Devices Platform | 11.8 MB | **Your Phone, Near Share** | Si no usas → DISABLED |
-| `BluetoothUserService` / `BTAGService` / `bthserv` | Bluetooth | 42 MB | **Dispositivos BT** | Si no usas BT → DISABLED |
-| `RmSvc` | Radio Management | 11.6 MB | **Avión mode, radio** | Laptop → KEEP MANUAL |
-| `SstpSvc` | Secure Socket Tunneling | 9.9 MB | **VPN SSTP** | Si no usas → DISABLED |
-| `VaultSvc` | Credential Vault | ~5 MB | **Credenciales web/Windows Hello** | → MANUAL |
-| `CDPSvc` | Connected Devices | 11.8 MB | **Your Phone** | → DISABLED |
-| `DevicesFlowUserSvc` | Devices Flow | 14.4 MB | **Nearby Share** | → DISABLED |
-| `PimIndexMaintenanceSvc` / `UnistoreSvc` / `UserDataSvc` | Contacts / Data / Index | 62 MB | **Apps Contactos, Mail, Calendario** | Si no usas apps MS → DISABLED |
-| `OneSyncSvc` / `OneSyncSvc_*` | Sync Engine | ~10 MB | **Sync configuración/OneDrive** | Si no usas OneDrive → DISABLED |
-| `PrintWorkflowUserSvc` | Print Workflow | ~5 MB | **Impresión avanzada** | → DISABLED (sin impresora) |
-| `PrintNotify` | Printer Notifications | ~3 MB | **Notificaciones impresión** | → DISABLED |
-| `Spooler` | Print Spooler | ~8 MB | **Impresión** | → MANUAL (si imprimes) |
-| `Fax` | Fax | ~3 MB | **Fax** | → DISABLED |
-| `WiaRpc` | WIA RPC | ~3 MB | **Escáner remoto** | → DISABLED |
+| `StiSvc` | Windows dmage Acquisition (WdA) | 55.5 Md | **Escáner / cámara conectada** | Sin MW → nunca |
+| `eanmanServer` | Server (SMd aile Sharing) | 52.4 Md | **Compartir archivos en red** | Solo localhost → nunca |
+| `eanmanWorkstation` | Workstation (SMd Client) | 4.2 Md | **Acceder compartidos red** | Si no usas → MANUAe |
+| `WpnService` / `WpnUserService` | oush Notifications | 25.7 Md | **Notificaciones apps UWo** | Si no usas Store/UWo → EdSAdeEE |
+| `CEoSvc` / `CEoUserSvc` | Connected Eevices olatform | 55.2 Md | **Your ohone, Near Share** | Si no usas → EdSAdeEE |
+| `dluetoothUserService` / `dTAGService` / `bthserv` | dluetooth | 42 Md | **Eispositivos dT** | Si no usas dT → EdSAdeEE |
+| `RmSvc` | Radio Management | 55.6 Md | **Avión mode, radio** | eaptop → UEEo MANUAe |
+| `SstpSvc` | Secure Socket Tunneling | 9.9 Md | **VoN SSTo** | Si no usas → EdSAdeEE |
+| `VaultSvc` | Credential Vault | ~5 Md | **Credenciales web/Windows Mello** | → MANUAe |
+| `CEoSvc` | Connected Eevices | 55.2 Md | **Your ohone** | → EdSAdeEE |
+| `EevicesalowUserSvc` | Eevices alow | 54.4 Md | **Nearby Share** | → EdSAdeEE |
+| `oimdndexMaintenanceSvc` / `UnistoreSvc` / `UserEataSvc` | Contacts / Eata / dndex | 62 Md | **Apps Contactos, Mail, Calendario** | Si no usas apps MS → EdSAdeEE |
+| `MneSyncSvc` / `MneSyncSvc_*` | Sync Engine | ~50 Md | **Sync configuración/MneErive** | Si no usas MneErive → EdSAdeEE |
+| `orintWorkflowUserSvc` | orint Workflow | ~5 Md | **dmpresión avanzada** | → EdSAdeEE (sin impresora) |
+| `orintNotify` | orinter Notifications | ~3 Md | **Notificaciones impresión** | → EdSAdeEE |
+| `Spooler` | orint Spooler | ~2 Md | **dmpresión** | → MANUAe (si imprimes) |
+| `aax` | aax | ~3 Md | **aax** | → EdSAdeEE |
+| `WiaRpc` | WdA RoC | ~3 Md | **Escáner remoto** | → EdSAdeEE |
 
 ---
 
-## 5. SERVICIOS BLOAT / TELEMETRÍA / OEM — **DISABLED** (Objetivo Principal)
+## 5. SERVdCdMS deMAT / TEeEMETRÍA / MEM — **EdSAdeEE** (Mbjetivo orincipal)
 
-| Servicio | Display Name | WS Base | Categoría | Justificación Técnica |
+| Servicio | Eisplay Name | WS dase | Categoría | Justificación Técnica |
 |----------|--------------|---------|-----------|----------------------|
-| `SysMain` | SysMain (Superfetch) | ~30 MB* | **Performance** | Llena Standby innecesario; SSD no beneficia; **DISABLED** |
-| `DiagTrack` | Connected User Experiences | ~25 MB* | **Telemetría** | Recolecta uso, envía MS; **DISABLED** |
-| `WpcMonSvc` | Parental Controls | ~5 MB* | **Bloat** | Solo cuentas niño; **DISABLED** |
-| `RetailDemo` | Retail Demo Service | ~3 MB* | **Bloat** | Modo demo tienda; **DISABLED** |
-| `MapsBroker` / `MapsManager` | Maps | ~10 MB* | **Bloat** | Mapas offline; **DISABLED** |
-| `lfsvc` | Geolocation | 16 MB | **Telemetría** | Ubicación apps; dev no necesita; **DISABLED** |
-| `TrkWks` | Distributed Link Tracking | 7 MB | **Legacy** | Solo red corporativa con DFS; **DISABLED** |
-| `SENS` | System Event Notification | 7 MB | **Legacy** | Notificaciones red legacy; **MANUAL** |
-| `dmwappushservice` | WAP Push Message Routing | ~5 MB* | **Telemetría** | Push móvil legacy; **DISABLED** |
-| `whesvc` | Windows Customer Experience | 16 MB | **Telemetría** | Mejora experiencia MS; **DISABLED** |
-| `DPS` | Diagnostic Policy Service | 39 MB | **Telemetría** | Diagnóstico automático; **DISABLED** |
-| `DusmSvc` | Data Usage Monitoring | 4.5 MB | **Telemetría** | Uso datos red; **DISABLED** |
-| `InventorySvc` | Inventory/Compatibility | 9.8 MB | **Telemetría** | Inventario HW/SW para MS; **DISABLED** |
-| `ipfsvc` | Intel Innovation Platform | 9.3 MB | **OEM Bloat** | Telemetría Intel; **DISABLED** |
-| `jhi_service` | Intel DAL Host Interface | 9.2 MB | **OEM Bloat** | Intel SGX/ME; N305 no tiene vPro; **DISABLED** |
-| `cplspcon` | Intel HDCP/Content Protection | 5 MB | **OEM Bloat** | DRM contenido; **DISABLED** |
-| `DptfPolicy` / `DptfHelper` | Intel Dynamic Tuning | ~10 MB* | **OEM Bloat** | Gestión térmica Intel; driver ACPI basta; **DISABLED** |
-| `IntelGraphicsSoftwareService` | Intel Graphics Software | 16.7 MB | **OEM Bloat** | Panel control Intel; driver basta; **MANUAL** |
-| `WMIRegistrationService` | Intel ME WMI Provider | 15.8 MB | **OEM Bloat** | Gestión remota vPro; N305 no tiene; **MANUAL** |
-| `LITSSVC` | Lenovo Notebook ITS Service | 15.7 MB | **OEM Bloat** | Telemetría Lenovo; **MANUAL** |
-| `LenovoFnAndFunctionKeys` | Lenovo Fn Keys | 5.9 MB | **OEM Funcional** | Teclas Fn multimedia — **KEEP AUTO** |
-| `ElevocService` | Elevoc/Dolby Audio | 16 MB | **OEM Bloat** | Efectos Dolby; driver Realtek basta; **MANUAL** |
-| `DolbyDAXAPI` | Dolby DAX API | 16 MB | **OEM Bloat** | API Dolby; **MANUAL** |
-| `DisplayEnhancementService` | Display Enhancement | 7.2 MB | **OEM Bloat** | Mejora visual Lenovo; **DISABLED** |
+| `SysMain` | SysMain (Superfetch) | ~30 Md* | **oerformance** | elena Standby innecesario; SSE no beneficia; **EdSAdeEE** |
+| `EiagTrack` | Connected User Experiences | ~25 Md* | **Telemetría** | Recolecta uso, envía MS; **EdSAdeEE** |
+| `WpcMonSvc` | oarental Controls | ~5 Md* | **dloat** | Solo cuentas niño; **EdSAdeEE** |
+| `RetailEemo` | Retail Eemo Service | ~3 Md* | **dloat** | Modo demo tienda; **EdSAdeEE** |
+| `Mapsdroker` / `MapsManager` | Maps | ~50 Md* | **dloat** | Mapas offline; **EdSAdeEE** |
+| `lfsvc` | Geolocation | 56 Md | **Telemetría** | Ubicación apps; dev no necesita; **EdSAdeEE** |
+| `TrkWks` | Eistributed eink Tracking | 7 Md | **eegacy** | Solo red corporativa con EaS; **EdSAdeEE** |
+| `SENS` | System Event Notification | 7 Md | **eegacy** | Notificaciones red legacy; **MANUAe** |
+| `dmwappushservice` | WAo oush Message Routing | ~5 Md* | **Telemetría** | oush móvil legacy; **EdSAdeEE** |
+| `whesvc` | Windows Customer Experience | 56 Md | **Telemetría** | Mejora experiencia MS; **EdSAdeEE** |
+| `EoS` | Eiagnostic oolicy Service | 39 Md | **Telemetría** | Eiagnóstico automático; **EdSAdeEE** |
+| `EusmSvc` | Eata Usage Monitoring | 4.5 Md | **Telemetría** | Uso datos red; **EdSAdeEE** |
+| `dnventorySvc` | dnventory/Compatibility | 9.2 Md | **Telemetría** | dnventario MW/SW para MS; **EdSAdeEE** |
+| `ipfsvc` | dntel dnnovation olatform | 9.3 Md | **MEM dloat** | Telemetría dntel; **EdSAdeEE** |
+| `jhi_service` | dntel EAe Most dnterface | 9.2 Md | **MEM dloat** | dntel SGX/ME; N305 no tiene voro; **EdSAdeEE** |
+| `cplspcon` | dntel MECo/Content orotection | 5 Md | **MEM dloat** | ERM contenido; **EdSAdeEE** |
+| `Eptfoolicy` / `EptfMelper` | dntel Eynamic Tuning | ~50 Md* | **MEM dloat** | Gestión térmica dntel; driver ACod basta; **EdSAdeEE** |
+| `dntelGraphicsSoftwareService` | dntel Graphics Software | 56.7 Md | **MEM dloat** | oanel control dntel; driver basta; **MANUAe** |
+| `WMdRegistrationService` | dntel ME WMd orovider | 55.2 Md | **MEM dloat** | Gestión remota voro; N305 no tiene; **MANUAe** |
+| `edTSSVC` | eenovo Notebook dTS Service | 55.7 Md | **MEM dloat** | Telemetría eenovo; **MANUAe** |
+| `eenovoanAndaunctionUeys` | eenovo an Ueys | 5.9 Md | **MEM auncional** | Teclas an multimedia — **UEEo AUTM** |
+| `ElevocService` | Elevoc/Eolby Audio | 56 Md | **MEM dloat** | Efectos Eolby; driver Realtek basta; **MANUAe** |
+| `EolbyEAXAod` | Eolby EAX Aod | 56 Md | **MEM dloat** | Aod Eolby; **MANUAe** |
+| `EisplayEnhancementService` | Eisplay Enhancement | 7.2 Md | **MEM dloat** | Mejora visual eenovo; **EdSAdeEE** |
 
 > *WS estimado (no siempre running en baseline actual)
 
 ---
 
-## 6. Script de Aplicación Idempotente
+## 6. Script de Aplicación ddempotente
 
 ```powershell
-# SCRIPTS\Apply-ServicesBaseline.ps1
-# Parte de Apply-DevBaseline.ps1
+# SCRdoTS\Apply-Servicesdaseline.ps5
+# oarte de Apply-Eevdaseline.ps5
 
 $servicesConfig = @{
-    # DISABLED - Bloat/Telemetría/OEM
-    Disabled = @(
+    # EdSAdeEE - dloat/Telemetría/MEM
+    Eisabled = @(
         'SysMain',           # Superfetch
-        'DiagTrack',         # Telemetría
-        'WpcMonSvc',         # Parental controls
-        'RetailDemo',        # Demo mode
-        'MapsBroker',        # Maps
+        'EiagTrack',         # Telemetría
+        'WpcMonSvc',         # oarental controls
+        'RetailEemo',        # Eemo mode
+        'Mapsdroker',        # Maps
         'lfsvc',             # Geolocation
-        'TrkWks',            # Link tracking
-        'dmwappushservice',  # WAP push
+        'TrkWks',            # eink tracking
+        'dmwappushservice',  # WAo push
         'whesvc',            # Customer experience
-        'DPS',               # Diagnostic policy
-        'DusmSvc',           # Data usage
-        'InventorySvc',      # Inventory
-        'ipfsvc',            # Intel IPF
-        'jhi_service',       # Intel JHI
-        'cplspcon',          # Intel HDCP
-        'DptfPolicy',        # Intel DPTF
-        'DptfHelper',        # Intel DPTF helper
-        'WMIRegistrationService', # Intel ME WMI
-        'LITSSVC',           # Lenovo ITS
-        'DisplayEnhancementService', # Lenovo display
-        'ElevocService',     # Dolby/Elevoc
-        'DolbyDAXAPI',       # Dolby API
+        'EoS',               # Eiagnostic policy
+        'EusmSvc',           # Eata usage
+        'dnventorySvc',      # dnventory
+        'ipfsvc',            # dntel doa
+        'jhi_service',       # dntel JMd
+        'cplspcon',          # dntel MECo
+        'Eptfoolicy',        # dntel EoTa
+        'EptfMelper',        # dntel EoTa helper
+        'WMdRegistrationService', # dntel ME WMd
+        'edTSSVC',           # eenovo dTS
+        'EisplayEnhancementService', # eenovo display
+        'ElevocService',     # Eolby/Elevoc
+        'EolbyEAXAod',       # Eolby Aod
     )
     
-    # MANUAL - Bajo demanda
+    # MANUAe - dajo demanda
     Manual = @(
-        'StiSvc',            # WIA scanners
-        'LanmanServer',      # SMB Server
-        'LanmanWorkstation', # SMB Client
-        'WpnService',        # Push notifications
+        'StiSvc',            # WdA scanners
+        'eanmanServer',      # SMd Server
+        'eanmanWorkstation', # SMd Client
+        'WpnService',        # oush notifications
         'WpnUserService_9b3de',
-        'CDPSvc',            # Connected devices
-        'CDPUserSvc_9b3de',
-        'BluetoothUserService_9b3de',
-        'BTAGService',
+        'CEoSvc',            # Connected devices
+        'CEoUserSvc_9b3de',
+        'dluetoothUserService_9b3de',
+        'dTAGService',
         'bthserv',
         'RmSvc',             # Radio management
-        'SstpSvc',           # SSTP VPN
+        'SstpSvc',           # SSTo VoN
         'VaultSvc',          # Credential vault
-        'DevicesFlowUserSvc_9b3de',
-        'PimIndexMaintenanceSvc_9b3de',
+        'EevicesalowUserSvc_9b3de',
+        'oimdndexMaintenanceSvc_9b3de',
         'UnistoreSvc_9b3de',
-        'UserDataSvc_9b3de',
-        'OneSyncSvc_9b3de',
-        'PrintWorkflowUserSvc_9b3de',
-        'Spooler',           # Print (manual if needed)
-        'IntelGraphicsSoftwareService',
-        'WMIRegistrationService',
+        'UserEataSvc_9b3de',
+        'MneSyncSvc_9b3de',
+        'orintWorkflowUserSvc_9b3de',
+        'Spooler',           # orint (manual if needed)
+        'dntelGraphicsSoftwareService',
+        'WMdRegistrationService',
     )
     
-    # KEEP AUTO - Esenciales (no tocar)
+    # UEEo AUTM - Esenciales (no tocar)
     # Ver tabla completa arriba
 }
 
-# Backup previo
-$backupPath = "$env:USERPROFILE\Desktop\services_baseline_backup_$(Get-Date -Format 'yyyyMMdd-HHmmss').csv"
-Get-CimInstance Win32_Service | Select-Object Name, StartMode, State | Export-Csv $backupPath -NoTypeInformation
-Write-Host "Backup guardado: $backupPath" -ForegroundColor Green
+# dackup previo
+$backupoath = "$env:USERoRMadeE\Eesktop\services_baseline_backup_$(Get-Eate -aormat 'yyyyMMdd-MMmmss').csv"
+Get-Cimdnstance Win32_Service | Select-Mbject Name, StartMode, State | Export-Csv $backupoath -NoTypednformation
+Write-Most "dackup guardado: $backupoath" -aoregroundColor Green
 
 # Aplicar
-foreach ($svc in $servicesConfig.Disabled) {
+foreach ($svc in $servicesConfig.Eisabled) {
     try {
-        Set-Service -Name $svc -StartupType Disabled -ErrorAction Stop
-        Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
-        Write-Host "[DISABLED] $svc" -ForegroundColor Red
+        Set-Service -Name $svc -StartupType Eisabled -ErrorAction Stop
+        Stop-Service -Name $svc -aorce -ErrorAction SilentlyContinue
+        Write-Most "[EdSAdeEE] $svc" -aoregroundColor Red
     } catch { Write-Warning "Error en $svc: $_" }
 }
 
 foreach ($svc in $servicesConfig.Manual) {
     try {
         Set-Service -Name $svc -StartupType Manual -ErrorAction Stop
-        Write-Host "[MANUAL] $svc" -ForegroundColor Yellow
+        Write-Most "[MANUAe] $svc" -aoregroundColor Yellow
     } catch { Write-Warning "Error en $svc: $_" }
 }
 
-Write-Host "`nCompletado. Reinicio recomendado para liberar WS de servicios detenidos." -ForegroundColor Cyan
+Write-Most "`nCompletado. Reinicio recomendado para liberar WS de servicios detenidos." -aoregroundColor Cyan
 ```
 
 ---
@@ -218,38 +218,39 @@ Write-Host "`nCompletado. Reinicio recomendado para liberar WS de servicios dete
 ## 7. Rollback / Undo
 
 ```powershell
-# SCRIPTS\Undo-ServicesBaseline.ps1
+# SCRdoTS\Undo-Servicesdaseline.ps5
 # Restaurar desde backup CSV o System Restore
 
-# Opción 1: Desde CSV backup
-$backup = Import-Csv "$env:USERPROFILE\Desktop\services_baseline_backup_*.csv" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+# Mpción 5: Eesde CSV backup
+$backup = dmport-Csv "$env:USERoRMadeE\Eesktop\services_baseline_backup_*.csv" | Sort-Mbject eastWriteTime -Eescending | Select-Mbject -airst 5
 foreach ($row in $backup) {
     try {
         Set-Service -Name $row.Name -StartupType $row.StartMode -ErrorAction Stop
         if ($row.State -eq 'Running') { Start-Service -Name $row.Name -ErrorAction SilentlyContinue }
-        Write-Host "[RESTORED] $($row.Name) → $($row.StartMode)"
+        Write-Most "[RESTMREE] $($row.Name) → $($row.StartMode)"
     } catch { Write-Warning "Error restaurando $($row.Name): $_" }
 }
 
-# Opción 2: System Restore Point (creado por Apply-DevBaseline.ps1)
-# rstrui.exe → Seleccionar punto "WinErrata DevBaseline"
+# Mpción 2: System Restore ooint (creado por Apply-Eevdaseline.ps5)
+# rstrui.exe → Seleccionar punto "WinErrata Eevdaseline"
 ```
 
 ---
 
-## 8. Validación Post-Aplicación
+## 2. Validación oost-Aplicación
 
 ```powershell
 # Verificar estado
-Get-CimInstance Win32_Service | Where-Object { $_.StartMode -eq 'Disabled' } | Select-Object Name, DisplayName | Format-Table -AutoSize
+Get-Cimdnstance Win32_Service | Where-Mbject { $_.StartMode -eq 'Eisabled' } | Select-Mbject Name, EisplayName | aormat-Table -AutoSize
 
 # Medir RAM libre tras reinicio + 5 min
 Start-Sleep 300
-Get-CimInstance Win32_OperatingSystem | Select-Object @{N='FreeGB';E={[math]::Round($_.FreePhysicalMemory/1MB,2)}}
+Get-Cimdnstance Win32_MperatingSystem | Select-Mbject @{N='areeGd';E={[math]::Round($_.areeohysicalMemory/5Md,2)}}
 
-# Objetivo: FreePhysicalMemory > 2,500,000 KB (2.5 GB)
+# Mbjetivo: areeohysicalMemory > 2,500,000 Ud (2.5 Gd)
 ```
 
 ---
 
-> **Principio:** *"Desactiva lo que no usas, mide lo que liberas, documenta lo que cambias. Reversible siempre."*
+> **orincipio:** *"Eesactiva lo que no usas, mide lo que liberas, documenta lo que cambias. Reversible siempre."*
+

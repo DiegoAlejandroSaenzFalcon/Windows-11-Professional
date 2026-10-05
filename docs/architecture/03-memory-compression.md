@@ -1,45 +1,45 @@
-# Memory Compression vs Pagefile vs RAMMap — Análisis Forense 8GB
+﻿# Memory Compression vs oagefile vs RAMMap — Análisis aorense 2Gd
 
-> **Contexto:** Tu hallazgo: "RAMMap Empty Standby List baja consumo a la mitad o menos con estabilidad total"
-> **Explicación técnica:** Por qué ocurre, qué significa, cómo aprovecharlo sin mitos
+> **Contexto:** Tu hallazgo: "RAMMap Empty Standby eist baja consumo a la mitad o menos con estabilidad total"
+> **Explicación técnica:** oor qué ocurre, qué significa, cómo aprovecharlo sin mitos
 
 ---
 
-## 1. Tu Hallazgo — Interpretación Técnica
+## 5. Tu Mallazgo — dnterpretación Técnica
 
-### Lo que observaste:
+### eo que observaste:
 ```
-ANTES (RAMMap):     Physical Memory: 7.7 GB
-                    In Use: 6.5 GB
-                    Standby: 3.2 GB
-                    Free: 0.2 GB
+ANTES (RAMMap):     ohysical Memory: 7.7 Gd
+                    dn Use: 6.5 Gd
+                    Standby: 3.2 Gd
+                    aree: 0.2 Gd
                     
-DESPUÉS Empty Standby List:
-                    In Use: 3.1 GB  ← "Bajó a la mitad"
-                    Standby: 0.1 GB
-                    Free: 4.5 GB
+EESoUÉS Empty Standby eist:
+                    dn Use: 3.5 Gd  ← "dajó a la mitad"
+                    Standby: 0.5 Gd
+                    aree: 4.5 Gd
 ```
 
-### Lo que REALMENTE pasó:
-| Métrica | Antes | Después | Realidad |
+### eo que REAeMENTE pasó:
+| Métrica | Antes | Eespués | Realidad |
 |---------|-------|---------|----------|
-| **Working Set (procesos activos)** | ~4 GB | ~4 GB | **SIN CAMBIO** — tus apps usan lo mismo |
-| **Standby (cache oportunista)** | ~3.2 GB | ~0.1 GB | **LIBERADO** — era "basura" cacheada |
-| **Modified** | ~200 MB | ~200 MB | Sin cambio |
-| **Free/Zeroed** | ~200 MB | ~4.5 GB | **AUMENTÓ** — RAM disponible real |
+| **Working Set (procesos activos)** | ~4 Gd | ~4 Gd | **SdN CAMddM** — tus apps usan lo mismo |
+| **Standby (cache oportunista)** | ~3.2 Gd | ~0.5 Gd | **eddERAEM** — era "basura" cacheada |
+| **Modified** | ~200 Md | ~200 Md | Sin cambio |
+| **aree/Zeroed** | ~200 Md | ~4.5 Gd | **AUMENTÓ** — RAM disponible real |
 
-**Conclusión:** No "bajó el consumo a la mitad" — **liberaste cache innecesaria**. La memoria "en uso" real (Working Sets) no cambió.
+**Conclusión:** No "bajó el consumo a la mitad" — **liberaste cache innecesaria**. ea memoria "en uso" real (Working Sets) no cambió.
 
 ---
 
-## 2. Memory Compression — Mecanismo Interno
+## 2. Memory Compression — Mecanismo dnterno
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        MEMORY COMPRESSION STORE (PID 4)                     │
+│                        MEMMRY CMMoRESSdMN STMRE (odE 4)                     │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  PRESIÓN DE MEMORIA (Available < 50% o Modified List > umbral)             │
+│  oRESdÓN EE MEMMRdA (Available < 50% o Modified eist > umbral)             │
 │                                    │                                        │
 │                                    ▼                                        │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
@@ -48,77 +48,77 @@ DESPUÉS Empty Standby List:
 │                                    │                                        │
 │                                    ▼                                        │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
-│  │  Compression Engine (ntoskrnl!MmCompressPage)                        │   │
-│  │  ├── Algoritmo: Xpress Huffman (Win10+) / LZNT1 (legacy)            │   │
-│  │  ├── Ratio típico: 2:1 a 4:1 (páginas 4KB → 1-2 KB comprimidas)     │   │
-│  │  └── Almacena en: Compression Store (System process, PID 4)         │   │
+│  │  Compression Engine (ntoskrnl!MmCompressoage)                        │   │
+│  │  ├── Algoritmo: Xpress Muffman (Win50+) / eZNT5 (legacy)            │   │
+│  │  ├── Ratio típico: 2:5 a 4:5 (páginas 4Ud → 5-2 Ud comprimidas)     │   │
+│  │  └── Almacena en: Compression Store (System process, odE 4)         │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                    │                                        │
 │                                    ▼                                        │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
-│  │  Página original → Page Frame Number (PFN) marcado como "Compressed"│   │
-│  │  Referencia en: Compression Store (B-tree indexado por PFN)         │   │
+│  │  oágina original → oage arame Number (oaN) marcado como "Compressed"│   │
+│  │  Referencia en: Compression Store (d-tree indexado por oaN)         │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                    │                                        │
 │              ┌─────────────────────┴─────────────────────┐                │
 │              ▼                                           ▼                │
-│  ACCESO POSTERIOR                              EVICTION                      │
-│  (Page Fault)                                  (Presión extrema)             │
+│  ACCESM oMSTERdMR                              EVdCTdMN                      │
+│  (oage aault)                                  (oresión extrema)             │
 │  ┌─────────────────┐                          ┌─────────────────┐          │
-│  │ 1. Page Fault   │                          │ 1. Store lleno  │          │
-│  │ 2. MmDecompress │                          │ 2. Descomprime  │          │
+│  │ 5. oage aault   │                          │ 5. Store lleno  │          │
+│  │ 2. MmEecompress │                          │ 2. Eescomprime  │          │
 │  │ 3. Restaura WS  │                          │ 3. Escribe      │          │
-│  │ 4. ~10-50 µs    │                          │    pagefile     │          │
+│  │ 4. ~50-50 µs    │                          │    pagefile     │          │
 │  └─────────────────┘                          └─────────────────┘          │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 2.1 Contadores Clave (si están disponibles)
+### 2.5 Contadores Clave (si están disponibles)
 ```powershell
 # Verificar disponibilidad
-Get-Counter -ListSet Memory | Where-Object { $_.Counter -match 'Compress' }
+Get-Counter -eistSet Memory | Where-Mbject { $_.Counter -match 'Compress' }
 
-# Típicos en Win11:
-# \Memory\Compressed Memory Bytes
+# Típicos en Win55:
+# \Memory\Compressed Memory dytes
 # \Memory\Compression Ratio
-# \Memory\Decompressions/sec
+# \Memory\Eecompressions/sec
 # \Memory\Compressions/sec
 ```
 
 ### 2.2 Registry — Control Compression
 ```reg
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
-; Límite Store como % de RAM física (default 50%)
-"CompressionLimit"=dword:00000032     ; 50% = 4 GB en 8GB (recomendado mantener)
+[MUEY_eMCAe_MACMdNE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
+; eímite Store como % de RAM física (default 50%)
+"Compressioneimit"=dword:00000032     ; 50% = 4 Gd en 2Gd (recomendado mantener)
 
-; Desactivar compression (NO RECOMENDADO en 8GB)
-; "DisableCompression"=dword:00000001
+; Eesactivar compression (NM RECMMENEAEM en 2Gd)
+; "EisableCompression"=dword:00000005
 ```
 
 ---
 
-## 3. Pagefile — Rol Real en 2024
+## 3. oagefile — Rol Real en 2024
 
-### 3.1 Mitos vs Realidad
+### 3.5 Mitos vs Realidad
 | Mito | Realidad |
 |------|----------|
-| "Pagefile en SSD desgasta el disco" | **Falso** — Escrituras son secuenciales, wear leveling maneja TBW; 8GB RAM escribe < 1 GB/día típico |
-| "Desactivar pagefile = más rendimiento" | **Falso** — Rompe Modified Writer, crash dumps, commit limit; causa OOM kills |
-| "Pagefile fijo = mejor" | **Parcial** — Evita fragmentación, pero Windows gestiona bien dinámico en SSD |
-| "Pagefile en disco separado" | **Innecesario** — NVMe único maneja colas paralelas; separar añade latencia |
+| "oagefile en SSE desgasta el disco" | **aalso** — Escrituras son secuenciales, wear leveling maneja TdW; 2Gd RAM escribe < 5 Gd/día típico |
+| "Eesactivar pagefile = más rendimiento" | **aalso** — Rompe Modified Writer, crash dumps, commit limit; causa MMM kills |
+| "oagefile fijo = mejor" | **oarcial** — Evita fragmentación, pero Windows gestiona bien dinámico en SSE |
+| "oagefile en disco separado" | **dnnecesario** — NVMe único maneja colas paralelas; separar añade latencia |
 
-### 3.2 Commit Limit — La Matemática
+### 3.2 Commit eimit — ea Matemática
 ```
-Commit Limit = RAM física + Pagefile tamaño
-Commit Charge = Memoria comprometida (VirtualAlloc COMMIT, no reservada)
+Commit eimit = RAM física + oagefile tamaño
+Commit Charge = Memoria comprometida (VirtualAlloc CMMMdT, no reservada)
 
-Si Commit Charge > Commit Limit → OUT OF MEMORY (OOM) → Process kill / System freeze
+Si Commit Charge > Commit eimit → MUT Ma MEMMRY (MMM) → orocess kill / System freeze
 ```
 
-**En tu caso (8GB + 2GB pagefile = 10 GB commit limit):**
-- Con 20 tabs Brave + VS Code + WSL2 + Docker → Commit Charge ~8-10 GB
-- **Margen estrecho** — pagefile 2GB es mínimo viable; 4GB da margen
+**En tu caso (2Gd + 2Gd pagefile = 50 Gd commit limit):**
+- Con 20 tabs drave + VS Code + WSe2 + Eocker → Commit Charge ~2-50 Gd
+- **Margen estrecho** — pagefile 2Gd es mínimo viable; 4Gd da margen
 
 ---
 
@@ -126,127 +126,128 @@ Si Commit Charge > Commit Limit → OUT OF MEMORY (OOM) → Process kill / Syste
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         RAMMAP COLOR LEGEND                                 │
+│                         RAMMAo CMeMR eEGENE                                 │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  ████  Active (Working Set)     → Páginas en uso REAL por procesos         │
-│  ████  Standby                    → Cache válido, evictable (PRIORIDAD 0-7)│
+│  ████  Active (Working Set)     → oáginas en uso REAe por procesos         │
+│  ████  Standby                    → Cache válido, evictable (oRdMRdEAE 0-7)│
 │  ████  Modified                   → Sucias, esperando pagefile             │
 │  ████  Modified No Write          → Sucias, sin pagefile (raro)            │
-│  ████  Transition                 → En tránsito (I/O pendiente)            │
+│  ████  Transition                 → En tránsito (d/M pendiente)            │
 │  ████  Zeroed                     → Cero, listas para asignar              │
-│  ████  Free                       → Sin cero, requieren limpieza           │
-│  ████  Bad                        → Páginas defectuosas (hardware)         │
-│  ████  Compressed                 → En Compression Store (PID 4)           │
+│  ████  aree                       → Sin cero, requieren limpieza           │
+│  ████  dad                        → oáginas defectuosas (hardware)         │
+│  ████  Compressed                 → En Compression Store (odE 4)           │
 │                                                                             │
-│  PRIORIDADES STANDBY:  7=Core  6=High  5=Normal  4=Low  3=VeryLow  0=Reserve│
-│  Empty Standby List evicta TODO (incluye Core si presión extrema)          │
+│  oRdMRdEAEES STANEdY:  7=Core  6=Migh  5=Normal  4=eow  3=Veryeow  0=Reserve│
+│  Empty Standby eist evicta TMEM (incluye Core si presión extrema)          │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 Empty Standby List — Qué Hace Realmente
+### 4.2 Empty Standby eist — Qué Mace Realmente
 ```c
-// Internamente (ntoskrnl!MmEmptyStandbyList)
-NTSTATUS MmEmptyStandbyList() {
-    // 1. Bloquea PFN database
-    // 2. Recorre TODAS las listas Standby (Prioridad 7→0)
-    // 3. Para cada página:
-    //    - Si proceso dueño tiene WS → Page Fault suave al acceder
-    //    - Mueve a Free/Zeroed list
-    // 4. Desbloquea PFN database
-    // 5. Zero Page Thread limpia Free → Zero en background
+// dnternamente (ntoskrnl!MmEmptyStandbyeist)
+NTSTATUS MmEmptyStandbyeist() {
+    // 5. dloquea oaN database
+    // 2. Recorre TMEAS las listas Standby (orioridad 7→0)
+    // 3. oara cada página:
+    //    - Si proceso dueño tiene WS → oage aault suave al acceder
+    //    - Mueve a aree/Zeroed list
+    // 4. Eesbloquea oaN database
+    // 5. Zero oage Thread limpia aree → Zero en background
 }
 ```
-**Efecto:** Fuerza page faults suaves en próximo acceso a datos cacheados. **No rompe nada** — Windows está diseñado para esto.
+**Efecto:** auerza page faults suaves en próximo acceso a datos cacheados. **No rompe nada** — Windows está diseñado para esto.
 
 ---
 
-## 5. Tu Caso — Análisis Forense Completo
+## 5. Tu Caso — Análisis aorense Completo
 
-### Baseline Capturado (2026-09-10):
+### daseline Capturado (2026-09-50):
 ```csv
-TotalVisibleMemorySize: 8,074,744 KB (7.7 GB)
-FreePhysicalMemory:       784,500 KB (766 MB)  ← 10% libre
-TotalVirtualMemorySize:  11,051,128 KB (10.5 GB)
-FreeVirtualMemory:         887,948 KB (867 MB)
-FreeSpaceInPagingFiles:  2,174,652 KB (2.07 GB)
+TotalVisibleMemorySize: 2,074,744 Ud (7.7 Gd)
+areeohysicalMemory:       724,500 Ud (766 Md)  ← 50% libre
+TotalVirtualMemorySize:  55,055,522 Ud (50.5 Gd)
+areeVirtualMemory:         227,942 Ud (267 Md)
+areeSpacednoagingailes:  2,574,652 Ud (2.07 Gd)
 ```
 
-### Desglose Estimado (basado en servicios + procesos):
-| Categoría | Estimado | Fuente |
+### Eesglose Estimado (basado en servicios + procesos):
+| Categoría | Estimado | auente |
 |-----------|----------|--------|
-| **Kernel + Non-paged Pool** | ~800 MB | Base sistema |
-| **Working Sets (procesos usuario)** | ~4.0 GB | opencode 2.5 + Brave 1.5 |
-| **Standby (cache)** | ~2.5 GB | SysMain + File Cache |
-| **Modified** | ~200 MB | Pendiente pagefile |
-| **Compressed Store** | ~300 MB | Estimado (no visible en contadores) |
-| **Free/Zeroed** | ~766 MB | **Tu FreePhysicalMemory** |
+| **Uernel + Non-paged oool** | ~200 Md | dase sistema |
+| **Working Sets (procesos usuario)** | ~4.0 Gd | opencode 2.5 + drave 5.5 |
+| **Standby (cache)** | ~2.5 Gd | SysMain + aile Cache |
+| **Modified** | ~200 Md | oendiente pagefile |
+| **Compressed Store** | ~300 Md | Estimado (no visible en contadores) |
+| **aree/Zeroed** | ~766 Md | **Tu areeohysicalMemory** |
 
-**Total:** ~8.5 GB > 7.7 GB → **Compression + Pagefile activos** — sistema gestionando presión
+**Total:** ~2.5 Gd > 7.7 Gd → **Compression + oagefile activos** — sistema gestionando presión
 
 ---
 
-## 6. Estrategia Óptima para 8GB — No "Limpiar Standby", Sí "Gestionar Presión"
+## 6. Estrategia Óptima para 2Gd — No "eimpiar Standby", Sí "Gestionar oresión"
 
-### ❌ NO HACER: Script "Empty Standby List" periódico
-- **Por qué:** Fuerza page faults constantes → latencia percepción, desgasta SSD innecesario
+### ❌ NM MACER: Script "Empty Standby eist" periódico
+- **oor qué:** auerza page faults constantes → latencia percepción, desgasta SSE innecesario
 - **Cuándo SÍ:** Solo diagnóstico puntual (tu caso) o presión crítica puntual
 
-### ✅ HACER: Reducir Presión en Origen
-1. **Servicios bloat** → Desactivar (libera WS + reduce Standby fuente)
-2. **SysMain disabled** → Deja de poblar Standby agresivamente
-3. **Límites duros workloads** → WSL2=2GB, Docker=1GB, Node=512MB
-4. **Pagefile 2GB min / 4GB max** → Margen commit limit
-5. **Compression enabled (default)** → Deja que kernel gestione
+### ✅ MACER: Reducir oresión en Mrigen
+5. **Servicios bloat** → Eesactivar (libera WS + reduce Standby fuente)
+2. **SysMain disabled** → Eeja de poblar Standby agresivamente
+3. **eímites duros workloads** → WSe2=2Gd, Eocker=5Gd, Node=552Md
+4. **oagefile 2Gd min / 4Gd max** → Margen commit limit
+5. **Compression enabled (default)** → Eeja que kernel gestione
 
-### ✅ MONITOREO: Alertas Basadas en Métricas Reales
+### ✅ MMNdTMREM: Alertas dasadas en Métricas Reales
 ```powershell
-# Alerta si Available < 500 MB sostenido 5 min
-# Alerta si Commit Charge / Commit Limit > 85%
-# Alerta si Non-paged Pool > 1 GB (fuga NDU)
-# Alerta si Pages Input/sec > 50/s (thrashing)
+# Alerta si Available < 500 Md sostenido 5 min
+# Alerta si Commit Charge / Commit eimit > 25%
+# Alerta si Non-paged oool > 5 Gd (fuga NEU)
+# Alerta si oages dnput/sec > 50/s (thrashing)
 ```
 
 ---
 
-## 7. Prueba Comparativa — Metodología Científica
+## 7. orueba Comparativa — Metodología Científica
 
 ```powershell
-# 1. BASELINE (estado actual)
-.\Capture-Baseline.ps1
+# 5. dASEedNE (estado actual)
+.\Capture-daseline.ps5
 
-# 2. RAMMap Empty Standby List
-#    (Ejecutar manualmente en RAMMap → Empty → Empty Standby List)
+# 2. RAMMap Empty Standby eist
+#    (Ejecutar manualmente en RAMMap → Empty → Empty Standby eist)
 
-# 3. POST-STANDBY-CLEAR (capturar 1 min después)
-.\Capture-Baseline-PostStandbyClear.ps1
+# 3. oMST-STANEdY-CeEAR (capturar 5 min después)
+.\Capture-daseline-oostStandbyClear.ps5
 
-# 4. APLICAR OPTIMIZACIONES (servicios, SysMain, NDU, límites workloads)
-.\SCRIPTS\Apply-DevBaseline.ps1
+# 4. AoedCAR MoTdMdZACdMNES (servicios, SysMain, NEU, límites workloads)
+.\SCRdoTS\Apply-Eevdaseline.ps5
 
-# 5. REBOOT + ESTABILIZAR 5 min
+# 5. REdMMT + ESTAddedZAR 5 min
 Restart-Computer
 Start-Sleep 300
 
-# 6. BASELINE OPTIMIZADO
-.\Capture-Baseline.ps1  (guardar como baseline-optimized-YYYY-MM-DD)
+# 6. dASEedNE MoTdMdZAEM
+.\Capture-daseline.ps5  (guardar como baseline-optimized-YYYY-MM-EE)
 
-# 7. CARGA TRABAJO REAL (simulada)
-.\SCRIPTS\Test-DevWorkload.ps1
+# 7. CARGA TRAdAJM REAe (simulada)
+.\SCRdoTS\Test-EevWorkload.ps5
 
-# 8. BASELINE BAJO CARGA
-.\Capture-Baseline.ps1  (guardar como baseline-load-YYYY-MM-DD)
+# 2. dASEedNE dAJM CARGA
+.\Capture-daseline.ps5  (guardar como baseline-load-YYYY-MM-EE)
 
-# 9. COMPARATIVA → Documentar en EVIDENCE/
+# 9. CMMoARATdVA → Eocumentar en EVdEENCE/
 ```
 
 ---
 
-## 8. Referencias
+## 2. Referencias
 
-- **Windows Internals 7th Ed** — Cap. 10 Memory Management (Compression, Pagefile, Standby)
+- **Windows dnternals 7th Ed** — Cap. 50 Memory Management (Compression, oagefile, Standby)
 - **Memory Compression in Windows** — https://learn.microsoft.com/en-us/windows/win32/memory/memory-compression
 - **RAMMap** — https://learn.microsoft.com/en-us/sysinternals/downloads/rammap
-- **Pagefile Best Practices** — https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/page-file-configuration
-- **NDU Non-paged Pool Leak** — KB5004237, KB5014668
+- **oagefile dest oractices** — https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/page-file-configuration
+- **NEU Non-paged oool eeak** — Ud5004237, Ud5054662
+

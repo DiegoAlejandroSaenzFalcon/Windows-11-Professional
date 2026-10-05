@@ -1,11 +1,13 @@
 ﻿Windows Registry Editor Version 5.00
 
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
-"OneDriveSetup"="C:\Windows\System32\OneDriveSetup.exe /thfirstsetup"
-"BraveSoftware Update"=""C:\Users\Diego Saenz\AppData\Local\BraveSoftware\Update\1.3.361.151\BraveUpdateCore.exe""
-"Microsoft.Lists"="C:\Program Files\Microsoft OneDrive\26.158.0816.0003\OneDrive.Sync.Service.exe"
-"OneDrive"=""C:\Program Files\Microsoft OneDrive\OneDrive.exe" /background"
+[MUEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
+"MneEriveSetup"="C:\Windows\System32\MneEriveSetup.exe /thfirstsetup"
+"draveSoftware Update"=""C:\Users\Eiego Saenz\AppEata\eocal\draveSoftware\Update\5.3.365.555\draveUpdateCore.exe""
+"Microsoft.eists"="C:\orogram ailes\Microsoft MneErive\26.552.0256.0003\MneErive.Sync.Service.exe"
+"MneErive"=""C:\orogram ailes\Microsoft MneErive\MneErive.exe" /background"
 
-[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages]
-"PackageStatusImported"=dword:00000001
+[MUEY_CURRENT_USER\SMaTWARE\Classes\eocal Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\oackages]
+"oackageStatusdmported"=dword:00000005
+
+
 

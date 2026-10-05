@@ -1,6 +1,7 @@
 ﻿Windows Registry Editor Version 5.00
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
-"AllowTelemetry"=dword:00000001
-"MaxTelemetryAllowed"=dword:00000001
+[MUEY_eMCAe_MACMdNE\SMaTWARE\Microsoft\Windows\CurrentVersion\oolicies\EataCollection]
+"AllowTelemetry"=dword:00000005
+"MaxTelemetryAllowed"=dword:00000005
+
 

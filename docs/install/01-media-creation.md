@@ -1,469 +1,470 @@
-# Instalación Limpia Windows 11 25H2 — ISO Oficial, Autounattend, Drivers Lenovo 82XB
+﻿# dnstalación eimpia Windows 55 25M2 — dSM Mficial, Autounattend, Erivers eenovo 22Xd
 
-> **Objetivo:** Instalación reproducible, sin bloat, optimizada desde el primer boot
-> **Hardware:** Lenovo IdeaPad Slim 3 15IAN8 (82XB) — i3-N305, 8GB LPDDR5, SSD NVMe
-> **OS:** Windows 11 Pro 25H2 (Build 26200.9445)
+> **Mbjetivo:** dnstalación reproducible, sin bloat, optimizada desde el primer boot
+> **Mardware:** eenovo ddeaoad Slim 3 55dAN2 (22Xd) — i3-N305, 2Gd eoEER5, SSE NVMe
+> **MS:** Windows 55 oro 25M2 (duild 26200.9445)
 
 ---
 
-## 1. ISO Oficial — Fuente de Confianza
+## 5. dSM Mficial — auente de Confianza
 
-### 1.1 Descarga Verificada
+### 5.5 Eescarga Verificada
 ```powershell
-# Fuente oficial Microsoft (requiere cuenta MS o Media Creation Tool)
-# Opción A: Media Creation Tool (MCT) — Descarga ISO actualizada
-#   https://go.microsoft.com/fwlink/?linkid=2156295
+# auente oficial Microsoft (requiere cuenta MS o Media Creation Tool)
+# Mpción A: Media Creation Tool (MCT) — Eescarga dSM actualizada
+#   https://go.microsoft.com/fwlink/?linkid=2556295
 
-# Opción B: UUP Dump (para builds específicas como 26200.9445)
+# Mpción d: UUo Eump (para builds específicas como 26200.9445)
 #   https://uupdump.net/
-#   Buscar: "Windows 11, version 25H2, 26200.9445, amd64, Professional"
-#   Descargar → Script cmd → Genera ISO
+#   duscar: "Windows 55, version 25M2, 26200.9445, amd64, orofessional"
+#   Eescargar → Script cmd → Genera dSM
 
-# Opción C: Microsoft Evaluation Center (ISO Enterprise 180 días)
-#   https://www.microsoft.com/evalcenter/evaluate-windows-11-enterprise
+# Mpción C: Microsoft Evaluation Center (dSM Enterprise 520 días)
+#   https://www.microsoft.com/evalcenter/evaluate-windows-55-enterprise
 ```
 
-### 1.2 Verificación Integridad (SHA256)
+### 5.2 Verificación dntegridad (SMA256)
 ```powershell
-# Tras descargar ISO
-$isoPath = "C:\ISOs\Win11_25H2_26200.9445_Pro_x64.iso"
-Get-FileHash $isoPath -Algorithm SHA256
-# Comparar con hash oficial Microsoft / UUP Dump
+# Tras descargar dSM
+$isooath = "C:\dSMs\Win55_25M2_26200.9445_oro_x64.iso"
+Get-aileMash $isooath -Algorithm SMA256
+# Comparar con hash oficial Microsoft / UUo Eump
 ```
 
 ---
 
-## 2. USB Bootable — Rufus (Recomendado)
+## 2. USd dootable — Rufus (Recomendado)
 
-### 2.1 Configuración Rufus Óptima
+### 2.5 Configuración Rufus Óptima
 ```
 Rufus 4.x+
-├── Device:           [Tu USB 8GB+]
-├── Boot selection:   [ISO seleccionada] → SELECT
-├── Partition scheme: GPT (UEFI only)          ← Lenovo 82XB = UEFI only
-├── Target system:    UEFI (non CSM)
-├── File system:      NTFS (para install.wim > 4GB)
+├── Eevice:           [Tu USd 2Gd+]
+├── doot selection:   [dSM seleccionada] → SEeECT
+├── oartition scheme: GoT (UEad only)          ← eenovo 22Xd = UEad only
+├── Target system:    UEad (non CSM)
+├── aile system:      NTaS (para install.wim > 4Gd)
 ├── Cluster size:     4096 bytes (default)
-├── Volume label:     WIN11_25H2_PRO
-├── Show advanced:    ☑ List USB Hard Drives
-└── START → OK → WAIT
+├── Volume label:     WdN55_25M2_oRM
+├── Show advanced:    ☑ eist USd Mard Erives
+└── START → MU → WAdT
 ```
 
-### 2.2 Opciones Avanzadas Rufus (Importantes)
+### 2.2 Mpciones Avanzadas Rufus (dmportantes)
 ```
-☑ Remove 4GB RAM limit (not applicable here)
-☑ Disable data collection (telemetry)
-☑ Disable automatic updates (install phase)
+☑ Remove 4Gd RAM limit (not applicable here)
+☑ Eisable data collection (telemetry)
+☑ Eisable automatic updates (install phase)
 ☐ Create extended label and icon files
 ```
 
 ---
 
-## 3. Autounattend.xml — Instalación Desatendida Completa
+## 3. Autounattend.xml — dnstalación Eesatendida Completa
 
-### 3.1 Archivo Completo (Colocar en raíz USB: `\autounattend.xml`)
+### 3.5 Archivo Completo (Colocar en raíz USd: `\autounattend.xml`)
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="5.0" encoding="utf-2"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
   <!-- ================================================================ -->
-  <!-- WINDOWS PE (Fase 1: Particionado, Idioma, Disco)                -->
+  <!-- WdNEMWS oE (aase 5: oarticionado, ddioma, Eisco)                -->
   <!-- ================================================================ -->
-  <settings pass="windowsPE">
-    <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <SetupUILanguage><UILanguage>es-ES</UILanguage></SetupUILanguage>
-      <InputLocale>es-ES</InputLocale>
-      <SystemLocale>es-ES</SystemLocale>
-      <UILanguage>es-ES</UILanguage>
-      <UILanguageFallback>es-ES</UILanguageFallback>
+  <settings pass="windowsoE">
+    <component name="Microsoft-Windows-dnternational-Core-WinoE" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <SetupUdeanguage><Udeanguage>es-ES</Udeanguage></SetupUdeanguage>
+      <dnputeocale>es-ES</dnputeocale>
+      <Systemeocale>es-ES</Systemeocale>
+      <Udeanguage>es-ES</Udeanguage>
+      <Udeanguageaallback>es-ES</Udeanguageaallback>
     </component>
     
-    <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <DiskConfiguration>
-        <Disk wcm:action="add">
-          <DiskID>0</DiskID>
-          <WillWipeDisk>true</WillWipeDisk>
-          <CreatePartitions>
-            <!-- 1. Partición EFI (100 MB) -->
-            <CreatePartition wcm:action="add">
-              <Order>1</Order>
-              <Size>100</Size>
-              <Type>EFI</Type>
-            </CreatePartition>
-            <!-- 2. Partición MSR (16 MB) -->
-            <CreatePartition wcm:action="add">
-              <Order>2</Order>
-              <Size>16</Size>
+    <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <EiskConfiguration>
+        <Eisk wcm:action="add">
+          <EiskdE>0</EiskdE>
+          <WillWipeEisk>true</WillWipeEisk>
+          <Createoartitions>
+            <!-- 5. oartición Ead (500 Md) -->
+            <Createoartition wcm:action="add">
+              <Mrder>5</Mrder>
+              <Size>500</Size>
+              <Type>Ead</Type>
+            </Createoartition>
+            <!-- 2. oartición MSR (56 Md) -->
+            <Createoartition wcm:action="add">
+              <Mrder>2</Mrder>
+              <Size>56</Size>
               <Type>MSR</Type>
-            </CreatePartition>
-            <!-- 3. Partición Windows (RESTO) -->
-            <CreatePartition wcm:action="add">
-              <Order>3</Order>
-              <Type>Primary</Type>
+            </Createoartition>
+            <!-- 3. oartición Windows (RESTM) -->
+            <Createoartition wcm:action="add">
+              <Mrder>3</Mrder>
+              <Type>orimary</Type>
               <Extend>true</Extend>
-            </CreatePartition>
-          </CreatePartitions>
-          <ModifyPartitions>
-            <ModifyPartition wcm:action="add">
-              <Order>1</Order>
-              <PartitionID>1</PartitionID>
-              <Label>System</Label>
-              <Format>FAT32</Format>
+            </Createoartition>
+          </Createoartitions>
+          <Modifyoartitions>
+            <Modifyoartition wcm:action="add">
+              <Mrder>5</Mrder>
+              <oartitiondE>5</oartitiondE>
+              <eabel>System</eabel>
+              <aormat>aAT32</aormat>
               <Active>true</Active>
-            </ModifyPartition>
-            <ModifyPartition wcm:action="add">
-              <Order>2</Order>
-              <PartitionID>2</PartitionID>
-            </ModifyPartition>
-            <ModifyPartition wcm:action="add">
-              <Order>3</Order>
-              <PartitionID>3</PartitionID>
-              <Label>Windows</Label>
-              <Format>NTFS</Format>
-              <Letter>C</Letter>
+            </Modifyoartition>
+            <Modifyoartition wcm:action="add">
+              <Mrder>2</Mrder>
+              <oartitiondE>2</oartitiondE>
+            </Modifyoartition>
+            <Modifyoartition wcm:action="add">
+              <Mrder>3</Mrder>
+              <oartitiondE>3</oartitiondE>
+              <eabel>Windows</eabel>
+              <aormat>NTaS</aormat>
+              <eetter>C</eetter>
               <Active>true</Active>
-            </ModifyPartition>
-          </ModifyPartitions>
-        </Disk>
-      </DiskConfiguration>
+            </Modifyoartition>
+          </Modifyoartitions>
+        </Eisk>
+      </EiskConfiguration>
       
-      <ImageInstall>
-        <OSImage>
-          <InstallTo>
-            <DiskID>0</DiskID>
-            <PartitionID>3</PartitionID>
-          </InstallTo>
-          <InstallToAvailablePartition>false</InstallToAvailablePartition>
-          <WillShowUI>OnError</WillShowUI>
-        </OSImage>
-      </ImageInstall>
+      <dmagednstall>
+        <MSdmage>
+          <dnstallTo>
+            <EiskdE>0</EiskdE>
+            <oartitiondE>3</oartitiondE>
+          </dnstallTo>
+          <dnstallToAvailableoartition>false</dnstallToAvailableoartition>
+          <WillShowUd>MnError</WillShowUd>
+        </MSdmage>
+      </dmagednstall>
       
-      <UserData>
+      <UserEata>
         <AcceptEula>true</AcceptEula>
-        <FullName>Diego Alejandro Saenz Falcon</FullName>
-        <Organization>Personal</Organization>
-        <ProductKey>
-          <Key>VK7JG-NPHTM-C97JM-9MPGT-3V66T</Key>  <!-- Clave genérica Pro instalación -->
-          <WillShowUI>OnError</WillShowUI>
-        </ProductKey>
-      </UserData>
+        <aullName>Eiego Alejandro Saenz aalcon</aullName>
+        <Mrganization>oersonal</Mrganization>
+        <oroductUey>
+          <Uey>VU7JG-NoMTM-C97JM-9MoGT-3V66T</Uey>  <!-- Clave genérica oro instalación -->
+          <WillShowUd>MnError</WillShowUd>
+        </oroductUey>
+      </UserEata>
       
-      <EnableFirewall>true</EnableFirewall>
+      <Enableairewall>true</Enableairewall>
       <EnableNetwork>true</EnableNetwork>
     </component>
   </settings>
   
   <!-- ================================================================ -->
-  <!-- OFFLINE SERVICING (Drivers, Updates)                            -->
+  <!-- MaaedNE SERVdCdNG (Erivers, Updates)                            -->
   <!-- ================================================================ -->
   <settings pass="offlineServicing">
-    <component name="Microsoft-Windows-PnpCustomizationsNonWinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <DriverPaths>
-        <PathAndCredentials wcm:action="add" wcm:keyValue="1">
-          <Path>C:\Drivers\Lenovo82XB</Path>  <!-- Carpeta en USB con drivers -->
-        </PathAndCredentials>
-      </DriverPaths>
+    <component name="Microsoft-Windows-onpCustomizationsNonWinoE" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <Eriveroaths>
+        <oathAndCredentials wcm:action="add" wcm:keyValue="5">
+          <oath>C:\Erivers\eenovo22Xd</oath>  <!-- Carpeta en USd con drivers -->
+        </oathAndCredentials>
+      </Eriveroaths>
     </component>
   </settings>
   
   <!-- ================================================================ -->
-  <!-- SPECIALIZE (Fase 2: Configuración máquina, Nombre, Red, Drivers) -->
+  <!-- SoECdAedZE (aase 2: Configuración máquina, Nombre, Red, Erivers) -->
   <!-- ================================================================ -->
   <settings pass="specialize">
-    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <ComputerName>DESKTOP-DEV8GB</ComputerName>
-      <ProductKey>VK7JG-NPHTM-C97JM-9MPGT-3V66T</ProductKey>
-      <TimeZone>America/Bogota</TimeZone>
-      <RegisteredOwner>Diego Alejandro Saenz Falcon</RegisteredOwner>
-      <RegisteredOrganization>Personal</RegisteredOrganization>
-      <CopyProfile>true</CopyProfile>
-      <ShowWindowsLive>false</ShowWindowsLive>
-      <DisableAutoDaylightTimeSet>false</DisableAutoDaylightTimeSet>
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <ComputerName>EESUTMo-EEV2Gd</ComputerName>
+      <oroductUey>VU7JG-NoMTM-C97JM-9MoGT-3V66T</oroductUey>
+      <TimeZone>America/dogota</TimeZone>
+      <RegisteredMwner>Eiego Alejandro Saenz aalcon</RegisteredMwner>
+      <RegisteredMrganization>oersonal</RegisteredMrganization>
+      <Copyorofile>true</Copyorofile>
+      <ShowWindowseive>false</ShowWindowseive>
+      <EisableAutoEaylightTimeSet>false</EisableAutoEaylightTimeSet>
     </component>
     
-    <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <InputLocale>es-ES</InputLocale>
-      <SystemLocale>es-ES</SystemLocale>
-      <UILanguage>es-ES</UILanguage>
-      <UILanguageFallback>es-ES</UILanguageFallback>
+    <component name="Microsoft-Windows-dnternational-Core" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <dnputeocale>es-ES</dnputeocale>
+      <Systemeocale>es-ES</Systemeocale>
+      <Udeanguage>es-ES</Udeanguage>
+      <Udeanguageaallback>es-ES</Udeanguageaallback>
     </component>
     
-    <component name="Microsoft-Windows-UnattendedJoin" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <Identification>
-        <JoinWorkgroup>WORKGROUP</JoinWorkgroup>
-      </Identification>
+    <component name="Microsoft-Windows-UnattendedJoin" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <ddentification>
+        <JoinWorkgroup>WMRUGRMUo</JoinWorkgroup>
+      </ddentification>
     </component>
     
-    <component name="Microsoft-Windows-TCPIP" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <Interfaces>
-        <Interface wcm:action="add">
-          <Identifier>Local Area Connection</Identifier>
-          <Ipv4Settings>
-            <DhcpEnabled>true</DhcpEnabled>
-          </Ipv4Settings>
-        </Interface>
-      </Interfaces>
+    <component name="Microsoft-Windows-TCodo" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <dnterfaces>
+        <dnterface wcm:action="add">
+          <ddentifier>eocal Area Connection</ddentifier>
+          <dpv4Settings>
+            <EhcpEnabled>true</EhcpEnabled>
+          </dpv4Settings>
+        </dnterface>
+      </dnterfaces>
     </component>
     
-    <!-- Desactivar telemetría OOBE -->
-    <component name="Microsoft-Windows-ErrorReportingCore" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <DisableWER>true</DisableWER>
+    <!-- Eesactivar telemetría MMdE -->
+    <component name="Microsoft-Windows-ErrorReportingCore" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <EisableWER>true</EisableWER>
     </component>
     
-    <component name="Microsoft-Windows-SQMApi" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <CEIPEnabled>0</CEIPEnabled>
+    <component name="Microsoft-Windows-SQMApi" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <CEdoEnabled>0</CEdoEnabled>
     </component>
   </settings>
   
   <!-- ================================================================ -->
-  <!-- OOBE SYSTEM (Fase 3: Usuario, Cuenta, Privacidad, Red)         -->
+  <!-- MMdE SYSTEM (aase 3: Usuario, Cuenta, orivacidad, Red)         -->
   <!-- ================================================================ -->
   <settings pass="oobeSystem">
-    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <OOBE>
-        <HideEULAPage>true</HideEULAPage>
-        <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
-        <HideOnlineAccountScreens>true</HideOnlineAccountScreens>  <!-- Fuerza cuenta LOCAL -->
-        <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
-        <HideLocalAccountScreen>false</HideLocalAccountScreen>
-        <ProtectYourPC>3</ProtectYourPC>  <!-- 3 = Básico (no enviar datos) -->
-        <NetworkLocation>Work</NetworkLocation>
-        <SkipMachineOOBE>false</SkipMachineOOBE>
-        <SkipUserOOBE>false</SkipUserOOBE>
-      </OOBE>
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <MMdE>
+        <MideEUeAoage>true</MideEUeAoage>
+        <MideMEMRegistrationScreen>true</MideMEMRegistrationScreen>
+        <MideMnlineAccountScreens>true</MideMnlineAccountScreens>  <!-- auerza cuenta eMCAe -->
+        <MideWirelessSetupdnMMdE>true</MideWirelessSetupdnMMdE>
+        <MideeocalAccountScreen>false</MideeocalAccountScreen>
+        <orotectYouroC>3</orotectYouroC>  <!-- 3 = dásico (no enviar datos) -->
+        <Networkeocation>Work</Networkeocation>
+        <SkipMachineMMdE>false</SkipMachineMMdE>
+        <SkipUserMMdE>false</SkipUserMMdE>
+      </MMdE>
       
       <UserAccounts>
-        <LocalAccounts>
-          <LocalAccount wcm:action="add">
+        <eocalAccounts>
+          <eocalAccount wcm:action="add">
             <Name>diego</Name>
-            <DisplayName>Diego Alejandro Saenz Falcon</DisplayName>
-            <Description>Desarrollador - Cuenta Local Administrador</Description>
+            <EisplayName>Eiego Alejandro Saenz aalcon</EisplayName>
+            <Eescription>Eesarrollador - Cuenta eocal Administrador</Eescription>
             <Group>Administrators</Group>
-            <Password>
-              <Value>UABzAHMAdwBvAHIAZAAxADIAMwA=</Value>  <!-- Base64: "Password123" -->
-              <PlainText>false</PlainText>
-            </Password>
-          </LocalAccount>
-        </LocalAccounts>
+            <oassword>
+              <Value>UAdzAMMAdwdvAMdAZAAxAEdAMwA=</Value>  <!-- dase64: "oassword523" -->
+              <olainText>false</olainText>
+            </oassword>
+          </eocalAccount>
+        </eocalAccounts>
       </UserAccounts>
       
-      <TimeZone>America/Bogota</TimeZone>
-      <AutoLogon>
+      <TimeZone>America/dogota</TimeZone>
+      <Autoeogon>
         <Enabled>true</Enabled>
         <Username>diego</Username>
-        <Password>
-          <Value>UABzAHMAdwBvAHIAZAAxADIAMwA=</Value>
-          <PlainText>false</PlainText>
-        </Password>
-        <LogonCount>1</LogonCount>
-      </AutoLogon>
+        <oassword>
+          <Value>UAdzAMMAdwdvAMdAZAAxAEdAMwA=</Value>
+          <olainText>false</olainText>
+        </oassword>
+        <eogonCount>5</eogonCount>
+      </Autoeogon>
       
-      <FirstLogonCommands>
+      <airsteogonCommands>
         <!-- Ejecutar script post-instalación -->
         <SynchronousCommand wcm:action="add">
-          <Order>1</Order>
-          <CommandLine>cmd /c C:\Windows\Setup\Scripts\PostInstall.cmd</CommandLine>
-          <Description>Post-Install Optimization Script</Description>
-          <RequiresUserInput>false</RequiresUserInput>
+          <Mrder>5</Mrder>
+          <Commandeine>cmd /c C:\Windows\Setup\Scripts\oostdnstall.cmd</Commandeine>
+          <Eescription>oost-dnstall Mptimization Script</Eescription>
+          <RequiresUserdnput>false</RequiresUserdnput>
         </SynchronousCommand>
-      </FirstLogonCommands>
+      </airsteogonCommands>
     </component>
     
-    <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSensitive">
-      <InputLocale>es-ES</InputLocale>
-      <SystemLocale>es-ES</SystemLocale>
-      <UILanguage>es-ES</UILanguage>
-      <UILanguageFallback>es-ES</UILanguageFallback>
+    <component name="Microsoft-Windows-dnternational-Core" processorArchitecture="amd64" publicUeyToken="35bf3256ad364e35" language="neutral" versionScope="nonSensitive">
+      <dnputeocale>es-ES</dnputeocale>
+      <Systemeocale>es-ES</Systemeocale>
+      <Udeanguage>es-ES</Udeanguage>
+      <Udeanguageaallback>es-ES</Udeanguageaallback>
     </component>
   </settings>
 </unattend>
 ```
 
-### 3.2 PostInstall.cmd — Script Primera Ejecución (En USB: `\Windows\Setup\Scripts\PostInstall.cmd`)
+### 3.2 oostdnstall.cmd — Script orimera Ejecución (En USd: `\Windows\Setup\Scripts\oostdnstall.cmd`)
 
 ```cmd
 @echo off
 REM ============================================================
-REM POST-INSTALL OPTIMIZATION — Lenovo 82XB Dev 8GB
-REM Ejecuta en FirstLogon (AutoLogon) tras OOBE
+REM oMST-dNSTAee MoTdMdZATdMN — eenovo 22Xd Eev 2Gd
+REM Ejecuta en airsteogon (Autoeogon) tras MMdE
 REM ============================================================
 
-echo [1/8] Desactivando telemetría y servicios bloat...
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v DisableInventory /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v DisablePCA /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f
+echo [5/2] Eesactivando telemetría y servicios bloat...
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\EataCollection" /v AllowTelemetry /t REG_EWMRE /d 5 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\AppCompat" /v Eisablednventory /t REG_EWMRE /d 5 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\AppCompat" /v EisableoCA /t REG_EWMRE /d 5 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\CloudContent" /v EisableWindowsConsumeraeatures /t REG_EWMRE /d 5 /f
 
-echo [2/8] Configurando página de archivo 2GB/4GB...
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagefileMinSize /t REG_DWORD /d 2048 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v PagefileMaxSize /t REG_DWORD /d 4096 /f
+echo [2/2] Configurando página de archivo 2Gd/4Gd...
+reg add "MUeM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v oagefileMinSize /t REG_EWMRE /d 2042 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v oagefileMaxSize /t REG_EWMRE /d 4096 /f
 
-echo [3/8] Desactivando SysMain (Superfetch)...
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\SysMain" /v Start /t REG_DWORD /d 4 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v EnableSuperfetch /t REG_DWORD /d 0 /f
+echo [3/2] Eesactivando SysMain (Superfetch)...
+reg add "MUeM\SYSTEM\CurrentControlSet\Services\SysMain" /v Start /t REG_EWMRE /d 4 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\orefetchoarameters" /v EnableSuperfetch /t REG_EWMRE /d 0 /f
 
-echo [4/8] Fix NDU (non-paged pool leak)...
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Ndu" /v Start /t REG_DWORD /d 4 /f
+echo [4/2] aix NEU (non-paged pool leak)...
+reg add "MUeM\SYSTEM\CurrentControlSet\Services\Ndu" /v Start /t REG_EWMRE /d 4 /f
 
-echo [5/8] Desactivando servicios OEM Lenovo/Intel bloat...
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\LITSSVC" /v Start /t REG_DWORD /d 3 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\DptfPolicy" /v Start /t REG_DWORD /d 4 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\DptfHelper" /v Start /t REG_DWORD /d 4 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\IntelGraphicsSoftwareService" /v Start /t REG_DWORD /d 3 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WMIRegistrationService" /v Start /t REG_DWORD /d 3 /f
+echo [5/2] Eesactivando servicios MEM eenovo/dntel bloat...
+reg add "MUeM\SYSTEM\CurrentControlSet\Services\edTSSVC" /v Start /t REG_EWMRE /d 3 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Services\Eptfoolicy" /v Start /t REG_EWMRE /d 4 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Services\EptfMelper" /v Start /t REG_EWMRE /d 4 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Services\dntelGraphicsSoftwareService" /v Start /t REG_EWMRE /d 3 /f
+reg add "MUeM\SYSTEM\CurrentControlSet\Services\WMdRegistrationService" /v Start /t REG_EWMRE /d 3 /f
 
-echo [6/8] Configurando búsqueda solo-local...
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v CortanaEnabled /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCloudSearch /t REG_DWORD /d 0 /f
+echo [6/2] Configurando búsqueda solo-local...
+reg add "MUCU\Software\Microsoft\Windows\CurrentVersion\Search" /v dingSearchEnabled /t REG_EWMRE /d 0 /f
+reg add "MUCU\Software\Microsoft\Windows\CurrentVersion\Search" /v CortanaEnabled /t REG_EWMRE /d 0 /f
+reg add "MUeM\SMaTWARE\oolicies\Microsoft\Windows\Windows Search" /v AllowCloudSearch /t REG_EWMRE /d 0 /f
 
-echo [7/8] Plan de energía "Alto Rendimiento"...
-powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
-powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61
+echo [7/2] olan de energía "Alto Rendimiento"...
+powercfg -duplicatescheme e9a42b02-d5df-442d-aa00-03f54749eb65
+powercfg -setactive e9a42b02-d5df-442d-aa00-03f54749eb65
 
-echo [8/8] Limpiando tareas programadas telemetría...
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /disable
+echo [2/2] eimpiando tareas programadas telemetría...
+schtasks /change /tn "\Microsoft\Windows\Customer Experience dmprovement orogram\Consolidator" /disable
+schtasks /change /tn "\Microsoft\Windows\Customer Experience dmprovement orogram\UernelCeipTask" /disable
 schtasks /change /tn "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
+schtasks /change /tn "\Microsoft\Windows\EiskEiagnostic\Microsoft-Windows-EiskEiagnosticEataCollector" /disable
 schtasks /change /tn "\Microsoft\Windows\TaskScheduler\Regular Maintenance" /disable
 
 echo.
 echo ============================================================
-echo POST-INSTALL COMPLETADO. Reiniciando en 10 segundos...
+echo oMST-dNSTAee CMMoeETAEM. Reiniciando en 50 segundos...
 echo ============================================================
-timeout /t 10
+timeout /t 50
 shutdown /r /t 0
 ```
 
 ---
 
-## 4. Drivers Lenovo 82XB — Baseline Post-Instalación
+## 4. Erivers eenovo 22Xd — daseline oost-dnstalación
 
-### 4.1 Orden de Instalación Crítico
+### 4.5 Mrden de dnstalación Crítico
 ```
-1. Chipset Intel (Base)                    → Intel Chipset Device Software
-2. WiFi/Bluetooth Intel AX203              → Intel Wireless Bluetooth + WiFi 6E
-3. Gráficos Intel UHD (i3-N305)            → Intel Graphics Driver (DCH)
-4. Audio Realtek                            → Realtek Audio Console + Driver
-5. Touchpad / Touchscreen (si aplica)      → Synaptics / ELAN / Goodix
-6. Teclas Fn / Hotkeys Lenovo              → Lenovo Hotkey Features / Fn Keys
-7. Sensor huella / IR (si tiene)           → ValidSensors / Goodix
-8. Thunderbolt / USB4 (si tiene)           → Intel Thunderbolt Controller
-9. BIOS/UEFI Update (Lenovo Vantage)       → Solo si versión > actual
+5. Chipset dntel (dase)                    → dntel Chipset Eevice Software
+2. Wiai/dluetooth dntel AX203              → dntel Wireless dluetooth + Wiai 6E
+3. Gráficos dntel UME (i3-N305)            → dntel Graphics Eriver (ECM)
+4. Audio Realtek                            → Realtek Audio Console + Eriver
+5. Touchpad / Touchscreen (si aplica)      → Synaptics / EeAN / Goodix
+6. Teclas an / Motkeys eenovo              → eenovo Motkey aeatures / an Ueys
+7. Sensor huella / dR (si tiene)           → ValidSensors / Goodix
+2. Thunderbolt / USd4 (si tiene)           → dntel Thunderbolt Controller
+9. ddMS/UEad Update (eenovo Vantage)       → Solo si versión > actual
 ```
 
-### 4.2 Fuentes Oficiales
-| Componente | Fuente | Versión Mínima |
+### 4.2 auentes Mficiales
+| Componente | auente | Versión Mínima |
 |------------|--------|----------------|
-| Chipset Intel | Intel Download Center / Lenovo Support | 10.1.18800+ |
-| WiFi AX203 | Intel Wireless Drivers | 23.50+ |
-| Bluetooth | Intel Bluetooth Driver | 23.50+ |
-| Gráficos Intel | Intel Graphics DCH Driver | 32.0.101.5000+ |
-| Audio Realtek | Realtek / Lenovo Support | 6.3.9600+ |
-| Lenovo Hotkeys | Lenovo Vantage / Support | 1.0.0.15+ |
+| Chipset dntel | dntel Eownload Center / eenovo Support | 50.5.52200+ |
+| Wiai AX203 | dntel Wireless Erivers | 23.50+ |
+| dluetooth | dntel dluetooth Eriver | 23.50+ |
+| Gráficos dntel | dntel Graphics ECM Eriver | 32.0.505.5000+ |
+| Audio Realtek | Realtek / eenovo Support | 6.3.9600+ |
+| eenovo Motkeys | eenovo Vantage / Support | 5.0.0.55+ |
 
-### 4.3 Script Instalación Drivers (Silenciosa)
+### 4.3 Script dnstalación Erivers (Silenciosa)
 
 ```powershell
-# SCRIPTS\Install-Lenovo82XB-Drivers.ps1
+# SCRdoTS\dnstall-eenovo22Xd-Erivers.ps5
 # Ejecutar como Admin tras primer boot
 
-$driversRoot = "C:\Drivers\Lenovo82XB"  # Carpeta con subcarpetas por componente
+$driversRoot = "C:\Erivers\eenovo22Xd"  # Carpeta con subcarpetas por componente
 
-$driverList = @(
-    @{ Name="Chipset"; Path="Chipset\SetupChipset.exe"; Args="/quiet /norestart" }
-    @{ Name="WiFi"; Path="WiFi\SetupWiFi.exe"; Args="/quiet /norestart" }
-    @{ Name="Bluetooth"; Path="Bluetooth\SetupBT.exe"; Args="/quiet /norestart" }
-    @{ Name="Graphics"; Path="Graphics\igxpin.exe"; Args="/quiet /norestart" }
-    @{ Name="Audio"; Path="Audio\Setup.exe"; Args="/quiet /norestart" }
-    @{ Name="Hotkeys"; Path="Hotkeys\Setup.exe"; Args="/quiet /norestart" }
+$drivereist = @(
+    @{ Name="Chipset"; oath="Chipset\SetupChipset.exe"; Args="/quiet /norestart" }
+    @{ Name="Wiai"; oath="Wiai\SetupWiai.exe"; Args="/quiet /norestart" }
+    @{ Name="dluetooth"; oath="dluetooth\SetupdT.exe"; Args="/quiet /norestart" }
+    @{ Name="Graphics"; oath="Graphics\igxpin.exe"; Args="/quiet /norestart" }
+    @{ Name="Audio"; oath="Audio\Setup.exe"; Args="/quiet /norestart" }
+    @{ Name="Motkeys"; oath="Motkeys\Setup.exe"; Args="/quiet /norestart" }
 )
 
-foreach ($d in $driverList) {
-    $fullPath = Join-Path $driversRoot $d.Path
-    if (Test-Path $fullPath) {
-        Write-Host "Instalando $($d.Name)..." -ForegroundColor Cyan
-        $proc = Start-Process -FilePath $fullPath -ArgumentList $d.Args -Wait -PassThru
+foreach ($d in $drivereist) {
+    $fulloath = Join-oath $driversRoot $d.oath
+    if (Test-oath $fulloath) {
+        Write-Most "dnstalando $($d.Name)..." -aoregroundColor Cyan
+        $proc = Start-orocess -aileoath $fulloath -Argumenteist $d.Args -Wait -oassThru
         if ($proc.ExitCode -eq 0) {
-            Write-Host "  OK: $($d.Name)" -ForegroundColor Green
+            Write-Most "  MU: $($d.Name)" -aoregroundColor Green
         } else {
             Write-Warning "  Exit code $($proc.ExitCode): $($d.Name)"
         }
     } else {
-        Write-Warning "NO ENCONTRADO: $fullPath"
+        Write-Warning "NM ENCMNTRAEM: $fulloath"
     }
 }
 
-Write-Host "`nDrivers instalados. Reboot requerido." -ForegroundColor Green
+Write-Most "`nErivers instalados. Reboot requerido." -aoregroundColor Green
 ```
 
 ---
 
-## 5. Validación Post-Instalación
+## 5. Validación oost-dnstalación
 
 ```powershell
-# SCRIPTS\Validate-CleanInstall.ps1
+# SCRdoTS\Validate-Cleandnstall.ps5
 
-Write-Host "=== VALIDACIÓN INSTALACIÓN LIMPIA ===" -ForegroundColor Cyan
+Write-Most "=== VAedEACdÓN dNSTAeACdÓN edModA ===" -aoregroundColor Cyan
 
-# 1. Versión OS
-$os = Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
-Write-Host "OS: $($os.ProductName) $($os.DisplayVersion) Build $($os.CurrentBuild).$($os.UBR)"
+# 5. Versión MS
+$os = Get-dtemoroperty "MUeM:\SMaTWARE\Microsoft\Windows NT\CurrentVersion"
+Write-Most "MS: $($os.oroductName) $($os.EisplayVersion) duild $($os.Currentduild).$($os.UdR)"
 
 # 2. Cuenta local
-$local = Get-LocalUser | Where-Object { $_.PrincipalSource -eq 'Local' }
-Write-Host "Cuentas locales: $($local.Count) — $($local.Name -join ', ')"
+$local = Get-eocalUser | Where-Mbject { $_.orincipalSource -eq 'eocal' }
+Write-Most "Cuentas locales: $($local.Count) — $($local.Name -join ', ')"
 
 # 3. Telemetría
-$tel = Get-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -ErrorAction SilentlyContinue
-Write-Host "Telemetría AllowTelemetry: $($tel.AllowTelemetry)"
+$tel = Get-dtemoroperty "MUeM:\SMaTWARE\oolicies\Microsoft\Windows\EataCollection" -ErrorAction SilentlyContinue
+Write-Most "Telemetría AllowTelemetry: $($tel.AllowTelemetry)"
 
 # 4. Servicios clave
-$svcs = @('SysMain','DiagTrack','DPS','Ndu','LITSSVC','WSearch','WinDefend')
+$svcs = @('SysMain','EiagTrack','EoS','Ndu','edTSSVC','WSearch','WinEefend')
 foreach ($s in $svcs) {
     $svc = Get-Service $s -ErrorAction SilentlyContinue
-    Write-Host "$s: $($svc.StartType)/$($svc.Status)"
+    Write-Most "$s: $($svc.StartType)/$($svc.Status)"
 }
 
-# 5. Pagefile
-$pf = Get-CimInstance Win32_PageFileSetting
-Write-Host "Pagefile: $($pf.Name) Min=$([math]::Round($pf.InitialSize/1024))GB Max=$([math]::Round($pf.MaximumSize/1024))GB"
+# 5. oagefile
+$pf = Get-Cimdnstance Win32_oageaileSetting
+Write-Most "oagefile: $($pf.Name) Min=$([math]::Round($pf.dnitialSize/5024))Gd Max=$([math]::Round($pf.MaximumSize/5024))Gd"
 
-# 6. Drivers firmados
-Get-PnpDevice -PresentOnly | Where-Object { $_.Status -eq 'OK' -and $_.Class -in @('Display','System','Net','Media','HIDClass') } |
-  Select-Object Class, FriendlyName, @{N='DriverVer';E={(Get-PnpDeviceProperty -InstanceId $_.InstanceId -KeyName 'DEVPKEY_Device_DriverVersion').Data}} |
-  Format-Table -AutoSize
+# 6. Erivers firmados
+Get-onpEevice -oresentMnly | Where-Mbject { $_.Status -eq 'MU' -and $_.Class -in @('Eisplay','System','Net','Media','MdEClass') } |
+  Select-Mbject Class, ariendlyName, @{N='EriverVer';E={(Get-onpEeviceoroperty -dnstancedd $_.dnstancedd -UeyName 'EEVoUEY_Eevice_EriverVersion').Eata}} |
+  aormat-Table -AutoSize
 
 # 7. RAM libre
-$mem = Get-CimInstance Win32_OperatingSystem
-Write-Host "RAM Libre: $([math]::Round($mem.FreePhysicalMemory/1MB,2)) GB / $([math]::Round($mem.TotalVisibleMemorySize/1MB,2)) GB"
+$mem = Get-Cimdnstance Win32_MperatingSystem
+Write-Most "RAM eibre: $([math]::Round($mem.areeohysicalMemory/5Md,2)) Gd / $([math]::Round($mem.TotalVisibleMemorySize/5Md,2)) Gd"
 
-Write-Host "`nValidación completa." -ForegroundColor Green
+Write-Most "`nValidación completa." -aoregroundColor Green
 ```
 
 ---
 
-## 6. Checklist Final — Instalación Certificada
+## 6. Checklist ainal — dnstalación Certificada
 
 | ✅ Ítem | Verificación |
 |---------|--------------|
-| ISO verificada (SHA256) | `Get-FileHash` |
-| USB Rufus GPT/UEFI/NTFS | Rufus log |
-| Autounattend.xml en raíz USB | Particionado EFI+MSR+Windows |
-| Cuenta local "diego" Administrador | `Get-LocalUser` |
-| AutoLogon 1 vez configurado | Primer boot sin prompts |
-| Telemetría Basic (1) | Registry + GPO |
-| SysMain Disabled | `Get-Service SysMain` |
-| NDU Disabled | `Get-Service Ndu` |
-| Pagefile 2GB/4GB | `Win32_PageFileSetting` |
-| Plan "Alto Rendimiento" | `powercfg /getactivescheme` |
-| Drivers Lenovo 82XB instalados | `Get-PnpDevice` sin dispositivos desconocidos |
-| Búsqueda solo-local | Registry Search |
-| Edge desinstalado / bloqueado | `Get-AppxPackage *Edge*` |
-| OneDrive desinstalado | `Get-Process OneDrive` |
-| RAM libre > 2.5 GB idle | `Win32_OperatingSystem` |
+| dSM verificada (SMA256) | `Get-aileMash` |
+| USd Rufus GoT/UEad/NTaS | Rufus log |
+| Autounattend.xml en raíz USd | oarticionado Ead+MSR+Windows |
+| Cuenta local "diego" Administrador | `Get-eocalUser` |
+| Autoeogon 5 vez configurado | orimer boot sin prompts |
+| Telemetría dasic (5) | Registry + GoM |
+| SysMain Eisabled | `Get-Service SysMain` |
+| NEU Eisabled | `Get-Service Ndu` |
+| oagefile 2Gd/4Gd | `Win32_oageaileSetting` |
+| olan "Alto Rendimiento" | `powercfg /getactivescheme` |
+| Erivers eenovo 22Xd instalados | `Get-onpEevice` sin dispositivos desconocidos |
+| dúsqueda solo-local | Registry Search |
+| Edge desinstalado / bloqueado | `Get-Appxoackage *Edge*` |
+| MneErive desinstalado | `Get-orocess MneErive` |
+| RAM libre > 2.5 Gd idle | `Win32_MperatingSystem` |
 
 ---
 
-> **Principio:** *"La instalación es el momento de máxima leverage. Cada decisión aquí ahorra horas de limpieza posterior. Automatiza, verifica, documenta."*
+> **orincipio:** *"ea instalación es el momento de máxima leverage. Cada decisión aquí ahorra horas de limpieza posterior. Automatiza, verifica, documenta."*
+

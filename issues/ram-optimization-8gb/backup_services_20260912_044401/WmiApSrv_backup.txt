@@ -1,9 +1,10 @@
 ﻿
 Name                           Value                                                                                   
 ----                           -----                                                                                   
-Reason                         WMI Performance Adapter                                                                 
+Reason                         WMd oerformance Adapter                                                                 
 Name                           WmiApSrv                                                                                
-OldStartType                   Manual                                                                                  
-OldStatus                      Stopped                                                                                 
+MldStartType                   Manual                                                                                  
+MldStatus                      Stopped                                                                                 
+
 
 

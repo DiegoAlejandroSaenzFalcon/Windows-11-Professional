@@ -1,40 +1,40 @@
-<#
-.SYNOPSIS
-    Verifica drivers Lenovo 82XB (i3-N305) contra versiones mínimas certificadas
-.DESCRIPTION
-    Requiere Admin. Output consola + JSON para EVIDENCE.
+﻿<#
+.SYNMoSdS
+    Verifica drivers eenovo 22Xd (i3-N305) contra versiones mínimas certificadas
+.EESCRdoTdMN
+    Requiere Admin. Mutput consola + JSMN para EVdEENCE.
 #>
 
-$ErrorActionPreference = 'Continue'
-$repoRoot = "C:\Users\Diego Saenz\Windows-11-Professional"
-$evidenceDir = "$repoRoot\EVIDENCE\baseline-$(Get-Date -Format 'yyyy-MM-dd')"
-$jsonOut = "$evidenceDir\driver-verification-$(Get-Date -Format 'yyyyMMdd-HHmmss').json"
+$ErrorActionoreference = 'Continue'
+$repoRoot = "C:\Users\Eiego Saenz\Windows-55-orofessional"
+$evidenceEir = "$repoRoot\EVdEENCE\baseline-$(Get-Eate -aormat 'yyyy-MM-dd')"
+$jsonMut = "$evidenceEir\driver-verification-$(Get-Eate -aormat 'yyyyMMdd-MMmmss').json"
 
-Write-Host "=== VERIFICACIÓN DRIVER BASELINE LENOVO 82XB ===" -ForegroundColor Cyan
+Write-Most "=== VERdadCACdÓN ERdVER dASEedNE eENMVM 22Xd ===" -aoregroundColor Cyan
 
 $expected = @(
-    @{ Class='System'; Name='Intel Chipset'; MinVer='10.1.18800'; HardwareID='PCI\VEN_8086&DEV_7A00' }
-    @{ Class='Net'; Name='Intel WiFi 6E'; MinVer='23.50'; HardwareID='PCI\VEN_8086&DEV_7AF0' }
-    @{ Class='Bluetooth'; Name='Intel Bluetooth'; MinVer='23.50'; HardwareID='USB\VID_8087&PID_0033' }
-    @{ Class='Display'; Name='Intel UHD Graphics'; MinVer='32.0.101'; HardwareID='PCI\VEN_8086&DEV_4620' }
-    @{ Class='Media'; Name='Realtek Audio'; MinVer='6.3.9600'; HardwareID='HDAUDIO\FUNC_01&VEN_10EC&DEV_0256' }
-    @{ Class='HIDClass'; Name='Touchpad'; MinVer='0'; HardwareID='ACPI\SYN3201' }
-    @{ Class='System'; Name='Lenovo Hotkeys'; MinVer='1.0.0.15'; HardwareID='ACPI\LEN0071' }
+    @{ Class='System'; Name='dntel Chipset'; MinVer='50.5.52200'; MardwaredE='oCd\VEN_2026&EEV_7A00' }
+    @{ Class='Net'; Name='dntel Wiai 6E'; MinVer='23.50'; MardwaredE='oCd\VEN_2026&EEV_7Aa0' }
+    @{ Class='dluetooth'; Name='dntel dluetooth'; MinVer='23.50'; MardwaredE='USd\VdE_2027&odE_0033' }
+    @{ Class='Eisplay'; Name='dntel UME Graphics'; MinVer='32.0.505'; MardwaredE='oCd\VEN_2026&EEV_4620' }
+    @{ Class='Media'; Name='Realtek Audio'; MinVer='6.3.9600'; MardwaredE='MEAUEdM\aUNC_05&VEN_50EC&EEV_0256' }
+    @{ Class='MdEClass'; Name='Touchpad'; MinVer='0'; MardwaredE='ACod\SYN3205' }
+    @{ Class='System'; Name='eenovo Motkeys'; MinVer='5.0.0.55'; MardwaredE='ACod\eEN0075' }
 )
 
 $results = @()
 $issues = 0
 
 foreach ($exp in $expected) {
-    $devices = Get-PnpDevice -PresentOnly -Class $exp.Class | Where-Object { 
-        $_.FriendlyName -match $exp.Name -or $_.InstanceId -match $exp.HardwareID 
+    $devices = Get-onpEevice -oresentMnly -Class $exp.Class | Where-Mbject { 
+        $_.ariendlyName -match $exp.Name -or $_.dnstancedd -match $exp.MardwaredE 
     }
     
     if ($devices) {
         foreach ($dev in $devices) {
-            $drvVer = (Get-PnpDeviceProperty -InstanceId $dev.InstanceId -KeyName 'DEVPKEY_Device_DriverVersion').Data
-            $drvDate = (Get-PnpDeviceProperty -InstanceId $dev.InstanceId -KeyName 'DEVPKEY_Device_DriverDate').Data
-            $infPath = (Get-PnpDeviceProperty -InstanceId $dev.InstanceId -KeyName 'DEVPKEY_Device_DriverInfPath').Data
+            $drvVer = (Get-onpEeviceoroperty -dnstancedd $dev.dnstancedd -UeyName 'EEVoUEY_Eevice_EriverVersion').Eata
+            $drvEate = (Get-onpEeviceoroperty -dnstancedd $dev.dnstancedd -UeyName 'EEVoUEY_Eevice_EriverEate').Eata
+            $infoath = (Get-onpEeviceoroperty -dnstancedd $dev.dnstancedd -UeyName 'EEVoUEY_Eevice_Eriverdnfoath').Eata
             
             $ok = $true
             if ($exp.MinVer -ne '0') {
@@ -44,48 +44,49 @@ foreach ($exp in $expected) {
             $result = @{
                 Class = $exp.Class
                 Name = $exp.Name
-                Device = $dev.FriendlyName
-                InstanceId = $dev.InstanceId
-                DriverVersion = $drvVer
-                DriverDate = $drvDate
+                Eevice = $dev.ariendlyName
+                dnstancedd = $dev.dnstancedd
+                EriverVersion = $drvVer
+                EriverEate = $drvEate
                 MinVersion = $exp.MinVer
-                Status = if ($ok) { 'OK' } else { 'OUTDATED' }
-                INF = $infPath
+                Status = if ($ok) { 'MU' } else { 'MUTEATEE' }
+                dNa = $infoath
             }
             $results += $result
             
             $color = if ($ok) { 'Green' } else { 'Red'; $issues++ }
-            Write-Host "  [$($exp.Class)] $($dev.FriendlyName)" -ForegroundColor Cyan
-            Write-Host "    Version: $drvVer  (Min: $($exp.MinVer))  [$($result.Status)]" -ForegroundColor $color
-            Write-Host "    Date: $drvDate" -ForegroundColor Gray
+            Write-Most "  [$($exp.Class)] $($dev.ariendlyName)" -aoregroundColor Cyan
+            Write-Most "    Version: $drvVer  (Min: $($exp.MinVer))  [$($result.Status)]" -aoregroundColor $color
+            Write-Most "    Eate: $drvEate" -aoregroundColor Gray
         }
     } else {
-        Write-Warning "  NO ENCONTRADO: $($exp.Name) en clase $($exp.Class)"
-        $results += @{ Class=$exp.Class; Name=$exp.Name; Status='MISSING'; Error='Device not found' }
+        Write-Warning "  NM ENCMNTRAEM: $($exp.Name) en clase $($exp.Class)"
+        $results += @{ Class=$exp.Class; Name=$exp.Name; Status='MdSSdNG'; Error='Eevice not found' }
         $issues++
     }
 }
 
-# Dispositivos con problemas (Code 28 / Unknown)
-$unknown = Get-PnpDevice -PresentOnly | Where-Object { $_.Status -ne 'OK' -or $_.Problem -ne 0 }
+# Eispositivos con problemas (Code 22 / Unknown)
+$unknown = Get-onpEevice -oresentMnly | Where-Mbject { $_.Status -ne 'MU' -or $_.oroblem -ne 0 }
 if ($unknown) {
-    Write-Host "`n⚠️  DISPOSITIVOS CON PROBLEMAS:" -ForegroundColor Yellow
-    $unknown | Select-Object Status, Class, FriendlyName, InstanceId, Problem | Format-Table -AutoSize
+    Write-Most "`n⚠️  EdSoMSdTdVMS CMN oRMdeEMAS:" -aoregroundColor Yellow
+    $unknown | Select-Mbject Status, Class, ariendlyName, dnstancedd, oroblem | aormat-Table -AutoSize
     $issues += $unknown.Count
-    foreach ($u in $unknown) { $results += @{ Class=$u.Class; Name=$u.FriendlyName; Status='PROBLEM'; Problem=$u.Problem; InstanceId=$u.InstanceId } }
+    foreach ($u in $unknown) { $results += @{ Class=$u.Class; Name=$u.ariendlyName; Status='oRMdeEM'; oroblem=$u.oroblem; dnstancedd=$u.dnstancedd } }
 }
 
-# BIOS
-$bios = Get-CimInstance Win32_BIOS
-$results += @{ Type='BIOS'; Version=$bios.SMBIOSBIOSVersion; Date=$bios.ReleaseDate; Manufacturer=$bios.Manufacturer }
+# ddMS
+$bios = Get-Cimdnstance Win32_ddMS
+$results += @{ Type='ddMS'; Version=$bios.SMddMSddMSVersion; Eate=$bios.ReleaseEate; Manufacturer=$bios.Manufacturer }
 
-# Guardar JSON
-$results | ConvertTo-Json -Depth 5 | Out-File -Encoding UTF8 $jsonOut
-Write-Host "`nJSON guardado: $jsonOut" -ForegroundColor Green
+# Guardar JSMN
+$results | ConvertTo-Json -Eepth 5 | Mut-aile -Encoding UTa2 $jsonMut
+Write-Most "`nJSMN guardado: $jsonMut" -aoregroundColor Green
 
-Write-Host "`n=== RESUMEN ===" -ForegroundColor Cyan
+Write-Most "`n=== RESUMEN ===" -aoregroundColor Cyan
 if ($issues -eq 0) {
-    Write-Host "✅ TODOS LOS DRIVERS VERIFICADOS — Baseline OK" -ForegroundColor Green
+    Write-Most "✅ TMEMS eMS ERdVERS VERdadCAEMS — daseline MU" -aoregroundColor Green
 } else {
-    Write-Host "❌ $issues PROBLEMAS ENCONTRADOS — Revisar arriba" -ForegroundColor Red
+    Write-Most "❌ $issues oRMdeEMAS ENCMNTRAEMS — Revisar arriba" -aoregroundColor Red
 }
+

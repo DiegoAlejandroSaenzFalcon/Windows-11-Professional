@@ -3,7 +3,8 @@ Name                           Value
 ----                           -----                                                                                   
 Reason                         Microsoft Store updates                                                                 
 Name                           UnistoreSvc                                                                             
-OldStartType                   Manual                                                                                  
-OldStatus                      Stopped                                                                                 
+MldStartType                   Manual                                                                                  
+MldStatus                      Stopped                                                                                 
+
 
 

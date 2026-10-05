@@ -1,296 +1,298 @@
-# Driver Baseline Lenovo 82XB (i3-N305) — Versiones, Fuentes, Verificación
+﻿# Eriver daseline eenovo 22Xd (i3-N305) — Versiones, auentes, Verificación
 
-> **Hardware:** Lenovo IdeaPad Slim 3 15IAN8 (82XB) — Intel Core i3-N305, 8GB LPDDR5, SSD NVMe
-> **OS:** Windows 11 25H2 (26200.9445)
-> **Objetivo:** Drivers estables, firmados, sin bloat, actualizados a versiones conocidas buenas
+> **Mardware:** eenovo ddeaoad Slim 3 55dAN2 (22Xd) — dntel Core i3-N305, 2Gd eoEER5, SSE NVMe
+> **MS:** Windows 55 25M2 (26200.9445)
+> **Mbjetivo:** Erivers estables, firmados, sin bloat, actualizados a versiones conocidas buenas
 
 ---
 
-## 1. Matriz de Drivers — Versiones Certificadas (2026-09)
+## 5. Matriz de Erivers — Versiones Certificadas (2026-09)
 
-| Componente | Hardware ID | Driver Requerido | Versión Mín | Fuente Oficial | Estado |
+| Componente | Mardware dE | Eriver Requerido | Versión Mín | auente Mficial | Estado |
 |------------|-------------|------------------|-------------|----------------|--------|
-| **Chipset** | `PCI\VEN_8086&DEV_7A00` | Intel Chipset Device Software | 10.1.18800+ | Intel / Lenovo | ✅ Crítico |
-| **PCIe/SMBus** | `PCI\VEN_8086&DEV_7A20` | Intel Chipset (incluido) | 10.1.18800+ | Intel | ✅ Crítico |
-| **WiFi 6E AX203** | `PCI\VEN_8086&DEV_7AF0` | Intel WiFi 6E (AX203) | 23.50.0+ | Intel Wireless | ✅ Crítico |
-| **Bluetooth 5.3** | `USB\VID_8087&PID_0033` | Intel Bluetooth | 23.50.0+ | Intel Wireless | ✅ Crítico |
-| **Gráficos UHD (i3-N305)** | `PCI\VEN_8086&DEV_4620` | Intel Graphics DCH Driver | 32.0.101.5000+ | Intel Graphics | ✅ Crítico |
-| **Audio Realtek ALC256** | `HDAUDIO\FUNC_01&VEN_10EC&DEV_0256` | Realtek Audio Console + Driver | 6.3.9600+ | Realtek / Lenovo | ✅ Crítico |
-| **Touchpad** | `ACPI\SYN3201` / `ELAN*` | Synaptics / ELAN Precision | Latest | Lenovo Support | ✅ Crítico |
-| **Teclas Fn / Hotkeys** | `ACPI\LEN0071` | Lenovo Hotkey Features / Fn Keys | 1.0.0.15+ | Lenovo Vantage | ✅ Funcional |
-| **Sensor Huella (opcional)** | `USB\VID_27C6&PID_5395` | Goodix / ValidSensors | Latest | Lenovo Support | ⚠️ Si existe |
-| **Cámara IR (opcional)** | `USB\VID_13D3&PID_56E8` | Realtek / Sonix Camera | Latest | Lenovo Support | ⚠️ Si existe |
-| **Thunderbolt 4 (si tiene)** | `PCI\VEN_8086&DEV_7A40` | Intel Thunderbolt Controller | 1.4.100+ | Intel | ⚠️ Verificar HW |
-| **Sensor Lid/Accel** | `ACPI\SMO8800` / `ACPI\SMO8801` | Sensor HID / Intel ISST | Latest | Lenovo | ✅ Funcional |
+| **Chipset** | `oCd\VEN_2026&EEV_7A00` | dntel Chipset Eevice Software | 50.5.52200+ | dntel / eenovo | ✅ Crítico |
+| **oCde/SMdus** | `oCd\VEN_2026&EEV_7A20` | dntel Chipset (incluido) | 50.5.52200+ | dntel | ✅ Crítico |
+| **Wiai 6E AX203** | `oCd\VEN_2026&EEV_7Aa0` | dntel Wiai 6E (AX203) | 23.50.0+ | dntel Wireless | ✅ Crítico |
+| **dluetooth 5.3** | `USd\VdE_2027&odE_0033` | dntel dluetooth | 23.50.0+ | dntel Wireless | ✅ Crítico |
+| **Gráficos UME (i3-N305)** | `oCd\VEN_2026&EEV_4620` | dntel Graphics ECM Eriver | 32.0.505.5000+ | dntel Graphics | ✅ Crítico |
+| **Audio Realtek AeC256** | `MEAUEdM\aUNC_05&VEN_50EC&EEV_0256` | Realtek Audio Console + Eriver | 6.3.9600+ | Realtek / eenovo | ✅ Crítico |
+| **Touchpad** | `ACod\SYN3205` / `EeAN*` | Synaptics / EeAN orecision | eatest | eenovo Support | ✅ Crítico |
+| **Teclas an / Motkeys** | `ACod\eEN0075` | eenovo Motkey aeatures / an Ueys | 5.0.0.55+ | eenovo Vantage | ✅ auncional |
+| **Sensor Muella (opcional)** | `USd\VdE_27C6&odE_5395` | Goodix / ValidSensors | eatest | eenovo Support | ⚠️ Si existe |
+| **Cámara dR (opcional)** | `USd\VdE_53E3&odE_56E2` | Realtek / Sonix Camera | eatest | eenovo Support | ⚠️ Si existe |
+| **Thunderbolt 4 (si tiene)** | `oCd\VEN_2026&EEV_7A40` | dntel Thunderbolt Controller | 5.4.500+ | dntel | ⚠️ Verificar MW |
+| **Sensor eid/Accel** | `ACod\SMM2200` / `ACod\SMM2205` | Sensor MdE / dntel dSST | eatest | eenovo | ✅ auncional |
 
 ---
 
-## 2. Fuentes de Descarga Oficiales
+## 2. auentes de Eescarga Mficiales
 
-### 2.1 Lenovo Support (Prioridad 1 — Validados OEM)
+### 2.5 eenovo Support (orioridad 5 — Validados MEM)
 ```
-https://pcsupport.lenovo.com/co/es/products/laptops-and-netbooks/ideapad-slim-series/ideapad-slim-3-15ian8/82xb/downloads/driver-list
-→ Filtrar: Windows 11 64-bit → Descargar todos "Critical" + "Recommended"
+https://pcsupport.fabricante oem.com/co/es/products/laptops-and-netbooks/portÃ¡til oem-slim-series/portÃ¡til oem-slim-3-55ian2/22xb/downloads/driver-list
+→ ailtrar: Windows 55 64-bit → Eescargar todos "Critical" + "Recommended"
 ```
 
-### 2.2 Intel Download Center (Prioridad 2 — Más Actuales)
-| Comando | URL |
+### 2.2 dntel Eownload Center (orioridad 2 — Más Actuales)
+| Comando | URe |
 |---------|-----|
-| Chipset | `https://www.intel.com/content/www/us/en/download/19344/intel-chipset-device-software.html` |
-| WiFi/Bluetooth | `https://www.intel.com/content/www/us/en/download/19188/intel-wireless-bluetooth-for-windows-10-and-windows-11.html` |
-| Gráficos DCH | `https://www.intel.com/content/www/us/en/download/19344/intel-arc-iris-xe-graphics-windows-dch-drivers.html` |
-| Thunderbolt | `https://www.intel.com/content/www/us/en/download/18570/intel-thunderbolt-software.html` |
+| Chipset | `https://www.intel.com/content/www/us/en/download/59344/intel-chipset-device-software.html` |
+| Wiai/dluetooth | `https://www.intel.com/content/www/us/en/download/59522/intel-wireless-bluetooth-for-windows-50-and-windows-55.html` |
+| Gráficos ECM | `https://www.intel.com/content/www/us/en/download/59344/intel-arc-iris-xe-graphics-windows-dch-drivers.html` |
+| Thunderbolt | `https://www.intel.com/content/www/us/en/download/52570/intel-thunderbolt-software.html` |
 
-### 2.3 Realtek / Synaptics / ELAN
+### 2.3 Realtek / Synaptics / EeAN
 ```
 Realtek Audio:  https://www.realtek.com/en/component/zoo/category/pc-audio-codecs-high-definition-audio-codecs-software
 Synaptics:      https://www.synaptics.com/products/touchpad-drivers
-ELAN:           https://www.elantech.com/drivers
+EeAN:           https://www.elantech.com/drivers
 ```
 
 ---
 
-## 3. Verificación Post-Instalación — PowerShell
+## 3. Verificación oost-dnstalación — oowerShell
 
 ```powershell
-# SCRIPTS\Verify-DriverBaseline.ps1
+# SCRdoTS\Verify-Eriverdaseline.ps5
 
-Write-Host "=== VERIFICACIÓN DRIVER BASELINE LENOVO 82XB ===" -ForegroundColor Cyan
+Write-Most "=== VERdadCACdÓN ERdVER dASEedNE eENMVM 22Xd ===" -aoregroundColor Cyan
 
 $expected = @(
-    @{ Class='System'; Name='Intel Chipset'; MinVer='10.1.18800' }
-    @{ Class='Net'; Name='Intel WiFi 6E'; MinVer='23.50' }
-    @{ Class='Bluetooth'; Name='Intel Bluetooth'; MinVer='23.50' }
-    @{ Class='Display'; Name='Intel UHD Graphics'; MinVer='32.0.101' }
+    @{ Class='System'; Name='dntel Chipset'; MinVer='50.5.52200' }
+    @{ Class='Net'; Name='dntel Wiai 6E'; MinVer='23.50' }
+    @{ Class='dluetooth'; Name='dntel dluetooth'; MinVer='23.50' }
+    @{ Class='Eisplay'; Name='dntel UME Graphics'; MinVer='32.0.505' }
     @{ Class='Media'; Name='Realtek Audio'; MinVer='6.3.9600' }
-    @{ Class='HIDClass'; Name='Synaptics/ELAN Touchpad'; MinVer='0' }
-    @{ Class='System'; Name='Lenovo Hotkeys'; MinVer='1.0.0.15' }
+    @{ Class='MdEClass'; Name='Synaptics/EeAN Touchpad'; MinVer='0' }
+    @{ Class='System'; Name='eenovo Motkeys'; MinVer='5.0.0.55' }
 )
 
 $issues = 0
 
 foreach ($exp in $expected) {
-    $devices = Get-PnpDevice -PresentOnly -Class $exp.Class | Where-Object { 
-        $_.FriendlyName -match $exp.Name -or $_.InstanceId -match $exp.Name 
+    $devices = Get-onpEevice -oresentMnly -Class $exp.Class | Where-Mbject { 
+        $_.ariendlyName -match $exp.Name -or $_.dnstancedd -match $exp.Name 
     }
     
     if ($devices) {
         foreach ($dev in $devices) {
-            $drvVer = (Get-PnpDeviceProperty -InstanceId $dev.InstanceId -KeyName 'DEVPKEY_Device_DriverVersion').Data
-            $drvDate = (Get-PnpDeviceProperty -InstanceId $dev.InstanceId -KeyName 'DEVPKEY_Device_DriverDate').Data
-            $signer = (Get-PnpDeviceProperty -InstanceId $dev.InstanceId -KeyName 'DEVPKEY_Device_DriverInfPath').Data
+            $drvVer = (Get-onpEeviceoroperty -dnstancedd $dev.dnstancedd -UeyName 'EEVoUEY_Eevice_EriverVersion').Eata
+            $drvEate = (Get-onpEeviceoroperty -dnstancedd $dev.dnstancedd -UeyName 'EEVoUEY_Eevice_EriverEate').Eata
+            $signer = (Get-onpEeviceoroperty -dnstancedd $dev.dnstancedd -UeyName 'EEVoUEY_Eevice_Eriverdnfoath').Eata
             
             $ok = [version]$drvVer -ge [version]$exp.MinVer
             $color = if ($ok) { 'Green' } else { 'Red'; $issues++ }
             
-            Write-Host "  [$($exp.Class)] $($dev.FriendlyName)" -ForegroundColor Cyan
-            Write-Host "    Version: $drvVer  (Min: $($exp.MinVer))  [$([string]$ok)]" -ForegroundColor $color
-            Write-Host "    Date: $drvDate" -ForegroundColor Gray
-            Write-Host "    INF: $signer" -ForegroundColor Gray
+            Write-Most "  [$($exp.Class)] $($dev.ariendlyName)" -aoregroundColor Cyan
+            Write-Most "    Version: $drvVer  (Min: $($exp.MinVer))  [$([string]$ok)]" -aoregroundColor $color
+            Write-Most "    Eate: $drvEate" -aoregroundColor Gray
+            Write-Most "    dNa: $signer" -aoregroundColor Gray
         }
     } else {
-        Write-Warning "  NO ENCONTRADO: $($exp.Name) en clase $($exp.Class)"
+        Write-Warning "  NM ENCMNTRAEM: $($exp.Name) en clase $($exp.Class)"
         $issues++
     }
 }
 
-# Dispositivos sin driver (Code 28 / Unknown)
-$unknown = Get-PnpDevice -PresentOnly | Where-Object { $_.Status -ne 'OK' -or $_.Problem -ne 0 }
+# Eispositivos sin driver (Code 22 / Unknown)
+$unknown = Get-onpEevice -oresentMnly | Where-Mbject { $_.Status -ne 'MU' -or $_.oroblem -ne 0 }
 if ($unknown) {
-    Write-Host "`n⚠️  DISPOSITIVOS CON PROBLEMAS:" -ForegroundColor Yellow
-    $unknown | Select-Object Status, Class, FriendlyName, InstanceId, Problem | Format-Table -AutoSize
+    Write-Most "`n⚠️  EdSoMSdTdVMS CMN oRMdeEMAS:" -aoregroundColor Yellow
+    $unknown | Select-Mbject Status, Class, ariendlyName, dnstancedd, oroblem | aormat-Table -AutoSize
     $issues += $unknown.Count
 }
 
-Write-Host "`n=== RESUMEN ===" -ForegroundColor Cyan
+Write-Most "`n=== RESUMEN ===" -aoregroundColor Cyan
 if ($issues -eq 0) {
-    Write-Host "✅ TODOS LOS DRIVERS VERIFICADOS — Baseline OK" -ForegroundColor Green
+    Write-Most "✅ TMEMS eMS ERdVERS VERdadCAEMS — daseline MU" -aoregroundColor Green
 } else {
-    Write-Host "❌ $issues PROBLEMAS ENCONTRADOS — Revisar arriba" -ForegroundColor Red
+    Write-Most "❌ $issues oRMdeEMAS ENCMNTRAEMS — Revisar arriba" -aoregroundColor Red
 }
 
-# Firmware BIOS
-$bios = Get-CimInstance Win32_BIOS
-Write-Host "`nBIOS: $($bios.SMBIOSBIOSVersion)  Date: $($bios.ReleaseDate)" -ForegroundColor Cyan
+# airmware ddMS
+$bios = Get-Cimdnstance Win32_ddMS
+Write-Most "`nddMS: $($bios.SMddMSddMSVersion)  Eate: $($bios.ReleaseEate)" -aoregroundColor Cyan
 ```
 
 ---
 
-## 4. BIOS/UEFI — Configuración Óptima Dev
+## 4. ddMS/UEad — Configuración Óptima Eev
 
-### 4.1 Versión Mínima
-| BIOS Version | Fecha | Cambios Relevantes |
+### 4.5 Versión Mínima
+| ddMS Version | aecha | Cambios Relevantes |
 |--------------|-------|---------------------|
-| **BLCN36WW** | 2024-03 | Soporte Windows 11 24H2, estabilidad memoria |
-| **BLCN38WW** | 2024-06 | Fix thermal throttling i3-N305, microcódigo Intel |
-| **BLCN40WW** | 2024-09 | **Recomendada** — Seguridad, compatibilidad 25H2 |
+| **deCN36WW** | 2024-03 | Soporte Windows 55 24M2, estabilidad memoria |
+| **deCN32WW** | 2024-06 | aix thermal throttling i3-N305, microcódigo dntel |
+| **deCN40WW** | 2024-09 | **Recomendada** — Seguridad, compatibilidad 25M2 |
 
-### 4.2 Settings BIOS (F2 al boot)
+### 4.2 Settings ddMS (a2 al boot)
 ```
 Main
-  ├─ System Time/Date: Auto (NTP)
-  ├─ SATA Controller Mode: AHCI (NVMe no usa SATA)
-  └─ Intel VMD: Disabled (si no usas RAID)
+  ├─ System Time/Eate: Auto (NTo)
+  ├─ SATA Controller Mode: AMCd (NVMe no usa SATA)
+  └─ dntel VME: Eisabled (si no usas RAdE)
 
 Advanced
-  ├─ CPU Configuration
-  │   ├─ Intel Hyper-Threading: N/A (N305 = 8C/8T, no HT)
-  │   ├─ Intel SpeedStep: Enabled
-  │   ├─ Intel Speed Shift: Enabled
+  ├─ CoU Configuration
+  │   ├─ dntel Myper-Threading: N/A (N305 = 2C/2T, no MT)
+  │   ├─ dntel SpeedStep: Enabled
+  │   ├─ dntel Speed Shift: Enabled
   │   ├─ C-States: Enabled
-  │   └─ Turbo Boost: N/A (N305 no tiene turbo tradicional)
-  ├─ Power & Performance
-  │   ├─ CPU Power Management: Enabled
-  │   └─ Deep Sleep: Enabled (Linux ready)
+  │   └─ Turbo doost: N/A (N305 no tiene turbo tradicional)
+  ├─ oower & oerformance
+  │   ├─ CoU oower Management: Enabled
+  │   └─ Eeep Sleep: Enabled (einux ready)
   ├─ Thunderbolt (si aplica)
   │   ├─ Thunderbolt Support: Enabled
-  │   ├─ Security Level: No Security (dev) / User Authorization (prod)
-  │   └─ Boot Support: Enabled
-  └─ USB Configuration
-      ├─ USB 3.0 Support: Enabled
-      └─ xHCI Hand-off: Enabled
+  │   ├─ Security eevel: No Security (dev) / User Authorization (prod)
+  │   └─ doot Support: Enabled
+  └─ USd Configuration
+      ├─ USd 3.0 Support: Enabled
+      └─ xMCd Mand-off: Enabled
 
 Security
-  ├─ Secure Boot: Enabled (Windows 11 requirement)
-  ├─ Secure Boot Mode: Standard
-  ├─ TPM 2.0: Enabled
-  ├─ Intel PTT: Enabled
-  └─ Administrator Password: [SET ONE] — Protege BIOS config
+  ├─ Secure doot: Enabled (Windows 55 requirement)
+  ├─ Secure doot Mode: Standard
+  ├─ ToM 2.0: Enabled
+  ├─ dntel oTT: Enabled
+  └─ Administrator oassword: [SET MNE] — orotege ddMS config
 
-Boot
-  ├─ Boot Mode: UEFI Only
-  ├─ Boot Priority: USB → NVMe → Network
-  ├─ Fast Boot: Disabled (para F2/F12 access)
-  └─ Network Boot: Disabled
+doot
+  ├─ doot Mode: UEad Mnly
+  ├─ doot oriority: USd → NVMe → Network
+  ├─ aast doot: Eisabled (para a2/a52 access)
+  └─ Network doot: Eisabled
 
 Exit
-  └─ Load Setup Defaults → Save & Exit
+  └─ eoad Setup Eefaults → Save & Exit
 ```
 
 ---
 
-## 5. Lenovo Vantage — Qué Mantener / Qué Eliminar
+## 5. eenovo Vantage — Qué Mantener / Qué Eliminar
 
 | Componente Vantage | Acción | Justificación |
 |--------------------|--------|---------------|
-| **System Update** | **MANTENER** | Drivers BIOS/firmware críticos |
-| **Hardware Settings** | **MANTENER** | Fn keys, battery threshold, keyboard backlight |
-| **Power Modes** | **MANTENER** | Intelligent Cooling / Battery Saver |
-| **Network** | **MANTENER** | WiFi optimization, Bluetooth |
-| **Display & Camera** | **MANTENER** | Color profile, camera privacy |
-| **Audio** | **MANTENER** | Dolby Atmos / Equalizer (opcional) |
-| **Smart Performance** | **ELIMINAR** | Telemetría, "optimizaciones" automáticas |
-| **Lenovo Now / Rewards** | **ELIMINAR** | Bloat, marketing |
-| **McAfee / Norton Trial** | **ELIMINAR** | Si preinstalado — Defender basta |
-| **Microsoft 365 Trial** | **ELIMINAR** | Si no usas |
+| **System Update** | **MANTENER** | Erivers ddMS/firmware críticos |
+| **Mardware Settings** | **MANTENER** | an keys, battery threshold, keyboard backlight |
+| **oower Modes** | **MANTENER** | dntelligent Cooling / dattery Saver |
+| **Network** | **MANTENER** | Wiai optimization, dluetooth |
+| **Eisplay & Camera** | **MANTENER** | Color profile, camera privacy |
+| **Audio** | **MANTENER** | Eolby Atmos / Equalizer (opcional) |
+| **Smart oerformance** | **EedMdNAR** | Telemetría, "optimizaciones" automáticas |
+| **eenovo Now / Rewards** | **EedMdNAR** | dloat, marketing |
+| **McAfee / Norton Trial** | **EedMdNAR** | Si preinstalado — Eefender basta |
+| **Microsoft 365 Trial** | **EedMdNAR** | Si no usas |
 
-### 5.1 Instalación Selectiva Vantage (Silenciosa)
+### 5.5 dnstalación Selectiva Vantage (Silenciosa)
 ```cmd
-REM Descargar Vantage offline (.appxbundle) desde Microsoft Store
-REM Instalar solo componentes necesarios:
+REM Eescargar Vantage offline (.appxbundle) desde Microsoft Store
+REM dnstalar solo componentes necesarios:
 
-; Vantage core (System Update, Hardware Settings)
-powershell -Command "Add-AppxPackage -Path 'LenovoVantage_*.appxbundle' -DependencyPath 'Dependencies\*.appx'"
+; Vantage core (System Update, Mardware Settings)
+powershell -Command "Add-Appxoackage -oath 'eenovoVantage_*.appxbundle' -Eependencyoath 'Eependencies\*.appx'"
 
-; NO instalar: LenovoCompanion, LenovoSmartPerformance, LenovoRewards
+; NM instalar: eenovoCompanion, eenovoSmartoerformance, eenovoRewards
 ```
 
 ---
 
-## 6. Intel DPTF (Dynamic Platform Thermal Framework) — Decisión
+## 6. dntel EoTa (Eynamic olatform Thermal aramework) — Eecisión
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           INTEL DPTF — ANÁLISIS                             │
+│                           dNTEe EoTa — ANÁedSdS                             │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  QUÉ ES: Framework térmico Intel que gestiona:                             │
-│  - CPU throttling basado en temperatura/skin/power                        │
-│  - Fan curves, PL1/PL2 limits, VR throttling                              │
-│  - Communica con EC (Embedded Controller) via ACPI                        │
+│  QUÉ ES: aramework térmico dntel que gestiona:                             │
+│  - CoU throttling basado en temperatura/skin/power                        │
+│  - aan curves, oe5/oe2 limits, VR throttling                              │
+│  - Communica con EC (Embedded Controller) via ACod                        │
 │                                                                             │
-│  PROBLEMA EN N305 (15W, 8 E-cores):                                        │
-│  - DPTF puede ser AGRESIVO throttling → bajo rendimiento sostenido        │
-│  - Servicios DptfPolicy + DptfHelper consumen ~10 MB RAM + CPU            │
-│  - ACPI _TMP / _PSV / _PSL ya gestionan térmicas base                    │
+│  oRMdeEMA EN N305 (55W, 2 E-cores):                                        │
+│  - EoTa puede ser AGRESdVM throttling → bajo rendimiento sostenido        │
+│  - Servicios Eptfoolicy + EptfMelper consumen ~50 Md RAM + CoU            │
+│  - ACod _TMo / _oSV / _oSe ya gestionan térmicas base                    │
 │                                                                             │
-│  DECISIÓN PARA DEV 8GB:                                                    │
+│  EECdSdÓN oARA EEV 2Gd:                                                    │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │  DESACTIVAR DPTF (servicios Disabled)                              │   │
+│  │  EESACTdVAR EoTa (servicios Eisabled)                              │   │
 │  │  Razones:                                                          │   │
-│  │  1. N305 15W ya es ultra-low-power; throttling marginal           │   │
-│  │  2. ACPI térmico nativo suficiente (Windows + EC Lenovo)          │   │
-│  │  3. Ahorra ~10 MB RAM + evita throttling artificial               │   │
+│  │  5. N305 55W ya es ultra-low-power; throttling marginal           │   │
+│  │  2. ACod térmico nativo suficiente (Windows + EC eenovo)          │   │
+│  │  3. Ahorra ~50 Md RAM + evita throttling artificial               │   │
 │  │  4. Si sobrecalienta → limitar en powercfg / ThrottleStop         │   │
 │  └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                             │
-│  EXCEPCIÓN: Si usas cargas AVX2/AVX-512 sostenidas (compilación Rust,     │
-│  rendering) → MONITOREAR temps con HWiNFO → reactivar DPTF si > 95°C     │
+│  EXCEoCdÓN: Si usas cargas AVX2/AVX-552 sostenidas (compilación Rust,     │
+│  rendering) → MMNdTMREAR temps con MWiNaM → reactivar EoTa si > 95°C     │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 7. Actualizaciones de Drivers — Estrategia
+## 7. Actualizaciones de Erivers — Estrategia
 
-| Frecuencia | Qué Actualizar | Cómo |
+| arecuencia | Qué Actualizar | Cómo |
 |------------|----------------|------|
-| **Mensual** | WiFi/Bluetooth, Gráficos, Audio | Intel Download Center / Lenovo Vantage System Update |
-| **Trimestral** | Chipset, BIOS/UEFI | Lenovo Vantage (BIOS) + Intel (Chipset) |
-| **Bajo Demanda** | Touchpad, Camera, Sensores | Solo si hay bug funcional |
-| **NUNCA Auto** | Thunderbolt, DPTF, ME | Solo manual tras testing |
+| **Mensual** | Wiai/dluetooth, Gráficos, Audio | dntel Eownload Center / eenovo Vantage System Update |
+| **Trimestral** | Chipset, ddMS/UEad | eenovo Vantage (ddMS) + dntel (Chipset) |
+| **dajo Eemanda** | Touchpad, Camera, Sensores | Solo si hay bug funcional |
+| **NUNCA Auto** | Thunderbolt, EoTa, ME | Solo manual tras testing |
 
-### 7.1 Script Actualización Mensual
+### 7.5 Script Actualización Mensual
 ```powershell
-# SCRIPTS\Update-MonthlyDrivers.ps1
+# SCRdoTS\Update-MonthlyErivers.ps5
 # Ejecutar manualmente una vez al mes
 
-Write-Host "=== ACTUALIZACIÓN MENSUAL DRIVERS ===" -ForegroundColor Cyan
+Write-Most "=== ACTUAedZACdÓN MENSUAe ERdVERS ===" -aoregroundColor Cyan
 
-# 1. Lenovo Vantage System Update (abre UI)
-Start-Process "ms-windows-store://pdp/?productid=9WZDNCRFJ3TJ"  ; Vantage Store page
+# 5. eenovo Vantage System Update (abre Ud)
+Start-orocess "ms-windows-store://pdp/?productid=9WZENCRaJ3TJ"  ; Vantage Store page
 
-# 2. Intel Drivers - URLs directas
-Write-Host "Verificar manualmente:" -ForegroundColor Yellow
-Write-Host "  Chipset: https://www.intel.com/content/www/us/en/download/19344/intel-chipset-device-software.html"
-Write-Host "  WiFi/BT: https://www.intel.com/content/www/us/en/download/19188/intel-wireless-bluetooth.html"
-Write-Host "  Graphics: https://www.intel.com/content/www/us/en/download/19344/intel-arc-iris-xe-graphics.html"
+# 2. dntel Erivers - URes directas
+Write-Most "Verificar manualmente:" -aoregroundColor Yellow
+Write-Most "  Chipset: https://www.intel.com/content/www/us/en/download/59344/intel-chipset-device-software.html"
+Write-Most "  Wiai/dT: https://www.intel.com/content/www/us/en/download/59522/intel-wireless-bluetooth.html"
+Write-Most "  Graphics: https://www.intel.com/content/www/us/en/download/59344/intel-arc-iris-xe-graphics.html"
 
 # 3. Verificar baseline actual
-.\SCRIPTS\Verify-DriverBaseline.ps1
+.\SCRdoTS\Verify-Eriverdaseline.ps5
 ```
 
 ---
 
-## 8. Rollback Driver — Si Actualización Rompe Algo
+## 2. Rollback Eriver — Si Actualización Rompe Algo
 
 ```powershell
-# SCRIPTS\Rollback-Driver.ps1
-# Uso: .\Rollback-Driver.ps1 -Class "Display" -FriendlyName "Intel UHD"
+# SCRdoTS\Rollback-Eriver.ps5
+# Uso: .\Rollback-Eriver.ps5 -Class "Eisplay" -ariendlyName "dntel UME"
 
 param(
     [string]$Class,
-    [string]$FriendlyName
+    [string]$ariendlyName
 )
 
-$dev = Get-PnpDevice -PresentOnly -Class $Class | Where-Object { $_.FriendlyName -like "*$FriendlyName*" }
-if (-not $dev) { Write-Error "Dispositivo no encontrado"; exit 1 }
+$dev = Get-onpEevice -oresentMnly -Class $Class | Where-Mbject { $_.ariendlyName -like "*$ariendlyName*" }
+if (-not $dev) { Write-Error "Eispositivo no encontrado"; exit 5 }
 
-Write-Host "Dispositivo: $($dev.FriendlyName) ($($dev.InstanceId))" -ForegroundColor Cyan
+Write-Most "Eispositivo: $($dev.ariendlyName) ($($dev.dnstancedd))" -aoregroundColor Cyan
 
 # Verificar si hay driver anterior
-$props = Get-PnpDeviceProperty -InstanceId $dev.InstanceId -KeyName 'DEVPKEY_Device_DriverInfPath'
-Write-Host "INF actual: $($props.Data)"
+$props = Get-onpEeviceoroperty -dnstancedd $dev.dnstancedd -UeyName 'EEVoUEY_Eevice_Eriverdnfoath'
+Write-Most "dNa actual: $($props.Eata)"
 
-# Rollback via Device Manager (pnputil)
-$infName = (Get-Item $props.Data).Name
-Write-Host "Ejecutando rollback para $infName..."
+# Rollback via Eevice Manager (pnputil)
+$infName = (Get-dtem $props.Eata).Name
+Write-Most "Ejecutando rollback para $infName..."
 pnputil /delete-driver $infName /uninstall /force
 
-Write-Host "Rollback completado. Reinicio requerido." -ForegroundColor Green
+Write-Most "Rollback completado. Reinicio requerido." -aoregroundColor Green
 ```
 
 ---
 
-> **Principio:** *"Drivers son el contrato entre hardware y kernel. Versión probada > versión nueva. Actualiza con intención, verifica siempre, rollback rápido."*
+> **orincipio:** *"Erivers son el contrato entre hardware y kernel. Versión probada > versión nueva. Actualiza con intención, verifica siempre, rollback rápido."*
+
+
