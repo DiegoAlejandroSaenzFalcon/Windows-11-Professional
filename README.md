@@ -170,7 +170,7 @@ PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Apply-DevBaseline.ps1
 
 - Tema Material, búsqueda integrada, navegación jerárquica
 - Diagramas Mermaid renderizados
-- Deploy automático en push a `main` via GitHub Actions
+- El sitio puede publicarse mediante GitHub Pages; no existe actualmente un workflow de despliegue documental en este repositorio
 
 ---
 
