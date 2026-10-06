@@ -9,7 +9,22 @@
     Ejecutar COMO ADMIN.
 #>
 
+param(
+    [switch]$Force
+)
+
 $ErrorActionPreference = 'Continue'
+
+$availBefore = (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB
+if (-not $Force -and $availBefore -ge 500) {
+    Write-Host "ABORTADO: RAM disponible = $([math]::Round($availBefore,1)) MB; este script solo se ejecuta automáticamente por debajo de 500 MB. Use -Force únicamente con criterio explícito." -ForegroundColor Yellow
+    exit 2
+}
+$standbyTool = Get-Command EmptyStandbyList.exe -ErrorAction SilentlyContinue
+if (-not $standbyTool) {
+    Write-Host "ABORTADO: EmptyStandbyList.exe no está disponible en PATH." -ForegroundColor Red
+    exit 3
+}
 
 # Cargar WS class para SetProcessWorkingSetSetSizeEx
 if (-not ([System.Management.Automation.PSTypeName]'WS').Type) {
@@ -31,7 +46,6 @@ Write-Host "🚨 EMERGENCY TRIM INICIADO — $(Get-Date -Format 'HH:mm:ss')" -Fo
 function LogStep { param($msg) Write-Host "  ▶ $msg" -ForegroundColor Yellow }
 function LogOk { param($msg) Write-Host "  ✅ $msg" -ForegroundColor Green }
 
-$availBefore = (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB
 LogStep "RAM libre ANTES: $([math]::Round($availBefore,1)) MB"
 
 # 1. Empty Standby Priority 0 (Reserve) — Menos invasivo
