@@ -1,3 +1,10 @@
+param([switch]$Force)
+
+if (-not $Force) {
+    Write-Error "EJECUCIÓN BLOQUEADA: esta operación modifica componentes Edge/WebView2 y servicios del sistema. Revise el issue y ejecute con -Force solo con autorización y recuperación preparada."
+    exit 2
+}
+
 <#
 .SYNOPSIS
     Desinstalacion completa de Microsoft Edge + WebView2 cuando se usa otro navegador.
