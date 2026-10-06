@@ -2,10 +2,13 @@
   "id": "edge-uninstall-full",
   "title": "Desinstalacion completa de Microsoft Edge (cuando no se usa)",
   "category": "performance",
-  "severity": "high",
+  "severity": "critical",
   "symptom": "Microsoft Edge arranca procesos en segundo plano, se actualiza solo (EdgeUpdate/EdgeUpdateMachine), agrega procesos y consume RAM aunque uses otro navegador (p. ej. Brave).",
   "affected": {
-    "os": ["Windows 10", "Windows 11"],
+    "os": [
+      "Windows 10",
+      "Windows 11"
+    ],
     "builds": [],
     "condition": "Usuarios que usan otro navegador (Brave, Firefox, Chrome) y no necesitan Edge"
   },
@@ -17,11 +20,26 @@
   ],
   "detection": "(Get-AppxPackage -AllUsers *MicrosoftEdge.Stable* -ErrorAction SilentlyContinue) -ne $null",
   "fix_script": "fix.ps1",
-  "plain_language": "Edge es el navegador integrado de Windows. Si usas otro navegador, sus procesos y actualizador igual corren en segundo plano gastando RAM. Este arreglo detiene esos procesos, desactiva los servicios de actualizacion y elimina las entradas de registro que lo relanzan, guardando respaldo para revertirlo. Quitar Edge no rompe Windows: es una aplicacion, no parte del kernel.",
-  "reversible": true,
-  "undo": "Reinstalar Edge desde https://www.microsoft.com/edge (o con winget install --id Microsoft.Edge) y reactivar los servicios edgeupdate/edgeupdatem si se desean las actualizaciones.",
-  "tags": ["edge", "browser", "ram", "performance", "bloatware", "startup", "webview2"],
-  "references": ["https://www.microsoft.com/edge"],
+  "plain_language": "La eliminación completa de Edge/WebView2 modifica componentes y servicios del sistema y puede afectar aplicaciones que dependan de WebView2 o mecanismos de actualización. No debe ejecutarse como optimización genérica. Requiere validación específica del equipo y un plan de recuperación probado.",
+  "reversible": false,
+  "undo": "La reversión depende de reinstalar componentes compatibles y restaurar configuración; no se considera rollback garantizado por este repositorio.",
+  "tags": [
+    "edge",
+    "browser",
+    "ram",
+    "performance",
+    "bloatware",
+    "startup",
+    "webview2"
+  ],
+  "references": [
+    "https://www.microsoft.com/edge"
+  ],
   "author": "@opencode-session",
-  "date": "2026-09-12"
+  "date": "2026-09-12",
+  "status": "BLOCKED_PENDING_VALIDATION",
+  "notes": [
+    "La afirmación histórica de que retirar Edge no puede romper Windows se elimina por no estar respaldada por una prueba reproducible del alcance de este repositorio.",
+    "El script requiere autorización explícita mediante -Force después de revisar impacto y recuperación."
+  ]
 }
