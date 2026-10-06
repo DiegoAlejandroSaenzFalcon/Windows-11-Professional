@@ -8,7 +8,7 @@
 
 ## 🎯 Qué Es Este Repositorio
 
-**Manual técnico forense completo** para instalar, configurar, optimizar y monitorear Windows 11 en hardware limitado (8GB RAM soldada) bajo carga real de desarrollo (VS Code + WSL2 + Docker + Node + Brave + Terminal).
+**Manual técnico forense en evolución** para instalar, configurar, optimizar y monitorear Windows 11 en hardware limitado (8GB RAM soldada) bajo carga real de desarrollo (VS Code + WSL2 + Docker + Node + Brave + Terminal).
 
 **No es:** Lista de "tweaks" sin explicación, "debloat scripts" ciegos, ni guías genéricas.
 **Sí es:** Arquitectura de memoria documentada, boot forensics con WPR/PerfView, límites duros medibles, alertas proactivas, rollback garantizado.
@@ -75,7 +75,7 @@ Windows-11-Professional/
 
 ---
 
-## 🚀 Inicio Rápido — Aplicar Baseline Completa
+## ⚠️ Estado de ejecución
 
 ```powershell
 # 1. Clonar repo
@@ -166,11 +166,21 @@ PowerShell -ExecutionPolicy Bypass -File .\SCRIPTS\Apply-DevBaseline.ps1
 
 **Manual online:** https://diegoalejandrosaenzfalcon.github.io/Windows-11-Professional/
 
+> El sitio documenta el estado del proyecto; la documentación no constituye evidencia de que cada optimización haya sido aplicada o verificada.
+
 - Tema Material, búsqueda integrada, navegación jerárquica
 - Diagramas Mermaid renderizados
-- Deploy automático en push a `main` via GitHub Actions
+- El sitio puede publicarse mediante GitHub Pages; no existe actualmente un workflow de despliegue documental en este repositorio
 
 ---
+
+## ⚠️ Hallazgos de auditoría
+
+- El árbol `SCRIPTS/` contiene actualmente 8 scripts; el README histórico describe scripts adicionales que no están presentes.
+- `Apply-DevBaseline.ps1` dependía de scripts ausentes y usaba una ruta local fija; esto se corrige con un preflight y una ruta basada en `$PSScriptRoot`.
+- `Emergency-Trim.ps1` no imponía su propio umbral de 500 MB; se añade un bloqueo preventivo.
+- La eliminación completa de Edge/WebView2 queda clasificada como operación de alto riesgo y no recomendada sin validación específica.
+- El estado de ejecución del proyecto queda separado de la documentación histórica.
 
 ## 🤝 Contribuir
 

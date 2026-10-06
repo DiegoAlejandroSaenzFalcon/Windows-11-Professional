@@ -105,11 +105,7 @@ nav:
       - "Test-DevWorkload.ps1 (Test Carga Sintética)": scripts/Test-DevWorkload.md
       - "Switch-Context.ps1 (Cambio Contexto)": scripts/Switch-Context.md
   - GOBERNANZA:
-      - "Licencia GPL-3.0": LICENSE.md
-      - "Contributor License Agreement": CLA.md
-      - "Política Seguridad": SECURITY.md
-      - "Instrucciones Agentes IA": AGENTS.md
-      - "Tripwire IA No Autorizada": HONEYTOKEN.md
+      - "Estado y límites": governance/index.md
 
 extra:
   social:

@@ -18,8 +18,8 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$repoRoot = "C:\Users\Diego Saenz\Windows-11-Professional"
-$scriptsDir = "$repoRoot\SCRIPTS"
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$scriptsDir = $PSScriptRoot
 $evidenceDir = "$repoRoot\EVIDENCE\baseline-$(Get-Date -Format 'yyyy-MM-dd')"
 $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 
@@ -60,6 +60,21 @@ function Backup-State {
 # ============================================================
 # PRE-CHECKS
 # ============================================================
+$requiredScripts = @(
+    "Capture-Baseline.ps1",
+    "Apply-ServicesBaseline.ps1",
+    "Apply-TaskSchedulerBaseline.ps1",
+    "Apply-RegistryTuning.ps1",
+    "Apply-PrivacyTelemetry.ps1",
+    "Verify-DriverBaseline.ps1"
+)
+$missingScripts = $requiredScripts | Where-Object { -not (Test-Path (Join-Path $scriptsDir $_)) }
+if ($missingScripts) {
+    Write-Err "EJECUCIÓN BLOQUEADA: faltan scripts requeridos: $($missingScripts -join ', ')"
+    Write-Warn "No se aplicó ninguna modificación. Restaure primero las dependencias o reduzca el alcance del orquestador."
+    exit 2
+}
+
 Write-Header "APPLY-DEVBASELINE — Lenovo 82XB Dev 8GB"
 Write-Host "Repo: $repoRoot" -ForegroundColor Gray
 Write-Host "Evidencia: $evidenceDir" -ForegroundColor Gray

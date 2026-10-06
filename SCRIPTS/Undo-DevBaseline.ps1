@@ -9,7 +9,7 @@
 #>
 
 $ErrorActionPreference = 'Continue'
-$repoRoot = "C:\Users\Diego Saenz\Windows-11-Professional"
+$repoRoot = Split-Path -Parent $PSScriptRoot
 $evidenceDir = "$repoRoot\EVIDENCE"
 
 Write-Host "=== ROLLBACK DEVBASELINE ===" -ForegroundColor Cyan
