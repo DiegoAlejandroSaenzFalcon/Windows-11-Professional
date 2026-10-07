@@ -52,17 +52,9 @@ Windows-11-Professional/
 │   ├── Apply-TaskSchedulerBaseline.ps1# Task Scheduler
 │   ├── Apply-RegistryTuning.ps1       # Registro
 │   ├── Apply-PrivacyTelemetry.ps1     # Privacidad/Telemetría
-│   ├── Verify-DriverBaseline.ps1      # Drivers Lenovo 82XB
+│   ├── Verify-DriverBaseline.ps1     # Drivers Lenovo 82XB
 │   ├── Undo-DevBaseline.ps1           # ROLLBACK (System Restore + CSV backups)
-│   ├── Emergency-Trim.ps1             # EMERGENCIA: Available < 500 MB
-│   ├── Capture-Baseline.ps1           # Forense completa (memoria, servicios, tasks, drivers, registro)
-│   ├── Monitor-DevMemory.ps1          # Dashboard tiempo real (RAM, commit, top processes)
-│   ├── Monitor-PagefileCompression.ps1# Pagefile + Compression monitor
-│   ├── Log-MemorySnapshot.ps1         # CSV histórico cada 5 min (Task Scheduler)
-│   ├── Test-DevWorkload.ps1           # Test carga sintética dev
-│   ├── Switch-Context.ps1             # Cambio contexto: frontend/backend/compile/meeting
-│   ├── Start-DevDay.ps1 / End-DevDay.ps1 # Secuencia arranque/cierre día
-│   └── Compare-BootTraces.ps1         # Comparar WPR traces pre/post
+│   └── Emergency-Trim.ps1             # Emergencia cuando RAM disponible < 500 MB
 ├── docs/                              # MkDocs source (mirror de ARCHITECTURE/INSTALL/CONFIG/PERFORMANCE/EVIDENCE/SCRIPTS)
 ├── mkdocs.yml                         # Material theme, nav estructurada, plugins: search, mermaid2
 ├── .github/workflows/gitleaks.yml     # Análisis de secretos
