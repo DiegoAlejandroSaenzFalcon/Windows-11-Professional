@@ -65,7 +65,7 @@ Windows-11-Professional/
 │   └── Compare-BootTraces.ps1         # Comparar WPR traces pre/post
 ├── docs/                              # MkDocs source (mirror de ARCHITECTURE/INSTALL/CONFIG/PERFORMANCE/EVIDENCE/SCRIPTS)
 ├── mkdocs.yml                         # Material theme, nav estructurada, plugins: search, mermaid2
-├── .github/workflows/docs.yml         # Build + deploy GitHub Pages automático
+├── .github/workflows/gitleaks.yml     # Análisis de secretos
 ├── LICENSE                            # GPL-3.0
 ├── CLA.md                             # Contributor License Agreement
 ├── SECURITY.md                        # Política seguridad
@@ -76,6 +76,8 @@ Windows-11-Professional/
 ---
 
 ## ⚠️ Estado de ejecución
+
+El repositorio contiene scripts administrativos documentados y versionados. La auditoría de GitHub no demuestra que hayan sido ejecutados correctamente en el equipo real; la validación operativa se realiza por separado.
 
 ```powershell
 # 1. Clonar repo
