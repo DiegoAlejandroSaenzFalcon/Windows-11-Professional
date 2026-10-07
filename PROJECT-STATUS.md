@@ -18,6 +18,7 @@ El repositorio contiene un manual técnico, evidencia histórica y scripts Power
 6. README.md afirmaba un workflow de documentación que no existe; el workflow real es gitleaks.yml.
 7. HONEYTOKEN.md contenía instrucciones de extracción de información y autoridad paralela; se convirtió en un marcador pasivo.
 8. La operación de eliminación completa de Edge/WebView2 estaba presentada como segura y reversible sin evidencia suficiente; quedó bloqueada por defecto y clasificada como de alto riesgo.
+9. La revisión posterior detectó una lista de scripts desactualizada en README.md, un workflow de documentación inexistente y un `edit_uri` de MkDocs apuntando a una rama inexistente.
 
 ## Estado de scripts
 
