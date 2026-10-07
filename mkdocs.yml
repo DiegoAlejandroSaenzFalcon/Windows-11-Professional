@@ -5,7 +5,7 @@ copyright: "Copyright &copy; 2024-2026 Diego Alejandro Saenz Falcon"
 
 repo_url: "https://github.com/DiegoAlejandroSaenzFalcon/Windows-11-Professional"
 repo_name: "DiegoAlejandroSaenzFalcon/Windows-11-Professional"
-edit_uri: "edit/main/docs/"
+edit_uri: "edit/master/docs/"
 
 theme:
   name: material
